@@ -1,0 +1,20 @@
+.step-card {
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+    border: 1px solid black;
+    gap: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.card-img {
+    flex: 1;
+    /* background-color: */
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+}
