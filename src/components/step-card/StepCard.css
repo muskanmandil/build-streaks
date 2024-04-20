@@ -1,20 +1,33 @@
 .step-card {
-    display: flex;
-    flex-direction: column;
-    height: 30vh;
-    border: 1px solid black;
-    gap: 0.5rem;
-    border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  /* height: 30vh; */
+  border: 1px solid black;
+  gap: 0.5rem;
+  border-radius: 0.25rem;
 }
 
 .card-img {
-    flex: 1;
-    /* background-color: */
+  /* flex: 1; */
+  min-height: 12vh;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  /* gap: 2rem; */
+  padding: 1rem;
 }
 
 .card-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.substeps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 3rem 1rem;
 }

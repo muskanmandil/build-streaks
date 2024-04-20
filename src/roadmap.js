@@ -10,69 +10,189 @@ const all_steps = [
             level: "easy",
             all_questions: [{
                 id: 1,
-                question: "User Input/Output",
+                questionTitle: "User Input/Output",
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
             }, {
                 id: 2,
-                question: "Data Types",
+                questionTitle: "Data Types",
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
             }, {
                 id: 3,
-                question: "If Else Statements",
+                questionTitle: "If Else Statements",
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
             }, {
                 id: 4,
-                question: "Switch",
+                questionTitle: "Switch",
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
             }, {
                 id: 5,
-                question: "What are Arrays/ Strings?",
+                questionTitle: "What are Arrays, Strings?",
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
             }, {
                 id: 6,
-                question: "For Loop",
+                questionTitle: "For Loops",
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
             }, {
                 id: 7,
-                question: "While Loop",
+                questionTitle: "While Loops",
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
             }, {
                 id: 8,
-                question: "Functions",
+                questionTitle: "Functions",
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
             }, {
                 id: 9,
-                question: "Time Complexity",
+                questionTitle: "Time Complexity",
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
             }]
-        },{
+        }, {
             id: 2,
-            substepTitle: "shsnsn",
+            substepTitle: "Build Up Logical Thinking",
             level: "easy",
-            all_questions: []
+            all_questions: [{
+                id: 1,
+                questionTitle: "Patterns",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }, {
+            id: 3,
+            substepTitle: "Laern STL",
+            level: "easy",
+            all_questions: [{
+                id: 1,
+                questionTitle: "C++ STL",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }, {
+            id: 4,
+            substepTitle: "Know Basic Maths",
+            level: "easy",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Count Digits",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Reverse a Number",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Check Palindrome",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 4,
+                questionTitle: "GCD or HCF",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 5,
+                questionTitle: "Armstrong Numbers",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 6,
+                questionTitle: "Print All Divisors",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 7,
+                questionTitle: "Check for Prime",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
         }]
-    // }, {
-    //     id: 2,
-    //     title: "Learn Important Sorting techniques",
-    //     color: "cadetblue"
+    }, {
+        id: 2,
+        title: "Learn Important Sorting techniques",
+        color: "cadetblue",
+        level: "easy",
+        all_substeps: [{
+            id: 1,
+            substepTitle: "Sorting-I",
+            level: "easy",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Selection Sort",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Bubble Sort",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Insertion Sort",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }, {
+
+            id: 2,
+            substepTitle: "Sorting-II",
+            level: "easy",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Merge Sort",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Recursive Bubble Sort",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Recursive Insertion Sort",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 4,
+                questionTitle: "Quick Sort",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }]
+    }
     // }, {
     //     id: 3,
     //     title: "Arrays",
@@ -136,6 +256,6 @@ const all_steps = [
     //     title: "Tries",
     //     color: "royalblue"
     // }
-}];
+];
 
 export default all_steps;
