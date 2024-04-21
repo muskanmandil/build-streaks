@@ -16,3 +16,7 @@
 .hard-level{
     background-color: red;
 }
+
+.check-btn {
+    height: fit-content;
+}

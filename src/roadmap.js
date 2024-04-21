@@ -699,7 +699,7 @@ const all_steps = [
                 lecturelink: "",
                 noteslink: "",
             }]
-        },{
+        }, {
             id: 2,
             substepTitle: "BS on Answers",
             all_questions: [{
@@ -793,7 +793,7 @@ const all_steps = [
                 solvelink: "",
                 lecturelink: "",
                 noteslink: "",
-            },{
+            }, {
                 id: 14,
                 questionTitle: "Kth element of 2 sorted arrays",
                 level: "medium",
@@ -801,7 +801,7 @@ const all_steps = [
                 lecturelink: "",
                 noteslink: "",
             }]
-        },{
+        }, {
             id: 3,
             substepTitle: "BS on 2D Arrays",
             all_questions: [{
@@ -842,14 +842,375 @@ const all_steps = [
             }]
         }]
     },
-    // }, {
-    //     id: 5,
-    //     title: "Strings",
-    //     color: "chartreuse"
-    // }, {
-    //     id: 6,
-    //     title: "Linked List",
-    //     color: "cornflowerblue"
+    {
+        id: 5,
+        title: "Strings",
+        color: "chartreuse",
+        all_substeps: [{
+            id: 1,
+            substepTitle: "Basic and Easy String Problems",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Remove outermost Paranthesis",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Reverse words in a given string / Palindrome Check",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Largest odd number in a string",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 4,
+                questionTitle: "Longest Common Prefix",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 5,
+                questionTitle: "Isomorphic String",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 6,
+                questionTitle: "Check whether one string is a rotation of another",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 7,
+                questionTitle: "Check if two strings are anagram of each other",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 8,
+                questionTitle: "Search in Rotated Sorted Array I",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }, {
+            id: 2,
+            substepTitle: "Medium String Problems",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Sort Characters by frequency",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Maximum Nesting Depth of Paranthesis",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Roman Number to Integer and vice versa",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 4,
+                questionTitle: "Implement Atoi",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 5,
+                questionTitle: "Count Number of Substrings",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 6,
+                questionTitle: "Longest Palindromic Substring[Do it without DP]",
+                level: "hard",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 7,
+                questionTitle: "Sum of Beauty of all substring",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 8,
+                questionTitle: "Reverse Every Word in A String",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }],
+    },
+    {
+        id: 6,
+        title: "Linked List",
+        color: "cornflowerblue",
+        all_substeps: [{
+            id: 1,
+            substepTitle: "Learn 1D Linked List",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Introduction to LinkedList, learn about struct, and how is node represented",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Inserting a node in LinkedList",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Deleting a node in LinkedList",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 4,
+                questionTitle: "Find the length of the linkedlist [learn traversal]",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 5,
+                questionTitle: "Search an element in the LL",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }, {
+            id: 2,
+            substepTitle: "Learn Doubly Linked List",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Introduction to DLL, learn about struct, and how is node represented",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Insert a node in DLL",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Delete a node in DLL",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 4,
+                questionTitle: "Reverse a DLL",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }, {
+            id: 3,
+            substepTitle: "Medium Problems of LL",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Middle of a LinkedList [TortoiseHare Method]",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Reverse a LinkedList [Iterative]",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Reverse a LL [Recursive]",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 4,
+                questionTitle: "Detect a loop in LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 5,
+                questionTitle: "Find the starting point in LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 6,
+                questionTitle: "Length of Loop in LL",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 7,
+                questionTitle: "Check if LL is palindrome or not",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 8,
+                questionTitle: "Segrregate odd and even nodes in LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 9,
+                questionTitle: "Remove Nth node from the back of the LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 10,
+                questionTitle: "Delete the middle node of LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 11,
+                questionTitle: "Sort LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 12,
+                questionTitle: "Sort a LL of 0's 1's and 2's by changing links",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 13,
+                questionTitle: "Find the intersection point of Y LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 14,
+                questionTitle: "Add 1 to a number represented by LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 15,
+                questionTitle: "Add 2 numbers in LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }, {
+            id: 4,
+            substepTitle: "Medium Problems of DLL",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Delete all occurrences of a key in DLL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Find pairs with given sum in DLL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Remove duplicates from sorted DLL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }, {
+            id: 5,
+            substepTitle: "Hard Problems of LL",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Reverse LL in group of given size K",
+                level: "hard",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 2,
+                questionTitle: "Rotate a LL",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 3,
+                questionTitle: "Flattening of LL",
+                level: "hard",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }, {
+                id: 4,
+                questionTitle: "Clone a Linked List with random and next pointer",
+                level: "hard",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }]
+    },
     // }, {
     //     id: 7,
     //     title: "Recursion",
