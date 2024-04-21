@@ -30,7 +30,6 @@ const StepCard = (props) => {
                 <SubstepCard
                   id={substep.id}
                   substepTitle={substep.substepTitle}
-                  level={substep.level}
                   all_questions={substep.all_questions}
                 />
               );

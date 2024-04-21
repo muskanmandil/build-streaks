@@ -4,3 +4,15 @@
     border: 1px solid black;
     padding: 1rem;
 }
+
+.easy-level{
+    background-color: lightgreen;
+}
+
+.medium-level{
+    background-color: yellow
+}
+
+.hard-level{
+    background-color: red;
+}
