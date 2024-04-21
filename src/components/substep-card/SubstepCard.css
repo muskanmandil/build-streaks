@@ -8,6 +8,14 @@
     justify-content: space-between;
 }
 
+.medium-level{
+    background-color: yellow
+}
+
+.hard-level{
+    background-color: red;
+}
+
 .questions-list {
     display: flex;
     flex-direction: column;
