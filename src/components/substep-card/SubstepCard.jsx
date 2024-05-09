@@ -7,9 +7,9 @@ const SubstepCard = (props) => {
   return (
     <div className="substep-card">
       <div className="substep-card-content" >
-        <p className="substep-heading">Substep {props.id} : {props.substepTitle}</p>
+        <p className="substep-heading">Step {props.id} : {props.substepTitle}</p>
         <div className="progress-bar">Total : {props.all_questions.length}</div>
-        <button onClick={() => setIsOpen(!isOpen)}>Toggle questions</button>
+        <button onClick={() => setIsOpen(!isOpen)}>{!isOpen ? "v" : "^"}</button>
       </div>
       
       {isOpen ? (

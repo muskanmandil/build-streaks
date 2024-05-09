@@ -1,0 +1,56 @@
+.navbar{
+    /* position: sticky; */
+    padding: 1rem 5rem 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--background-2);
+}
+
+.logo-text{
+    font-family: "Lora", serif;
+    font-size: 1.5rem;
+    height: fit-content;
+    cursor: pointer;
+    color: var(--primary-2);
+}
+
+.navbar-right{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar-streak{
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+    padding: 0.5rem 1rem;
+}
+
+
+.navbar-streak-logo{
+    height: 1.75rem;
+}
+
+.navbar-streak-number{
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.navbar-profile{
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    color: var(--primary-2);
+}
+
+.login-btn {
+    padding: 0.75rem 2.25rem;
+    border: none;
+    background: var(--accent);
+    color: var(--white);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+}

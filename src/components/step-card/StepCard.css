@@ -1,33 +1,59 @@
 .step-card {
   display: flex;
-  flex-direction: column;
-  /* height: 30vh; */
-  border: 1px solid black;
-  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 1rem 0.5rem;
+  gap: 1.5rem;
+  justify-content: space-between;
   border-radius: 0.25rem;
-}
-
-.card-img {
-  /* flex: 1; */
-  min-height: 12vh;
-}
-
-.card-content {
-  display: flex;
-  flex-direction: column;
-  /* gap: 2rem; */
-  padding: 1rem;
+  z-index: 1;
 }
 
 .card-header {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  padding: 1rem 0;
+  width: 15vw;
+}
+
+.card-heading {
+  font-size: 1.5rem;
+  color: var(--primary-2);
+}
+
+.progress-circle {
+  border: 4px solid green;
+  border-radius: 50%;
+}
+
+.card-number-logo {
+  font-size: 2rem;
+  background: #e5e5e5;
+  border-radius: 50%;
+  padding: 0.75rem 1.4rem;
 }
 
 .substeps-list {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 3rem 1rem;
+  gap: 1rem;
+  flex: 1;
 }
+
+
+/* Color palettes */
+
+/* 1st */
+
+/* #FF7396
+#F4E06D
+#FFFFDE
+#C499BA */
+
+/* 2nd */
+/* #FF6868
+#DCFFB7
+#FFBB64
+#FFEAA7 */
+
+

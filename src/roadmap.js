@@ -1,7 +1,7 @@
 const all_steps = [
     {
         id: 1,
-        title: "Learn the basics",
+        title: "Basics",
         color: "aqua",
         all_substeps: [{
             id: 1,
@@ -240,7 +240,7 @@ const all_steps = [
         }]
     }, {
         id: 2,
-        title: "Learn Important Sorting techniques",
+        title: "Sorting Techniques",
         color: "cadetblue",
         all_substeps: [{
             id: 1,
@@ -1211,10 +1211,51 @@ const all_steps = [
             }]
         }]
     },
-    // }, {
-    //     id: 7,
-    //     title: "Recursion",
-    //     color: "crimson"
+    {
+        id: 7,
+        title: "Recursion",
+        color: "crimson",
+        all_substeps:[{
+            id: 1,
+            substepTitle: "Get a Strong Hold",
+            all_questions: [{
+                id: 1,
+                questionTitle: "Recursive Implementation of atoi()",
+                level: "hard",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            },{
+                id: 2,
+                questionTitle: "Pow(x, n)",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            },{
+                id: 3,
+                questionTitle: "Count Good numbers",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            },{
+                id: 4,
+                questionTitle: "Sort a stack using recursion",
+                level: "medium",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            },{
+                id: 5,
+                questionTitle: "Reverse a stack using recursion",
+                level: "easy",
+                solvelink: "",
+                lecturelink: "",
+                noteslink: "",
+            }]
+        }]
+    },
     // }, {
     //     id: 8,
     //     title: "Bit Manipulation",

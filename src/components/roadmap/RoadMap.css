@@ -1,0 +1,22 @@
+.roadmap {
+  /* grid-row: span 2; */
+  height: 100%;
+  overflow-y: scroll;
+
+  
+}
+
+.roadmap-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.roadmap-timeline::after {
+  background-color: var(--accent);
+  content: '';
+  position: absolute;
+  left: calc(22.3%);
+  width: 4px;
+  height: 100%;
+}

@@ -1,0 +1,50 @@
+.streak-logo-container {
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.streak-div {
+  border-radius: 50%;
+  background-color: var(--secondary);
+  padding: 0.5rem;
+  box-shadow: 0px 2px 6px rgba(255, 150, 0, 0.8);
+  animation: pulse 2s ease-in-out infinite;
+  overflow: hidden;
+}
+.streak-logo {
+  width: 12vw;
+  position: relative;
+  animation: none !important;
+}
+
+.click-text {
+  margin-top: 0.5rem;
+  color: var(--primary-1);
+}
+
+.rotate {
+  animation: pulse 2s ease-in-out infinite, rotation 2s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1); /* Start with normal scale */
+  }
+  50% {
+    transform: scale(1.05); /* Scale up to 110% halfway through */
+  }
+  100% {
+    transform: scale(1); /* Return to normal scale */
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
