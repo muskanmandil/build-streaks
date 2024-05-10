@@ -1,16 +1,30 @@
 .substep-card {
-    border: 1px black solid;
-    padding: 1rem;
+  border: 1px var(--light-neutral) solid;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
 }
 
 .substep-card-content {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .questions-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.substep-heading {
+  font-family: "Ysabeau Infant", sans-serif;
+  font-size: 1.2rem;
+}
+
+.toggle-btn {
+  border: none;
+  background: none;
+  padding: 0.5rem;
+  cursor: pointer;
 }

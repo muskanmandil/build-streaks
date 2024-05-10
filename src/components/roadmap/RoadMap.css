@@ -1,9 +1,7 @@
 .roadmap {
   /* grid-row: span 2; */
   height: 100%;
-  overflow-y: scroll;
-
-  
+  overflow-y: scroll;  
 }
 
 .roadmap-timeline {
@@ -13,7 +11,7 @@
 }
 
 .roadmap-timeline::after {
-  background-color: var(--accent);
+  background-color: var(--light-neutral);
   content: '';
   position: absolute;
   left: calc(22.3%);

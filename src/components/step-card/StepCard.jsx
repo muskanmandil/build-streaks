@@ -17,7 +17,7 @@ const StepCard = (props) => {
     <div className="step-card">
       <div className="card-header">
         <h3 className="card-heading">{props.title}</h3>
-        <div className="progress">Total : {totalQuestions(props.id)}</div>
+        <div className="progress">0 / {totalQuestions(props.id)}</div>
       </div>
       <div className="progress-circle">
         <div className="card-number-logo">{props.id}</div>

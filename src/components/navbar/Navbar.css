@@ -1,56 +1,61 @@
-.navbar{
-    /* position: sticky; */
-    padding: 1rem 5rem 1rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--background-2);
+.navbar {
+  padding: 1rem 5rem 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--light-neutral);
 }
 
-.logo-text{
-    font-family: "Lora", serif;
-    font-size: 1.5rem;
-    height: fit-content;
-    cursor: pointer;
-    color: var(--primary-2);
+.logo {
+  cursor: pointer;
+  font-family: "Ysabeau Infant", sans-serif;
+  font-size: 1.5rem;
+  height: fit-content;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
 }
 
-.navbar-right{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.logo-streak-icon {
+  width: 3rem;
 }
 
-.navbar-streak{
-    display: flex;
-    align-items: center;
-    gap: 0.1rem;
-    padding: 0.5rem 1rem;
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-
-.navbar-streak-logo{
-    height: 1.75rem;
+.navbar-streak {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.5rem 1rem;
 }
 
-.navbar-streak-number{
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--accent);
+.navbar-streak-logo {
+  height: 2rem;
 }
 
-.navbar-profile{
-    padding: 0.75rem 1rem;
-    font-weight: 500;
-    color: var(--primary-2);
+.navbar-streak-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--dark-orange);
+}
+
+.navbar-profile {
+  padding: 0.5rem 1rem;
+  /* height: fit-content; */
 }
 
 .login-btn {
-    padding: 0.75rem 2.25rem;
-    border: none;
-    background: var(--accent);
-    color: var(--white);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
+  padding: 0.75rem 2rem;
+  border: none;
+  background: var(--secondary);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  /* color: var(--white); */
 }
