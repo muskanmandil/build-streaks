@@ -1,34 +1,35 @@
-import React, { useState } from "react";
-import all_steps from "../../roadmap";
+import React, { useContext, useState } from "react";
 import "./StepCard.css";
 import SubstepCard from "../substep-card/SubstepCard";
+import { ProgressContext } from "../../context/ProgressContext";
 
 const StepCard = (props) => {
-  // const [isOpen, setIsOpen] = useState(false);
-  const totalQuestions = (stepId) => {
-    const step = all_steps.find((s) => s.id === stepId);
-    const totalLength = step.all_substeps.reduce(
-      (sum, substep) => sum + substep.all_questions.length,
-      0
-    );
-    return totalLength;
+  const { totalQuestionsInStep } = useContext(ProgressContext);
+  const [questionsDoneInStep, setQuestionsDoneInStep] = useState(0);
+  const updateQuestionsDoneInStep = (increment) => {
+    setQuestionsDoneInStep(questionsDoneInStep + increment);
   };
+
   return (
     <div className="step-card">
       <div className="card-header">
         <h3 className="card-heading">{props.title}</h3>
-        <div className="progress">0 / {totalQuestions(props.id)}</div>
+        <div className="progress">
+          {questionsDoneInStep} / {totalQuestionsInStep(props.id)}
+        </div>
       </div>
       <div className="progress-circle">
         <div className="card-number-logo">{props.id}</div>
       </div>
       <div className="substeps-list">
-        {props.all_substeps.map((substep) => {
+        {props.all_substeps.map((substep, index) => {
           return (
             <SubstepCard
+              key={index}
               id={substep.id}
               substepTitle={substep.substepTitle}
               all_questions={substep.all_questions}
+              updateQuestionsDoneInStep={updateQuestionsDoneInStep}
             />
           );
         })}

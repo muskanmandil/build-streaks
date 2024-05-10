@@ -7,9 +7,10 @@ const RoadMap = () => {
   return (
     <div className="roadmap">
       <div className="roadmap-timeline">
-        {all_steps.map((step) => {
+        {all_steps.map((step, index) => {
           return (
             <StepCard
+              key={index}
               id={step.id}
               title={step.title}
               color={step.color}

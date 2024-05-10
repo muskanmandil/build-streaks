@@ -19,7 +19,7 @@ const Login = () => {
           <label htmlFor="">Password</label>
           <input type="text" />
         </div>
-        <button className="login-btn">{user === "Signup" ? "Signup" : "Login"}</button>
+        <button className="login-signup-btn">{user === "Signup" ? "Signup" : "Login"}</button>
       </form>
     </div>
   );

@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import streak_logo from "../../assets/streak.svg";
 import user_avatar from "../../assets/user_avatar.svg";
+import { AppContext } from "../../context/AppContext";
 
-const Navbar = ({ isLoggedIn, setLoggedIn }) => {
+const Navbar = () => {
+  const { isLoggedIn, setLoggedIn } = useContext(AppContext);
   return (
     <div className="navbar">
       <h2 className="logo" onClick={() => (window.location.href = "/")}>
@@ -24,9 +26,7 @@ const Navbar = ({ isLoggedIn, setLoggedIn }) => {
           </>
         ) : (
           <Link to="/login">
-            <button onClick={() => setLoggedIn(true)} className="login-btn">
-              Login
-            </button>
+            <button className="login-btn">Login</button>
           </Link>
         )}
       </div>

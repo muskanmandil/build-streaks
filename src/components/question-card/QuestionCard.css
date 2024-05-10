@@ -1,6 +1,6 @@
 .question-card {
   display: grid;
-  grid-template-columns: 1fr 24fr 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 16fr 7fr 1fr 1fr 1fr;
   gap: 1.5rem;
   padding: 0.5rem 0;
 }
