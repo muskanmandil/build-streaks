@@ -14,7 +14,7 @@ const LandingPage = () => {
       </div>
       <div className="credits-container">
         <p><i>Based on Striver's A-Z DSA Sheet</i></p>
-        <a href="https://www.takeuforward.com" target="_blank"><img src={tuf} alt="" className="tuf-logo"/></a>
+        <a href="https://www.takeuforward.com" target="_blank" rel="noreferrer"><img src={tuf} alt="" className="tuf-logo"/></a>
 
       </div>
       <StreakLogo />

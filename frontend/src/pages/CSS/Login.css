@@ -1,10 +1,9 @@
-
 .login-container {
     border: 1px solid var(--light-neutral);
     width: 50vw;
     margin: 0 auto;
     margin-top: 5vh;
-    padding: 2rem;
+    padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -47,6 +46,6 @@ form {
     font-weight: 600;
     cursor: pointer;
     color: var(--white);
-    margin-top: 1.5rem;
+    /* margin-top: 1.25rem; */
     width: fit-content;
 }
