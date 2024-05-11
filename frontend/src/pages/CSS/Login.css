@@ -2,7 +2,7 @@
     border: 1px solid var(--light-neutral);
     width: 50vw;
     margin: 0 auto;
-    margin-top: 5vh;
+    margin-top: 1rem;
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
@@ -35,6 +35,13 @@ form {
     padding: 0.75rem 1rem;
     border-radius: 4px;
     border: 1px solid var(--light-neutral);
+}
+
+.login-signup-link {
+    text-decoration: underline;
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .login-signup-btn {

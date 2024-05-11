@@ -1,7 +1,4 @@
 import "./App.css";
-import all_steps from "./roadmap";
-import StepCard from "./components/step-card/StepCard";
-import { useContext, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import LandingPage from "./pages/LandingPage";

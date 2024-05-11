@@ -1,0 +1,44 @@
+.profile-container{
+    border: 1px solid var(--light-neutral);
+    width: 50vw;
+    margin: 0 auto;
+    margin-top: 5vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-div {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.info-div h3{
+    font-weight: 600;
+}
+
+
+
+.change-passw-btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  background: var(--primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.logout-btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  background: var(--semantic-red);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--white);
+  width: fit-content;
+}

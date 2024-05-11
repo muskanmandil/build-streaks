@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState} from "react";
 import "./CSS/Login.css";
+import { AppContext } from "../context/AppContext";
 
 const Login = () => {
-  const [isSignedUp, setSignedUp] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const { isSignedUp, setSignedUp} = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,8 +38,11 @@ const Login = () => {
         if (response.status === 200) {
           alert("User Sign up successful");
           setSignedUp(true);
+          localStorage.setItem('auth-token', data.token);
+
         } else {
           alert(data.error);
+          setSignedUp(true);
         }
       } catch (error) {
         console.log(error);
@@ -64,10 +67,10 @@ const Login = () => {
       });
       console.log(response);
       const data = await response.json();
-      if (response.status===200) {
+      if (response.status === 200) {
         alert("User Logged in successfully");
-        setLoggedIn(true);
-        window.location.href="/dashboard";
+        localStorage.setItem('auth-token', data.token);
+        window.location.href = "/dashboard";
       } else {
         alert(data.error);
       }
@@ -79,6 +82,13 @@ const Login = () => {
   return (
     <div className="login-container">
       <h2 className="form-heading">{!isSignedUp ? "Signup" : "Login"}</h2>
+      <p>
+        {!isSignedUp ? "Already have an account? " : "Don't have an account? "}
+        <span className="login-signup-link" onClick={() => setSignedUp(!isSignedUp)}>
+          {!isSignedUp ? "Login" : "Signup"}
+        </span>
+      </p>
+
       <form onSubmit={!isSignedUp ? handleSignup : handleLogin}>
         {!isSignedUp ? (
           <div className="input-div">
