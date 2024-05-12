@@ -31,11 +31,15 @@ export const ProgressProvider = ({ children }) => {
             body: JSON.stringify({}),
           });
 
-          console.log(res);
+          // console.log(res);
 
           if (res.status === 200) {
             const data = await res.json();
-            setProgressInfo(data);
+            // setProgressInfo(data);
+            setProgressInfo((prevProgressInfo) => ({
+              ...prevProgressInfo,
+              ...data,
+            }));
           }
         } catch (error) {
           console.log(error);
@@ -43,7 +47,7 @@ export const ProgressProvider = ({ children }) => {
       }
     };
     fetchProgressInfo();
-  }, []);
+  }, [progressInfo]);
 
   const markQuestionDone = (questionId) => {
     fetch("http://localhost:4000/questiondone", {
@@ -57,10 +61,12 @@ export const ProgressProvider = ({ children }) => {
       }),
     })
       .then((res) => res.json())
-      .then(
+      .then((data)=>
         setProgressInfo((prevProgressInfo) => ({
           ...prevProgressInfo,
           questionsData: { ...prevProgressInfo.questionsData, [questionId]: 1 },
+          streak: data.streak,
+          lastActiveDate: data.lastActiveDate
         }))
       );
   };

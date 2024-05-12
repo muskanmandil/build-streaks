@@ -39,7 +39,7 @@ const Users = mongoose.model("Users", {
         type: Number
     },
     lastActiveDate: {
-        type: Date
+        type: String
     },
     date: {
         type: Date,
@@ -71,7 +71,13 @@ app.post('/signup', async (req, res) => {
             password: req.body.password,
             questionsData: questionsObj,
             streak: 0,
-            lastActiveDate: Date.now()
+            // UTC Timezone
+            // lastActiveDate: new Date()
+            // 2024-05-12T20:59:19.433+00:00
+            // database: 2024-05-12T21:04:52.000+00:00
+
+            // Indian TimeZone : dd-mm-yyyy
+            lastActiveDate: new Date().toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-')
         })
 
         // saving that user
@@ -170,28 +176,69 @@ app.post('/userinfo', fetchUser, async (req, res) => {
     })
 })
 
+// Function for calculating days diff
+const calculateDaysDiff = (user, latestActiveDate) => {
+    // initialize last & latest active date
+    let lastActiveDate = user.lastActiveDate;
+    // let latestActiveDate = new Date(2024, 4, 14).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+
+    // Parse the date strings into Date objects
+    const date1 = new Date(`${lastActiveDate.slice(6, 10)}-${lastActiveDate.slice(3, 5)}-${lastActiveDate.slice(0, 2)}`);
+    const date2 = new Date(`${latestActiveDate.slice(6, 10)}-${latestActiveDate.slice(3, 5)}-${latestActiveDate.slice(0, 2)}`);
+
+    // Calculate the time difference in milliseconds
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+
+    // Convert the time difference from milliseconds to days
+    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    return daysDiff;
+}
+
 // Progress info API 
 app.post('/progressinfo', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
+    let currDate = new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+    let daysDiff = calculateDaysDiff(user, currDate);
+    if (daysDiff > 1) {
+        user.streak = 0;
+    }
+    await Users.findOneAndUpdate({ _id: req.user.id }, { streak: user.streak });
     res.status(200).json({
         questionsData: user.questionsData,
         streak: user.streak,
-        lastActiveDate: user.lastActiveDate,
+        lastActiveDate: user.lastActiveDate
     })
 })
 
 //  Question done API
 app.post('/questiondone', fetchUser, async (req, res) => {
 
+    // find the user
     let user = await Users.findOne({ _id: req.user.id });
+
+    // update the questions data
     user.questionsData[req.body.questionId] = 1;
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });
-    res.status(200).json({ message: "Question mark as completed" });
+
+    let latestActiveDate = new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+
+    // if days diff is 1 then update streak
+    const daysDiff = calculateDaysDiff(user, latestActiveDate);
+    if (daysDiff === 1) {
+        user.streak += 1;
+    } else if(daysDiff>1){
+        user.streak = 1;
+    }
+
+    // save updated information
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, streak: user.streak, lastActiveDate: latestActiveDate });
+
+    // response
+    res.status(200).json({ streak: user.streak, lastActiveDate: latestActiveDate, message: "Question mark as completed" });
 });
 
 // Question undo API
 app.post('/questionundo', fetchUser, async (req, res) => {
-
     let user = await Users.findOne({ _id: req.user.id });
     user.questionsData[req.body.questionId] = 0;
     await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });

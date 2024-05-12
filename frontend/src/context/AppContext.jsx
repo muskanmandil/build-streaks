@@ -25,7 +25,7 @@ export const AppProvider = ({ children }) => {
           });
 
           // log the response
-          console.log(res);
+          // console.log(res);
 
           // if response is ok then set userInfo
           if (res.status === 200) {

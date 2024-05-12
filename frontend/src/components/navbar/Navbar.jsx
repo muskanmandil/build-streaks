@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import streak_logo from "../../assets/streak.svg";
 import user_avatar from "../../assets/user_avatar.svg";
+import { ProgressContext } from "../../context/ProgressContext";
 
 const Navbar = () => {
+  const { progressInfo } = useContext(ProgressContext);
   return (
     <div className="navbar">
       <h2 className="logo" onClick={() => (window.location.href = "/")}>
@@ -17,8 +19,13 @@ const Navbar = () => {
             <Link to="/dashboard">
               <div className="navbar-streak">
                 <img src={streak_logo} alt="" className="navbar-streak-logo" />
-                <div className="navbar-streak-number">0</div>
+                <div className="navbar-streak-number">
+                  {progressInfo.streak}
+                </div>
               </div>
+            </Link>
+            <Link to="/leaderboard" className="navbar-leaderboard">
+              🏆
             </Link>
             <Link to="/profile" className="navbar-profile">
               <img src={user_avatar} alt="" />
