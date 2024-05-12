@@ -3,7 +3,7 @@ import "./CSS/Profile.css";
 import { AppContext } from "../context/AppContext";
 
 const Profile = () => {
-  const { userName, userEmail } = useContext(AppContext);
+  const { userInfo } = useContext(AppContext);
   const handleLogout = () => {
     localStorage.removeItem("auth-token");
     alert("User Logged out successfully");
@@ -13,11 +13,11 @@ const Profile = () => {
     <div className="profile-container">
       <div className="info-div">
         <h3>Name:</h3>
-        <p>{userName}</p>
+        <p>{userInfo.name}</p>
       </div>
       <div className="info-div">
         <h3>Email:</h3>
-        <p>{userEmail}</p>
+        <p>{userInfo.email}</p>
       </div>
       <button className="logout-btn" onClick={handleLogout}>
         Logout

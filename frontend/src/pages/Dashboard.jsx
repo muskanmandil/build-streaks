@@ -7,6 +7,7 @@ import LeaderboardCard from "../components/leaderboard-card/LeaderboardCard";
 import { ProgressProvider } from "../context/ProgressContext";
 
 const Dashboard = () => {
+
   return (
     <div className="dashboard">
       <ProgressProvider>

@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import QuestionCard from "../question-card/QuestionCard";
 import "./SubstepCard.css";
 import arrow_up from "../../assets/arrow_up.svg";
 import arrow_down from "../../assets/arrow_down.svg";
+import { ProgressContext } from "../../context/ProgressContext";
 
 const SubstepCard = (props) => {
+  const { progressInfo } = useContext(ProgressContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [questionsDone, setQuestionsDone] = useState(0);
-  const onQuestionDone = () => {
-    setQuestionsDone(questionsDone + 1);
-    props.updateQuestionsDoneInStep(1);
+  const [questionsDoneInSubstep, setQuestionsDoneInSubstep] = useState(0);
+  const updateQuestionsDoneInSubstep = () => {
+    let count = 0;
+    props.all_questions.forEach((question) => {
+      if (progressInfo.questionsData[question.id] === 1) {
+        count++;
+      }
+    });
+    setQuestionsDoneInSubstep(count);
   };
-  const onQuestionUndo = () => {
-    setQuestionsDone(questionsDone - 1);
-    props.updateQuestionsDoneInStep(-1);
-  };
+
+  useEffect(() => {
+    updateQuestionsDoneInSubstep();
+  }, [progressInfo]);
+
   return (
     <div className="substep-card">
       <div className="substep-card-content">
@@ -22,7 +30,7 @@ const SubstepCard = (props) => {
           Step {props.id} : {props.substepTitle}
         </p>
         <div className="progress-bar">
-          {questionsDone} / {props.all_questions.length}
+          {questionsDoneInSubstep} / {props.all_questions.length}
         </div>
         <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
           {!isOpen ? <img src={arrow_down} /> : <img src={arrow_up} />}
@@ -35,10 +43,9 @@ const SubstepCard = (props) => {
             return (
               <QuestionCard
                 key={index}
+                id={question.id}
                 questionTitle={question.questionTitle}
                 level={question.level}
-                onQuestionDone={onQuestionDone}
-                onQuestionUndo={onQuestionUndo}
               />
             );
           })}

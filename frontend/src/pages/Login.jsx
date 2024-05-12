@@ -1,9 +1,9 @@
-import React, { useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import "./CSS/Login.css";
 import { AppContext } from "../context/AppContext";
 
 const Login = () => {
-  const { isSignedUp, setSignedUp} = useContext(AppContext);
+  const { isSignedUp, setSignedUp } = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,10 +19,16 @@ const Login = () => {
   };
 
   const handleSignup = async (e) => {
+
+    // preventing default event
     e.preventDefault();
+
+    // checking if password & confirm password matches
     if (formData.password.trim() === formData.confirm_password.trim()) {
+
+      // if it does then try to fetch response
       try {
-        const response = await fetch("http://localhost:4000/signup", {
+        const res = await fetch("http://localhost:4000/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -33,58 +39,89 @@ const Login = () => {
             password: formData.password,
           }),
         });
-        console.log(response);
-        const data = await response.json();
-        if (response.status === 200) {
-          alert("User Sign up successful");
+
+        // logging response
+        console.log(res);
+
+        const data = await res.json();
+
+        // if response is successful i.e. status code 200
+        if (res.status === 200) {
           setSignedUp(true);
+
+          // store auth-token in local storage
           localStorage.setItem('auth-token', data.token);
 
-        } else {
-          alert(data.error);
-          setSignedUp(true);
+          // redirect to dashboard
+          window.location.href='/dashboard'
         }
-      } catch (error) {
+
+        // alert the response message
+        alert(data.message);
+      } 
+      // if any error occurs catch it and log it
+      catch(error) {
         console.log(error);
       }
-    } else {
+    } 
+    // if passwords do not matches alert user about it
+    else {
       alert("Passwords do not match");
     }
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e) =>{
+
+    // prevent default event
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:4000/login", {
+
+    // try to fetch response
+    try{
+      const res = await fetch("http://localhost:4000/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type" : "application/json"
         },
-        body: JSON.stringify({
+        body: JSON.stringify ({
           email: formData.email,
-          password: formData.password,
-        }),
+          password: formData.password
+        })
       });
-      console.log(response);
-      const data = await response.json();
-      if (response.status === 200) {
-        alert("User Logged in successfully");
+
+      // logging response
+      console.log(res);
+
+      const data = await res.json();
+
+      // if response is successful i.e. status code 200
+      if(res.status===200){
+
+        // store auth-token in local storage
         localStorage.setItem('auth-token', data.token);
-        window.location.href = "/dashboard";
-      } else {
-        alert(data.error);
+
+        // redirect to dashboard
+        window.location.href = '/dashboard';
+
       }
-    } catch (error) {
-      console.log(error);
+
+      // alert the response message
+      alert(data.message);
     }
-  };
+    // if any error occurs catch it and log it
+    catch(error){
+      console.log(error);
+    } 
+  }
 
   return (
     <div className="login-container">
       <h2 className="form-heading">{!isSignedUp ? "Signup" : "Login"}</h2>
       <p>
         {!isSignedUp ? "Already have an account? " : "Don't have an account? "}
-        <span className="login-signup-link" onClick={() => setSignedUp(!isSignedUp)}>
+        <span
+          className="login-signup-link"
+          onClick={() => setSignedUp(!isSignedUp)}
+        >
           {!isSignedUp ? "Login" : "Signup"}
         </span>
       </p>
