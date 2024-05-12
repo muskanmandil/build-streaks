@@ -1,112 +1,208 @@
+// Importing necessary packages
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
+// Declaring the port
 const port = 4000;
 
-const app = express()
+// Creating app instance, and using necessary packages
+const app = express();
+app.use(express.json());
 app.use(cors());
-app.use(express.json())
 
-mongoose.connect("mongodb+srv://muskanmandil:HInzJBl4A3AkLEO8@cluster0.c6wwyow.mongodb.net/");
-
+// Get request from deafult path to check if app is running or not (localhost:4000)
 app.get('/', (req, res) => {
-    res.send("Express app is running")
+    res.send("Express app is running");
 })
 
-// Schema for users
+// Connecting with database
+mongoose.connect("mongodb+srv://muskanmandil:YAa0W4IzmbX1QBDy@cluster0.tvcijwm.mongodb.net/build-streaks");
+
+// Creating Users Schema
 const Users = mongoose.model("Users", {
     name: {
-        type: String,
-        required: true,
+        type: String
     },
     email: {
         type: String,
-        required: true,
-        unique: true,
+        unique: true
     },
     password: {
         type: String,
-        required: true,
+    },
+    questionsData: {
+        type: Object
+    },
+    streak: {
+        type: Number
+    },
+    lastActiveDate: {
+        type: Date
     },
     date: {
         type: Date,
-        default: Date.now,
+        default: Date.now
     }
 })
 
+// Signup API
 app.post('/signup', async (req, res) => {
+
+    // checking if user with requested email already exists or not
     let check = await Users.findOne({ email: req.body.email });
+
     if (check) {
-        return res.status(400).json({ success: false, error: "User with this email addresss already exists" })
+        // if exists then sending a bad request(400) response
+        res.status(400).json({ message: "User with this email already exists" });
     }
-    const user = new Users({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    })
-    await user.save();
-
-    const data = {
-        user: {
-            id: user.id
+    else {
+        // if not then making a default questionsObj for questionsData for the user on signup
+        let questionsObj = {};
+        for (let i = 0; i < 455; i++) {
+            questionsObj[i] = 0;
         }
-    }
 
-    const token = jwt.sign(data, 'secret_user');
-    res.json({ success: true, token });
+        // creating a new user
+        const user = new Users({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            questionsData: questionsObj,
+            streak: 0,
+            lastActiveDate: Date.now()
+        })
+
+        // saving that user
+        await user.save();
+
+        // creating a new data object containing user's id 
+        const data = {
+            user: {
+                id: user.id
+            }
+        }
+
+        // generates a json web token using user's id
+        const token = jwt.sign(data, "secret_key");
+
+        // sending a ok request(200) response [token]
+        res.status(200).json({ message: "User has been registered successfully", token });
+
+    }
 })
 
+
+// Login API
 app.post('/login', async (req, res) => {
+    // checking if user with requested email exists or not
     let user = await Users.findOne({ email: req.body.email });
+
     if (user) {
-        const passCompare = req.body.password === user.password;
-        if (passCompare) {
+        // comparing requested and stored passwords
+        let passwCompare = user.password === req.body.password
+
+        if (passwCompare) {
+            // if passwords matches then creating a new data object containing user's id 
             const data = {
                 user: {
                     id: user.id
                 }
             }
-            const token = jwt.sign(data, 'secret_user');
-            res.json({ succes: true, token });
-        } else {
-            res.json({ success: false, error: "wrong password" })
+
+            // generates a json web token using user's id
+            const token = jwt.sign(data, 'secret_key');
+
+            // sending ok request (200) response along with token
+            res.status(200).json({ message: "Logged in successful", token })
         }
-    } else {
-        return res.json({ success: false, error: "no user found" })
+        else {
+            // sending bad request (400) repsonse if password do not match
+            res.status(400).json({ message: "Wrong password" });
+        }
+    }
+    else {
+        // if no user is found then send a bad request(400) response 
+        res.status(400).json({ message: "No user found with this email. Signup first" });
     }
 })
 
-// middleware
-const fetchUser = async(req,res,next) => {
-    const token=req.header('auth-token');
-    if(!token){
-        res.status(401).send({error: "Please authenticate using a valid token" });
-    }else{
-        try{
-            const data = jwt.verify(token, 'secret_user');
+// MIDDLEWARE: used for authentication
+// next: a fucntion to call the next middleware in chain
+const fetchUser = async (req, res, next) => {
+
+    // retrieves value of auth-token header from request, to pass jwt for authentication
+    const token = req.header('auth-token');
+
+    // if token is not present or empty string
+    if (!token) {
+
+        // sending a unauthorized request(400) response of invalid token
+        res.status(401).json({ message: "Please authenticate using a valid token" });
+    }
+    else {
+        // if token is present 
+        try {
+            // then verify it with secret key
+            const data = jwt.verify(token, 'secret_key');
+
+            // set the user property of data to the user property of request
             req.user = data.user;
+
+            // move to next middleware function in chain
             next();
-        } catch(error){
-            res.status(401).send({error: "please authenticate using a valid token"});
+        }
+
+        //  if any error occurs it is catched
+        catch (error) {
+            res.status(401).json({ message: "Please authenticate using a valid token" });
         }
     }
 }
 
-app.post('/userinfo', fetchUser, async (req,res)=>{
-    let userData = await Users.findOne({id: req.user.id.id});
-    res.json({
-        name: userData.name,
-        email: userData.email
+// User info API for profile
+app.post('/userinfo', fetchUser, async (req, res) => {
+    let user = await Users.findOne({ _id: req.user.id });
+    res.status(200).json({
+        name: user.name,
+        email: user.email
     })
 })
 
+// Progress info API 
+app.post('/progressinfo', fetchUser, async (req, res) => {
+    let user = await Users.findOne({ _id: req.user.id });
+    res.status(200).json({
+        questionsData: user.questionsData,
+        streak: user.streak,
+        lastActiveDate: user.lastActiveDate,
+    })
+})
 
+//  Question done API
+app.post('/questiondone', fetchUser, async (req, res) => {
+
+    let user = await Users.findOne({ _id: req.user.id });
+    user.questionsData[req.body.questionId] = 1;
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });
+    res.status(200).json({ message: "Question mark as completed" });
+});
+
+// Question undo API
+app.post('/questionundo', fetchUser, async (req, res) => {
+
+    let user = await Users.findOne({ _id: req.user.id });
+    user.questionsData[req.body.questionId] = 0;
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });
+    res.status(200).json({ message: "Question mark as uncompleted" });
+});
+
+// starting our app by listening to the port we declared
 app.listen(port, (error) => {
-    if (error) {
-        console.log("error:" + error);
+    if (!error) {
+        console.log("server is running on port : " + port);
     } else {
-        console.log("server is running on port " + port)
+        console.log("Error : " + error);
     }
 })

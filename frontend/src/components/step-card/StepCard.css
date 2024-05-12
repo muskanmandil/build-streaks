@@ -22,16 +22,31 @@
   font-family: "Ysabeau Infant", sans-serif;
 }
 
-.progress-circle {
-  border: 4px solid var(--gray);
-  border-radius: 50%;
-}
 
-.card-number-logo {
-  font-size: 2rem;
+.progress-outer-circle {
+  width: 100px;
+  height: 100px;
   background: var(--light-neutral);
   border-radius: 50%;
-  padding: 0.75rem 1.6rem;
+  position: relative;
+  border: 4px solid var(--gray);
+}
+
+.progress-inner-circle {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+}
+.card-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
 }
 
 .substeps-list {
@@ -40,7 +55,6 @@
   gap: 1rem;
   flex: 1;
 }
-
 
 /* Color palettes */
 
@@ -56,5 +70,3 @@
 #DCFFB7
 #FFBB64
 #FFEAA7 */
-
-

@@ -23,14 +23,19 @@ const SubstepCard = (props) => {
     updateQuestionsDoneInSubstep();
   }, [progressInfo]);
 
+  const progress = (questionsDoneInSubstep / props.all_questions.length) * 100;
+
   return (
     <div className="substep-card">
       <div className="substep-card-content">
         <p className="substep-heading">
           Step {props.id} : {props.substepTitle}
         </p>
-        <div className="progress-bar">
-          {questionsDoneInSubstep} / {props.all_questions.length}
+        <div
+          className="progress-bar-container"
+        >
+          <div className="progress-bar" style={{width: `${progress}%`}}></div>
+          <p>{questionsDoneInSubstep} / {props.all_questions.length}</p>
         </div>
         <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
           {!isOpen ? <img src={arrow_down} /> : <img src={arrow_up} />}
