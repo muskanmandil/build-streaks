@@ -24,14 +24,6 @@ const StreakLogo = () => {
             loop
             autoplay
           />
-
-          {/* <dotlottie-player
-        src="https://lottie.host/1ff275b9-c11a-40d7-b187-416474ea0fe4/sqFvT2ZksG.json"
-        background="transparent"
-        speed="0.5"
-        loop
-        autoplay
-      /> */}
         </div>
       </div>
       <p className="click-text">click to start</p>

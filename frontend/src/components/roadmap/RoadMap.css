@@ -11,10 +11,10 @@
 }
 
 .roadmap-timeline::after {
-  background-color: var(--light-neutral);
+  background-color: var(--secondary);
   content: '';
   position: absolute;
-  left: calc(22.3%);
+  left: 23.5vw;
   width: 4px;
   height: 100%;
 }

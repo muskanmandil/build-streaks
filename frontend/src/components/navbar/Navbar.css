@@ -34,7 +34,7 @@
   padding: 0.5rem 1rem;
 }
 
-.navbar-streak-logo {
+.navbar-streak-logo, .navbar-points-logo{
   height: 2rem;
 }
 
@@ -44,14 +44,23 @@
   color: var(--dark-orange);
 }
 
- .navbar-profile {
+.navbar-points {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
-  /* height: fit-content; */
 }
 
-.navbar-leaderboard{
-  font-size: 2.25rem;
-  padding: 0 1rem ;
+.navbar-points-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.navbar-profile,
+.navbar-leaderboard {
+  padding: 0.5rem 1rem;
+  /* height: fit-content; */
 }
 
 .login-btn {

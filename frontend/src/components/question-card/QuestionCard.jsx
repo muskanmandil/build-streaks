@@ -12,18 +12,18 @@ const QuestionCard = (props) => {
   useEffect(()=>{
   },[props.id, progressInfo]);
 
-  const handleDone = async (questionId) => {
+  const handleDone = async (questionId,questionLevel) => {
     if (progressInfo.questionsData[questionId]===1) {
-      markQuestionUndone(questionId);
+      markQuestionUndone(questionId,questionLevel);
     } else {
-      markQuestionDone(questionId);
+      markQuestionDone(questionId,questionLevel);
     }
   };
   return (
     <div className={`question-card ${progressInfo.questionsData[props.id]===1 ? "question-completed" : null}`}>
       <div
         className={`check-btn ${progressInfo.questionsData[props.id]===1 ? "completed" : null}`}
-        onClick={() => handleDone(props.id)}
+        onClick={() => handleDone(props.id,props.level)}
       ></div>
       <p className="question-title  ">{props.questionTitle}</p>
       <p

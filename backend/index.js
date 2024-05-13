@@ -38,6 +38,9 @@ const Users = mongoose.model("Users", {
     streak: {
         type: Number
     },
+    points: {
+        type: Number
+    },
     lastActiveDate: {
         type: String
     },
@@ -71,12 +74,7 @@ app.post('/signup', async (req, res) => {
             password: req.body.password,
             questionsData: questionsObj,
             streak: 0,
-            // UTC Timezone
-            // lastActiveDate: new Date()
-            // 2024-05-12T20:59:19.433+00:00
-            // database: 2024-05-12T21:04:52.000+00:00
-
-            // Indian TimeZone : dd-mm-yyyy
+            points: 0,
             lastActiveDate: new Date().toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-')
         })
 
@@ -180,7 +178,6 @@ app.post('/userinfo', fetchUser, async (req, res) => {
 const calculateDaysDiff = (user, latestActiveDate) => {
     // initialize last & latest active date
     let lastActiveDate = user.lastActiveDate;
-    // let latestActiveDate = new Date(2024, 4, 14).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
 
     // Parse the date strings into Date objects
     const date1 = new Date(`${lastActiveDate.slice(6, 10)}-${lastActiveDate.slice(3, 5)}-${lastActiveDate.slice(0, 2)}`);
@@ -207,7 +204,8 @@ app.post('/progressinfo', fetchUser, async (req, res) => {
     res.status(200).json({
         questionsData: user.questionsData,
         streak: user.streak,
-        lastActiveDate: user.lastActiveDate
+        lastActiveDate: user.lastActiveDate,
+        points: user.points
     })
 })
 
@@ -221,28 +219,77 @@ app.post('/questiondone', fetchUser, async (req, res) => {
     user.questionsData[req.body.questionId] = 1;
 
     let latestActiveDate = new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+    
+    // for testing purpose
+    // let latestActiveDate = new Date(2024, 4, 14).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+
+    // update points
+    if (req.body.questionLevel === 'easy') {
+        user.points += 10;
+    } else if (req.body.questionLevel === 'medium') {
+        user.points += 20;
+    } else {
+        user.points += 40;
+    }
 
     // if days diff is 1 then update streak
     const daysDiff = calculateDaysDiff(user, latestActiveDate);
-    if (daysDiff === 1) {
-        user.streak += 1;
-    } else if(daysDiff>1){
+
+    if (daysDiff === 0 && user.streak === 0 || daysDiff > 1) {
         user.streak = 1;
+    }
+    else if (daysDiff === 1) {
+        user.streak += 1;
     }
 
     // save updated information
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, streak: user.streak, lastActiveDate: latestActiveDate });
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points, streak: user.streak, lastActiveDate: latestActiveDate });
 
     // response
-    res.status(200).json({ streak: user.streak, lastActiveDate: latestActiveDate, message: "Question mark as completed" });
+    res.status(200).json({ streak: user.streak, points: user.points, lastActiveDate: latestActiveDate, message: "Question mark as completed" });
 });
 
 // Question undo API
 app.post('/questionundo', fetchUser, async (req, res) => {
+
+    // find the user
     let user = await Users.findOne({ _id: req.user.id });
+
+    // update the questions data
     user.questionsData[req.body.questionId] = 0;
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });
-    res.status(200).json({ message: "Question mark as uncompleted" });
+
+    // update points
+    if (req.body.questionLevel === 'easy') {
+        user.points -= 10;
+    } else if (req.body.questionLevel === 'medium') {
+        user.points -= 20;
+    } else {
+        user.points -= 40;
+    }
+
+    // save updated information
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points });
+
+    // response
+    res.status(200).json({ points: user.points, message: "Question mark as uncompleted" });
+});
+
+// Leaderboard API
+app.get('/leaderboard', fetchUser, async (req, res) => {
+
+    const users = await Users.find({}, { name: 1, email: 1, points: 1, streak: 1 })
+        .sort({ points: -1, streak: -1, name: 1 })
+        .exec();
+
+    const leaderboard = users.map((user, index) => ({
+        rank: index + 1,
+        name: user.name,
+        email: user.email,
+        points: user.points,
+        streak: user.streak,
+    }));
+
+    res.status(200).json(leaderboard);
 });
 
 // starting our app by listening to the port we declared

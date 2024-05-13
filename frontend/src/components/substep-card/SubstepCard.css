@@ -47,7 +47,13 @@
   left: 50%;
   transform: translate(-50%,-50%);
   font-size: 0.85rem;
+  font-weight: 600;
 }
+
+.half-substep-complete{
+   color: var(--white);
+}
+
 .toggle-btn {
   border: none;
   background: none;

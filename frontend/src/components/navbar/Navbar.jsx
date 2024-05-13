@@ -1,12 +1,24 @@
 import React, { useContext } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import streak_logo from "../../assets/streak.svg";
+import streak_logo from "../../assets/streak_logo.svg";
+import streak_dull from "../../assets/streak_dull.svg";
+import streak_lit from "../../assets/streak_lit.svg";
 import user_avatar from "../../assets/user_avatar.svg";
 import { ProgressContext } from "../../context/ProgressContext";
+import leaderboard from "../../assets/leaderboard.svg";
+import pointsxp from "../../assets/pointsxp.svg";
 
 const Navbar = () => {
   const { progressInfo } = useContext(ProgressContext);
+  let today = new Date(Date.now())
+    .toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })
+    .replace(/\//g, "-");
+
   return (
     <div className="navbar">
       <h2 className="logo" onClick={() => (window.location.href = "/")}>
@@ -16,16 +28,29 @@ const Navbar = () => {
       <div className="navbar-right">
         {localStorage.getItem("auth-token") ? (
           <>
+          <div className="navbar-points">
+            <img src={pointsxp} alt="" className="navbar-points-logo"/>
+            <div className="navbar-points-number">{progressInfo.points}</div>
+          </div>
             <Link to="/dashboard">
               <div className="navbar-streak">
-                <img src={streak_logo} alt="" className="navbar-streak-logo" />
+                <img
+                  src={
+                    progressInfo.lastActiveDate === today &&
+                    progressInfo.streak !== 0
+                      ? streak_lit
+                      : streak_dull
+                  }
+                  alt=""
+                  className="navbar-streak-logo"
+                />
                 <div className="navbar-streak-number">
                   {progressInfo.streak}
                 </div>
               </div>
             </Link>
             <Link to="/leaderboard" className="navbar-leaderboard">
-              🏆
+              <img src={leaderboard} alt="" />
             </Link>
             <Link to="/profile" className="navbar-profile">
               <img src={user_avatar} alt="" />

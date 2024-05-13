@@ -15,6 +15,7 @@ export const ProgressProvider = ({ children }) => {
   const [progressInfo, setProgressInfo] = useState({
     questionsData: getDefaultQuestionsData(),
     streak: "",
+    points: "",
     lastActiveDate: "",
   });
 
@@ -35,7 +36,6 @@ export const ProgressProvider = ({ children }) => {
 
           if (res.status === 200) {
             const data = await res.json();
-            // setProgressInfo(data);
             setProgressInfo((prevProgressInfo) => ({
               ...prevProgressInfo,
               ...data,
@@ -49,7 +49,7 @@ export const ProgressProvider = ({ children }) => {
     fetchProgressInfo();
   }, [progressInfo]);
 
-  const markQuestionDone = (questionId) => {
+  const markQuestionDone = (questionId, questionLevel) => {
     fetch("http://localhost:4000/questiondone", {
       method: "POST",
       headers: {
@@ -58,6 +58,7 @@ export const ProgressProvider = ({ children }) => {
       },
       body: JSON.stringify({
         questionId: questionId,
+        questionLevel: questionLevel
       }),
     })
       .then((res) => res.json())
@@ -66,12 +67,13 @@ export const ProgressProvider = ({ children }) => {
           ...prevProgressInfo,
           questionsData: { ...prevProgressInfo.questionsData, [questionId]: 1 },
           streak: data.streak,
+          points: data.points,
           lastActiveDate: data.lastActiveDate
         }))
       );
   };
 
-  const markQuestionUndone = (questionId) => {
+  const markQuestionUndone = (questionId, questionLevel) => {
     fetch("http://localhost:4000/questionundo", {
       method: "POST",
       headers: {
@@ -80,13 +82,15 @@ export const ProgressProvider = ({ children }) => {
       },
       body: JSON.stringify({
         questionId: questionId,
+        questionLevel: questionLevel
       }),
     })
       .then((res) => res.json())
-      .then(
+      .then((data) =>
         setProgressInfo((prevProgressInfo) => ({
           ...prevProgressInfo,
           questionsData: { ...prevProgressInfo.questionsData, [questionId]: 0 },
+          points: data.points,
         }))
       );
   };

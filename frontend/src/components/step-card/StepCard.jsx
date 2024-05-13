@@ -32,17 +32,15 @@ const StepCard = (props) => {
         <div className="progress">
           {questionsDoneInStep} / {totalQuestionsInStep(props.id)}
         </div>
+        <div
+          className="step-progress-bar-container"
+        >
+          <div className="step-progress-bar" style={{width: `${progress}%`}}></div>
+        </div>
       </div>
-      <div className="progress-outer-circle">
-        {/* <div
-          className="progress-inner-circle"
-          style={{
-            borderImage: `linear-gradient(to right, var(--gray), var(--semantic-green)) ${progress}%`,
-          }}
-        > */}
+      <div className={`card-number-outer-circle ${progress===100 ? "step-complete" : null}`}>
         <div className="card-number">
           {props.id}
-          {/* </div> */}
         </div>
       </div>
       <div className="substeps-list">

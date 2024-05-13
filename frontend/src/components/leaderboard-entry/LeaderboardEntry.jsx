@@ -1,36 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./LeaderboardEntry.css";
-import streak from "../../assets/streak.svg";
-import gold_trophy from "../../assets/gold_trophy.svg";
-import silver_trophy from "../../assets/silver_trophy.svg";
-import bronze_trophy from "../../assets/bronze_trophy.svg";
+import streak_lit from "../../assets/streak_lit.svg";
+import streak_dull from "../../assets/streak_dull.svg";
+import pointsxp from "../../assets/pointsxp.svg";
+import rank1st from "../../assets/rank1st.svg";
+import rank2nd from "../../assets/rank2nd.svg";
+import rank3rd from "../../assets/rank3rd.svg";
+import { AppContext } from "../../context/AppContext";
 
-const LeaderboardEntry = ({ rank }) => {
+const LeaderboardEntry = (props) => {
+  const { userInfo } = useContext(AppContext);
   return (
-    <div className="leaderboard-entry">
+    <div
+      className={`leaderboard-entry ${
+        props.email === userInfo.email ? "this-user" : null
+      }`}
+    >
       <p className="leaderboard-rank">
-        {rank === "01" || rank === "02" || rank === "03" ? (
+        {props.rank <=3 ? (
           <img
             src={
-              rank === "01"
-                ? gold_trophy
-                : rank === "02"
-                ? silver_trophy
-                : rank === "03"
-                ? bronze_trophy
+              props.rank === 1
+                ? rank1st
+                : props.rank === 2
+                ? rank2nd
+                : props.rank === 3
+                ? rank3rd
                 : null
             }
             alt=""
           />
         ) : (
-          rank
+          props.rank
         )}
       </p>
-      <p className="leaderboard-name">Name</p>
-      <p className="leaderboard-points">1000</p>
+      <p className="leaderboard-name">{props.name}</p>
+      <p className="leaderboard-points">
+        <img src={pointsxp} alt="" />
+        {props.points}
+      </p>
       <p className="leaderboard-streak">
-        <img src={streak} alt="" />
-        100
+        <img src={props.streak !== 0 ? streak_lit : streak_dull} alt="" />
+        {props.streak}
       </p>
     </div>
   );

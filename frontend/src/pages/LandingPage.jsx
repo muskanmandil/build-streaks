@@ -2,7 +2,6 @@ import React from "react";
 import "./CSS/LandingPage.css";
 import StreakLogo from "../components/streak-logo/StreakLogo";
 import tuf from "../assets/tuf.svg"
-// import arrow from "../assets/arrow.svg"
 
 const LandingPage = () => {
   return (

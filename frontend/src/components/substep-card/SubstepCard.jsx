@@ -35,10 +35,10 @@ const SubstepCard = (props) => {
           className="progress-bar-container"
         >
           <div className="progress-bar" style={{width: `${progress}%`}}></div>
-          <p>{questionsDoneInSubstep} / {props.all_questions.length}</p>
+          <p className={`${progress>=50 ? "half-substep-complete": null}`}>{questionsDoneInSubstep} / {props.all_questions.length}</p>
         </div>
         <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
-          {!isOpen ? <img src={arrow_down} /> : <img src={arrow_up} />}
+          {!isOpen ? <img src={arrow_down} alt="arrow_icon"/> : <img src={arrow_up} alt="arrow_icon"/>}
         </button>
       </div>
 
