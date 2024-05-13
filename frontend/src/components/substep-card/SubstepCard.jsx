@@ -51,6 +51,9 @@ const SubstepCard = (props) => {
                 id={question.id}
                 questionTitle={question.questionTitle}
                 level={question.level}
+                lecturelink={question.lecturelink}
+                problemlink={question.problemlink}
+                articlelink={question.articlelink}
               />
             );
           })}

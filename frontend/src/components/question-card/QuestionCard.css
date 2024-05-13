@@ -1,7 +1,7 @@
 .question-card {
   display: grid;
-  grid-template-columns: 1fr 16fr 7fr 1fr 1fr 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 1fr 16fr 7fr 1.5fr 1.5fr 1.5fr;
+  gap: 2.5rem;
   padding: 0.5rem 0;
 }
 
@@ -38,4 +38,8 @@
 .question-completed {
   /* text-decoration: line-through; */
   opacity: 0.5;
+}
+
+.lecture-link img, .problem-link img, .article-link img{
+  height: 1.5rem;
 }
