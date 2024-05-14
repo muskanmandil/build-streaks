@@ -75,7 +75,7 @@ app.post('/signup', async (req, res) => {
             questionsData: questionsObj,
             streak: 0,
             points: 0,
-            lastActiveDate: new Date().toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-')
+            lastActiveDate: new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-')
         })
 
         // saving that user

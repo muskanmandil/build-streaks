@@ -1,5 +1,5 @@
 .navbar {
-  padding: 1rem 5rem 1rem 3rem;
+  padding: 0.5rem 5rem 0.5rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +54,7 @@
 .navbar-points-number {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--semantic-green);
 }
 
 .navbar-profile,
@@ -66,10 +66,10 @@
 .login-btn {
   padding: 0.75rem 2rem;
   border: none;
-  background: var(--secondary);
+  background: var(--semantic-green);
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  /* color: var(--white); */
+  color: var(--white);
 }

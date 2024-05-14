@@ -1,11 +1,12 @@
 .step-card {
   display: flex;
   align-items: flex-start;
-  padding: 1rem 0.5rem;
-  gap: 1.5rem;
+  padding: 2.5rem 0.5rem 0 0.5rem;
+  gap: 4vw;
   justify-content: space-between;
   border-radius: 0.25rem;
   z-index: 1;
+  min-height: 35vh;
 }
 
 .card-header {
@@ -17,15 +18,16 @@
 }
 
 .card-heading {
-  font-size: 1.75rem;
-  color: var(--black);
+  font-size: 1.5rem;
+  color: var(--brown);
   font-family: "Ysabeau Infant", sans-serif;
 }
 
 .progress {
   text-align: center;
-  color: var(--dark-orange);
-  font-weight: 600;
+  color: var(--black);
+  /* font-weight: 600; */
+  margin-top: 0.5rem;
 }
 .card-number-outer-circle {
   width: 100px;
@@ -55,6 +57,7 @@
   background: var(--light-neutral);
   border-radius: 1rem;
   position: relative;
+  max-width: 300px;
 }
 
 .step-progress-bar{
@@ -65,28 +68,14 @@
   background: var(--semantic-green);
   border-radius: 1rem;
   transition: width 0.3s ease;
+  
 }
 
 .step-complete{
-  background: var(--secondary);
+  background: var(--accent);
   border-color: var(--semantic-green);
 }
 
 .step-complete .card-number{
   font-weight: 600;
 }
-
-/* Color palettes */
-
-/* 1st */
-
-/* #FF7396
-#F4E06D
-#FFFFDE
-#C499BA */
-
-/* 2nd */
-/* #FF6868
-#DCFFB7
-#FFBB64
-#FFEAA7 */

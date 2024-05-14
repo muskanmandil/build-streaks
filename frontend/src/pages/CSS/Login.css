@@ -39,7 +39,7 @@ form {
 
 .login-signup-link {
     text-decoration: underline;
-    color: var(--accent);
+    color: var(--semantic-green);
     cursor: pointer;
     font-weight: 600;
 }

@@ -22,10 +22,13 @@
 }
 
 .check-btn {
-  padding: 0.75rem;
+  /* padding: 0.8rem; */
   border-radius: 50%;
   border: 1px solid var(--gray);
   cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  /* height: fit-content; */
 }
 
 .completed {

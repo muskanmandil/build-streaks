@@ -30,6 +30,7 @@
   background: var(--light-neutral);
   border-radius: 1rem;
   position: relative;
+  max-width: 400px;
 }
 
 .progress-bar{
