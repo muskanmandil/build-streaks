@@ -65,17 +65,18 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: var(--semantic-green);
+  background: var(--secondary);
   border-radius: 1rem;
   transition: width 0.3s ease;
   
 }
 
 .step-complete{
-  background: var(--accent);
-  border-color: var(--semantic-green);
+  background: var(--light-green);
+  border-color: var(--secondary);
 }
 
 .step-complete .card-number{
   font-weight: 600;
+  color: var(--brown);
 }

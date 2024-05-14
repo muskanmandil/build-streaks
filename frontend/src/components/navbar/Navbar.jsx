@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import streak_logo from "../../assets/streak_logo.svg";
@@ -10,7 +10,8 @@ import leaderboard from "../../assets/leaderboard.svg";
 import pointsxp from "../../assets/pointsxp.svg";
 
 const Navbar = () => {
-  const { progressInfo } = useContext(ProgressContext);
+  const { progressInfo, totalQuestionsDone } = useContext(ProgressContext);
+
   let today = new Date(Date.now())
     .toLocaleString("en-IN", {
       day: "2-digit",
@@ -25,13 +26,19 @@ const Navbar = () => {
         <img src={streak_logo} className="logo-streak-icon" alt="" />
         <i>Build Streaks</i>
       </h2>
+      <div className="total-progress-container">
+        <p className="total-progress-percentage">
+          {Math.ceil((totalQuestionsDone / 454) * 100)}% completed
+        </p>
+        <p className="total-progress">{totalQuestionsDone} / 454</p>
+      </div>
       <div className="navbar-right">
         {localStorage.getItem("auth-token") ? (
           <>
-          <div className="navbar-points">
-            <img src={pointsxp} alt="" className="navbar-points-logo"/>
-            <div className="navbar-points-number">{progressInfo.points}</div>
-          </div>
+            <div className="navbar-points">
+              <img src={pointsxp} alt="" className="navbar-points-logo" />
+              <div className="navbar-points-number">{progressInfo.points}</div>
+            </div>
             <Link to="/dashboard">
               <div className="navbar-streak">
                 <img

@@ -12,9 +12,12 @@
   font-size: 1.5rem;
   height: fit-content;
   font-weight: 700;
-
   display: flex;
   align-items: center;
+}
+
+.logo i {
+  color: var(--brown);
 }
 
 .logo-streak-icon {
@@ -34,7 +37,8 @@
   padding: 0.5rem 1rem;
 }
 
-.navbar-streak-logo, .navbar-points-logo{
+.navbar-streak-logo,
+.navbar-points-logo {
   height: 2rem;
 }
 
@@ -54,7 +58,7 @@
 .navbar-points-number {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--semantic-green);
+  color: var(--secondary);
 }
 
 .navbar-profile,
@@ -66,10 +70,25 @@
 .login-btn {
   padding: 0.75rem 2rem;
   border: none;
-  background: var(--semantic-green);
+  background: var(--secondary);
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   color: var(--white);
+}
+
+.total-progress-container {
+  display: flex;
+  gap: 2rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.total-progress-percentage {
+  color: var(--secondary);
+}
+
+.total-progress {
+  color: var(--brown);
 }

@@ -12,6 +12,7 @@
 .leaderboard-rank{
     font-size: 2rem;
     text-align: center;
+    color: var(--brown);
 }
 
 .leaderboard-points, .leaderboard-streak{
@@ -20,12 +21,20 @@
     font-weight: 600;
 }
 
+.leaderboard-points {
+    color: var(--secondary);
+}
+
+.leaderboard-streak {
+    color: var(--dark-orange);
+}
+
 .leaderboard-points img, .leaderboard-streak img {
     height: 1.75rem;
     margin-right: 0.5rem;
 }
 
 .this-user{
-    border: 0.5rem solid var(--dark-orange);
+    border: 0.5rem solid var(--accent);
     padding: 0.25rem 0.5rem;
 }

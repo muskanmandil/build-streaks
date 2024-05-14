@@ -24,6 +24,11 @@
   width: 35%;
 }
 
+.substep-heading span{
+  font-weight: 700;
+  color: var(--accent);
+}
+
 .progress-bar-container{
   width: 35%;
   height: 1.5rem;
@@ -38,7 +43,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: var(--semantic-green);
+  background: var(--accent);
   border-radius: 1rem;
   transition: width 0.3s ease;
 }

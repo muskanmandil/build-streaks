@@ -7,6 +7,8 @@ import codestudio from "../../assets/codestudio.png";
 import article_icon from "../../assets/article_icon.svg";
 import { ProgressContext } from "../../context/ProgressContext";
 import interviewbit from "../../assets/interviewbit.svg";
+import spoj from "../../assets/spoj.jpg";
+import tuf_circle from "../../assets/tuf_circle.svg"
 
 const QuestionCard = (props) => {
   const { progressInfo, markQuestionDone, markQuestionUndone } =
@@ -51,19 +53,18 @@ const QuestionCard = (props) => {
       >
         {props.level}
       </p>
-      {props.lecturelink !== "" && (
-        <a
-          href={props.lecturelink}
-          className="lecture-link"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src={youtube} alt="" />
-        </a>
-      )}
 
       <a
-        href={props.problemlink !== "" ? props.problemlink : ""}
+        href={props.lecturelink}
+        className="lecture-link"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img src={props.lecturelink !== "" ? youtube : null} alt="" />
+      </a>
+
+      <a
+        href={props.problemlink}
         className="problem-link"
         target="_blank"
         rel="noreferrer"
@@ -78,22 +79,22 @@ const QuestionCard = (props) => {
               ? codestudio
               : domain === "www.interviewbit.com"
               ? interviewbit
+              : domain === "www.spoj.com"
+              ? spoj
               : ""
           }
           alt=""
         />
       </a>
 
-      {props.articlelink !== "" && (
-        <a
-          href={props.articlelink}
-          className="article-link"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src={article_icon} alt="" />
-        </a>
-      )}
+      <a
+        href={props.articlelink}
+        className="article-link"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img src={props.articlelink !== "" ? tuf_circle : null} alt="" />
+      </a>
     </div>
   );
 };

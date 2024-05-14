@@ -29,16 +29,20 @@ const SubstepCard = (props) => {
     <div className="substep-card">
       <div className="substep-card-content">
         <p className="substep-heading">
-          Step {props.id} : {props.substepTitle}
+          <span>Step {props.id} :</span> {props.substepTitle}
         </p>
-        <div
-          className="progress-bar-container"
-        >
-          <div className="progress-bar" style={{width: `${progress}%`}}></div>
-          <p className={`${progress>=50 ? "half-substep-complete": null}`}>{questionsDoneInSubstep} / {props.all_questions.length}</p>
+        <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+          <p className={`${progress >= 50 ? "half-substep-complete" : null}`}>
+            {questionsDoneInSubstep} / {props.all_questions.length}
+          </p>
         </div>
         <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
-          {!isOpen ? <img src={arrow_down} alt="arrow_icon"/> : <img src={arrow_up} alt="arrow_icon"/>}
+          {!isOpen ? (
+            <img src={arrow_down} alt="arrow_icon" />
+          ) : (
+            <img src={arrow_up} alt="arrow_icon" />
+          )}
         </button>
       </div>
 

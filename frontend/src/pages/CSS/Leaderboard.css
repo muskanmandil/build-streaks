@@ -4,8 +4,7 @@
   margin: 0 auto;
   margin-top: 1rem;
   padding: 1.5rem 2rem;
-  /* background: var(--primary); */
-  background: #FED84E;
+  background: var(--light-yellow);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,5 +25,5 @@
 .leaderboard-heading{
     font-size: 2.5rem;
     font-family: "Ysabeau Infant", sans-serif;
-    color: var(--black);
+    color: var(--brown);
 }
