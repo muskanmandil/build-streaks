@@ -13,7 +13,11 @@ const port = 4000;
 // Creating app instance, and using necessary packages
 const app = express();
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+    origin: 'https://build-streaks.vercel.app',
+    credentials: true 
+}));
 
 // Get request from deafult path to check if app is running or not (localhost:4000)
 app.get('/', (req, res) => {
