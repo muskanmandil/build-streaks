@@ -12,6 +12,7 @@ const getDefaultQuestionsData = () => {
 };
 
 export const ProgressProvider = ({ children }) => {
+  const backendUrl = process.env.REACT_APP_BACKEND_URL
   const [progressInfo, setProgressInfo] = useState({
     questionsData: getDefaultQuestionsData(),
     streak: "",
@@ -32,7 +33,7 @@ export const ProgressProvider = ({ children }) => {
   const fetchProgressInfo = async () => {
     if (localStorage.getItem("auth-token")) {
       try {
-        const res = await fetch("http://localhost:4000/progressinfo", {
+        const res = await fetch(`${backendUrl}/progressinfo`, {
           method: "POST",
           headers: {
             "auth-token": `${localStorage.getItem("auth-token")}`,
@@ -59,7 +60,7 @@ export const ProgressProvider = ({ children }) => {
   
 
   const markQuestionDone = (questionId, questionLevel) => {
-    fetch("http://localhost:4000/questiondone", {
+    fetch(`${backendUrl}/questiondone`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +84,7 @@ export const ProgressProvider = ({ children }) => {
   };
 
   const markQuestionUndone = (questionId, questionLevel) => {
-    fetch("http://localhost:4000/questionundo", {
+    fetch(`${backendUrl}/questionundo`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

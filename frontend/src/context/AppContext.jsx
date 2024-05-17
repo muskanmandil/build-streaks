@@ -3,6 +3,7 @@ import React, { useState, createContext, useEffect } from "react";
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [isSignedUp, setSignedUp] = useState(false);
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -15,7 +16,7 @@ export const AppProvider = ({ children }) => {
     if (localStorage.getItem("auth-token")) {
       // if present then try to fetch response
       try {
-        const res = await fetch("http://localhost:4000/userinfo", {
+        const res = await fetch(`${backendUrl}/userinfo`, {
           method: "POST",
           headers: {
             "auth-token": `${localStorage.getItem("auth-token")}`,
@@ -43,7 +44,7 @@ export const AppProvider = ({ children }) => {
     if (localStorage.getItem("auth-token")) {
       // if present then try to fetch response
       try {
-        const res = await fetch("http://localhost:4000/leaderboard", {
+        const res = await fetch(`${backendUrl}/leaderboard`, {
           method: "GET",
           headers: {
             "auth-token": `${localStorage.getItem("auth-token")}`,

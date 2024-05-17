@@ -2601,23 +2601,359 @@ const all_steps = [
         }, {
             id: 2,
             substepTitle: "Problems on BFS/DFS",
-            all_questions: []
+            all_questions: [{
+                id: 335,
+                questionTitle: "Number of provinces",
+                level: "medium",
+                lecturelink: "https://youtu.be/ACzkVtewUYA",
+                problemlink: "https://leetcode.com/problems/number-of-provinces/description/",
+                articlelink: "https://takeuforward.org/data-structure/number-of-provinces/"
+            }, {
+                id: 336,
+                questionTitle: "Connected Components Problem in Matrix",
+                level: "hard",
+                lecturelink: "",
+                problemlink: "https://www.geeksforgeeks.org/problems/number-of-provinces/1",
+                articlelink: ""
+            }, {
+                id: 337,
+                questionTitle: "Rotten Oranges",
+                level: "medium",
+                lecturelink: "https://youtu.be/yf3oUhkvqA0",
+                problemlink: "https://leetcode.com/problems/rotting-oranges/description/",
+                articlelink: "https://takeuforward.org/data-structure/rotten-oranges-min-time-to-rot-all-oranges-bfs/"
+            }, {
+                id: 338,
+                questionTitle: "Flood Fill",
+                level: "hard",
+                lecturelink: "https://youtu.be/C-2_uSRli8o",
+                problemlink: "https://leetcode.com/problems/flood-fill/description/",
+                articlelink: "https://takeuforward.org/graph/flood-fill-algorithm-graphs/"
+            }, {
+                id: 339,
+                questionTitle: "Cycle detection in undirected graph (BFS)",
+                level: "hard",
+                lecturelink: "https://youtu.be/BPlrALf1LDU",
+                problemlink: "https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1",
+                articlelink: "https://takeuforward.org/data-structure/detect-cycle-in-an-undirected-graph-using-bfs/"
+            }, {
+                id: 340,
+                questionTitle: "Cycle detection in undirected graph (DFS)",
+                level: "hard",
+                lecturelink: "https://youtu.be/zQ3zgFypzX4",
+                problemlink: "https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1",
+                articlelink: "https://takeuforward.org/data-structure/detect-cycle-in-an-undirected-graph-using-dfs/"
+            }, {
+                id: 341,
+                questionTitle: "0/1 Matrix Problem [BFS]",
+                level: "medium",
+                lecturelink: "https://youtu.be/edXdVwkYHF8",
+                problemlink: "https://leetcode.com/problems/01-matrix/description/",
+                articlelink: "https://takeuforward.org/graph/distance-of-nearest-cell-having-1/"
+            }, {
+                id: 342,
+                questionTitle: "Surrounded Regions [DFS]",
+                level: "hard",
+                lecturelink: "https://youtu.be/BtdgAys4yMk",
+                problemlink: "https://leetcode.com/problems/surrounded-regions/description/",
+                articlelink: "https://takeuforward.org/graph/surrounded-regions-replace-os-with-xs/"
+            }, {
+                id: 343,
+                questionTitle: "Number of Enclaves [flood fill implementation - multisource]",
+                level: "hard",
+                lecturelink: "https://youtu.be/rxKcepXQgU4",
+                problemlink: "https://leetcode.com/problems/number-of-enclaves/description/",
+                articlelink: "https://takeuforward.org/graph/number-of-enclaves/"
+            }, {
+                id: 344,
+                questionTitle: "Word ladder - 1",
+                level: "hard",
+                lecturelink: "https://youtu.be/tRPda0rcf8E",
+                problemlink: "https://leetcode.com/problems/word-ladder/description/",
+                articlelink: "https://takeuforward.org/graph/word-ladder-i-g-29/"
+            }, {
+                id: 345,
+                questionTitle: "Word ladder - 2",
+                level: "hard",
+                lecturelink: "https://youtu.be/tRPda0rcf8E",
+                problemlink: "https://leetcode.com/problems/word-ladder-ii/description/",
+                articlelink: "https://takeuforward.org/graph/g-30-word-ladder-ii/"
+            }, {
+                id: 346,
+                questionTitle: "Number of Distinct Islands [dfs multisource]",
+                level: "hard",
+                lecturelink: "https://youtu.be/muncqlKJrH0",
+                problemlink: "https://leetcode.com/problems/number-of-distinct-islands-ii/description/",
+                articlelink: "https://takeuforward.org/data-structure/number-of-islands/"
+            }, {
+                id: 347,
+                questionTitle: "Bipartite Graph (DFS)",
+                level: "medium",
+                lecturelink: "https://youtu.be/KG5YFfR0j8A",
+                problemlink: "https://leetcode.com/problems/is-graph-bipartite/description/",
+                articlelink: "https://takeuforward.org/graph/bipartite-graph-dfs-implementation/"
+            }, {
+                id: 348,
+                questionTitle: "Cycle Detection in Directed Graph (DFS)",
+                level: "hard",
+                lecturelink: "https://youtu.be/9twcmtQj4DU",
+                problemlink: "https://leetcode.com/problems/course-schedule-ii/solutions/293048/detecting-cycle-in-directed-graph-problem/",
+                articlelink: "https://takeuforward.org/data-structure/detect-cycle-in-a-directed-graph-using-dfs-g-19/"
+            }]
         }, {
             id: 3,
             substepTitle: "Topo Sort and Problems",
-            all_questions: []
+            all_questions: [{
+                id: 349,
+                questionTitle: "Topo Sort",
+                level: "hard",
+                lecturelink: "https://youtu.be/5lZ0iJMrUMk",
+                problemlink: "https://www.geeksforgeeks.org/problems/topological-sort/1",
+                articlelink: "https://takeuforward.org/data-structure/topological-sort-algorithm-dfs-g-21/"
+            }, {
+                id: 350,
+                questionTitle: "Kahn's Algorithm",
+                level: "hard",
+                lecturelink: "https://youtu.be/73sneFXuTEg",
+                problemlink: "https://www.geeksforgeeks.org/problems/topological-sort/1",
+                articlelink: "https://takeuforward.org/data-structure/kahns-algorithm-topological-sort-algorithm-bfs-g-22/"
+            }, {
+                id: 351,
+                questionTitle: "Cycle Detection in Directed Graph [BFS]",
+                level: "hard",
+                lecturelink: "https://youtu.be/iTBaI90lpDQ",
+                problemlink: "https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1",
+                articlelink: ""
+            }, {
+                id: 352,
+                questionTitle: "Course Schedule - I",
+                level: "hard",
+                lecturelink: "https://youtu.be/WAOfKpxYHR8",
+                problemlink: "https://leetcode.com/problems/course-schedule/description/",
+                articlelink: "https://takeuforward.org/data-structure/course-schedule-i-and-ii-pre-requisite-tasks-topological-sort-g-24/"
+            }, {
+                id: 353,
+                questionTitle: "Course Schedule - II",
+                level: "hard",
+                lecturelink: "https://youtu.be/WAOfKpxYHR8",
+                problemlink: "https://leetcode.com/problems/course-schedule-ii/description/",
+                articlelink: "https://takeuforward.org/data-structure/course-schedule-i-and-ii-pre-requisite-tasks-topological-sort-g-24/"
+            }, {
+                id: 354,
+                questionTitle: "Find eventual safe states",
+                level: "hard",
+                lecturelink: "https://youtu.be/2gtg3VsDGyc",
+                problemlink: "https://leetcode.com/problems/find-eventual-safe-states/description/",
+                articlelink: "https://takeuforward.org/data-structure/find-eventual-safe-states-bfs-topological-sort-g-25/"
+            }, {
+                id: 355,
+                questionTitle: "Allen dictionary",
+                level: "hard",
+                lecturelink: "https://youtu.be/U3N_je7tWAs",
+                problemlink: "https://leetcode.com/problems/alien-dictionary/editorial/",
+                articlelink: "https://takeuforward.org/data-structure/alien-dictionary-topological-sort-g-26/"
+            }]
         }, {
             id: 4,
             substepTitle: "Shortest Path Algorithms and Problems",
-            all_questions: []
+            all_questions: [{
+                id: 356,
+                questionTitle: "Shortest Path in UG with unit weights",
+                level: "hard",
+                lecturelink: "https://youtu.be/C4gxoTaI71U",
+                problemlink: "https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1",
+                articlelink: "https://takeuforward.org/data-structure/shortest-path-in-undirected-graph-with-unit-distance-g-28/"
+            }, {
+                id: 357,
+                questionTitle: "Shortest Path in DAG",
+                level: "hard",
+                lecturelink: "https://youtu.be/ZUFQfFaU-8U",
+                problemlink: "https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1",
+                articlelink: "https://takeuforward.org/data-structure/shortest-path-in-directed-acyclic-graph-topological-sort-g-27/"
+            }, {
+                id: 358,
+                questionTitle: "Dijsktra's Algorithm",
+                level: "hard",
+                lecturelink: "https://youtu.be/rp1SMw7HSO8",
+                problemlink: "https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1",
+                articlelink: "https://takeuforward.org/data-structure/dijkstras-algorithm-using-set-g-33/"
+            }, {
+                id: 359,
+                questionTitle: "Why priority Queue is used in Djisktra's Algorithm",
+                level: "medium",
+                lecturelink: "https://youtu.be/rp1SMw7HSO8",
+                problemlink: "https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1",
+                articlelink: "https://takeuforward.org/data-structure/dijkstras-algorithm-using-priority-queue-g-32/"
+            }, {
+                id: 360,
+                questionTitle: "Shortest path in a binary maze",
+                level: "medium",
+                lecturelink: "https://youtu.be/U5Mw4eyUmw4",
+                problemlink: "https://leetcode.com/problems/shortest-path-in-binary-matrix/description/",
+                articlelink: "https://takeuforward.org/data-structure/g-36-shortest-distance-in-a-binary-maze/"
+            }, {
+                id: 361,
+                questionTitle: "Path with minimum effort",
+                level: "medium",
+                lecturelink: "https://youtu.be/0ytpZyiZFhA",
+                problemlink: "https://leetcode.com/problems/path-with-minimum-effort/description/",
+                articlelink: "https://takeuforward.org/data-structure/g-37-path-with-minimum-effort/"
+            }, {
+                id: 362,
+                questionTitle: "Cheapest flights within k stops",
+                level: "hard",
+                lecturelink: "https://youtu.be/9XybHVqTHcQ",
+                problemlink: "https://leetcode.com/problems/cheapest-flights-within-k-stops/description/",
+                articlelink: "https://takeuforward.org/data-structure/g-38-cheapest-flights-within-k-stops/"
+            }, {
+                id: 363,
+                questionTitle: "Network delay time",
+                level: "medium",
+                lecturelink: "",
+                problemlink: "https://leetcode.com/problems/network-delay-time/",
+                articlelink: ""
+            }, {
+                id: 364,
+                questionTitle: "Number of ways to arrive at destination",
+                level: "medium",
+                lecturelink: "https://youtu.be/_-0mx0SmYxA",
+                problemlink: "https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/",
+                articlelink: "https://takeuforward.org/data-structure/g-40-number-of-ways-to-arrive-at-destination/"
+            }, {
+                id: 365,
+                questionTitle: "Minimum steps to reach end from start by performing multiplication and mod operations with array elements",
+                level: "medium",
+                lecturelink: "https://youtu.be/_BvEJ3VIDWw",
+                problemlink: "https://www.geeksforgeeks.org/problems/minimum-multiplications-to-reach-end/1",
+                articlelink: "https://takeuforward.org/graph/g-39-minimum-multiplications-to-reach-end/"
+            }, {
+                id: 366,
+                questionTitle: "Bellman Ford Algorithm",
+                level: "hard",
+                lecturelink: "https://youtu.be/0vVofAhAYjc",
+                problemlink: "https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1",
+                articlelink: "https://takeuforward.org/data-structure/bellman-ford-algorithm-g-41/"
+            }, {
+                id: 367,
+                questionTitle: "Floyd Warshal Algorithm",
+                level: "hard",
+                lecturelink: "https://youtu.be/YbY8cVwWAvw",
+                problemlink: "https://www.geeksforgeeks.org/problems/implementing-floyd-warshall2042/1",
+                articlelink: "https://takeuforward.org/data-structure/floyd-warshall-algorithm-g-42/"
+            }, {
+                id: 368,
+                questionTitle: "Find the city with the smallest number of neighbors in a threshold distance",
+                level: "hard",
+                lecturelink: "https://youtu.be/9XybHVqTHcQ",
+                problemlink: "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/description/",
+                articlelink: "https://takeuforward.org/data-structure/find-the-city-with-the-smallest-number-of-neighbours-at-a-threshold-distance-g-43/"
+            }]
         }, {
             id: 5,
             substepTitle: "Minimum Spanning Tree / Disjoint Set Problems",
-            all_questions: []
+            all_questions: [{
+                id: 369,
+                questionTitle: "Minimum Spanning Tree",
+                level: "hard",
+                lecturelink: "https://youtu.be/ZSPjZuZWCME",
+                problemlink: "https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1",
+                articlelink: "https://takeuforward.org/data-structure/minimum-spanning-tree-theory-g-44/"
+            }, {
+                id: 370,
+                questionTitle: "Prim's Algorithm",
+                level: "hard",
+                lecturelink: "https://youtu.be/mJcZjjKzeqk",
+                problemlink: "https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1",
+                articlelink: "https://takeuforward.org/data-structure/prims-algorithm-minimum-spanning-tree-c-and-java-g-45/"
+            }, {
+                id: 371,
+                questionTitle: "Disjoint Set (Union by Rank)",
+                level: "hard",
+                lecturelink: "https://youtu.be/aBxjDBC4M1U",
+                problemlink: "https://www.geeksforgeeks.org/problems/disjoint-set-union-find/1",
+                articlelink: "https://takeuforward.org/data-structure/disjoint-set-union-by-rank-union-by-size-path-compression-g-46/"
+            }, {
+                id: 372,
+                questionTitle: "Disjoint Set (Union by Size)",
+                level: "hard",
+                lecturelink: "https://youtu.be/aBxjDBC4M1U",
+                problemlink: "https://www.geeksforgeeks.org/problems/disjoint-set-union-find/1",
+                articlelink: "https://takeuforward.org/data-structure/disjoint-set-union-by-rank-union-by-size-path-compression-g-46/"
+            }, {
+                id: 373,
+                questionTitle: "Kruskal's Algorithm",
+                level: "hard",
+                lecturelink: "https://youtu.be/DMnDM_sxVig",
+                problemlink: "https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1",
+                articlelink: "https://takeuforward.org/data-structure/kruskals-algorithm-minimum-spanning-tree-g-47/"
+            }, {
+                id: 374,
+                questionTitle: "Number of operations to make network connected",
+                level: "medium",
+                lecturelink: "https://youtu.be/FYrl7iz9_ZU",
+                problemlink: "https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/",
+                articlelink: "https://takeuforward.org/data-structure/number-of-operations-to-make-network-connected-dsu-g-49/"
+            }, {
+                id: 375,
+                questionTitle: "Most stones removed with same rows or columns",
+                level: "medium",
+                lecturelink: "https://youtu.be/OwMNX8SPavM",
+                problemlink: "https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/",
+                articlelink: "https://takeuforward.org/data-structure/most-stones-removed-with-same-row-or-column-dsu-g-53/"
+            }, {
+                id: 376,
+                questionTitle: "Accounts merge",
+                level: "hard",
+                lecturelink: "https://youtu.be/FMwpt_aQOGw",
+                problemlink: "https://leetcode.com/problems/accounts-merge/description/",
+                articlelink: "https://takeuforward.org/data-structure/accounts-merge-dsu-g-50/"
+            }, {
+                id: 377,
+                questionTitle: "Number of island II",
+                level: "hard",
+                lecturelink: "https://youtu.be/Rn6B-Q4SNyA",
+                problemlink: "https://leetcode.com/problems/number-of-islands-ii/description/",
+                articlelink: "https://takeuforward.org/graph/number-of-islands-ii-online-queries-dsu-g-51/"
+            }, {
+                id: 378,
+                questionTitle: "Making a Large Island",
+                level: "hard",
+                lecturelink: "https://youtu.be/lgiz0Oup6gM",
+                problemlink: "https://leetcode.com/problems/making-a-large-island/description/",
+                articlelink: "https://takeuforward.org/data-structure/making-a-large-island-dsu-g-52/"
+            }, {
+                id: 379,
+                questionTitle: "Swim in rising water",
+                level: "hard",
+                lecturelink: "",
+                problemlink: "https://leetcode.com/problems/swim-in-rising-water/description/",
+                articlelink: ""
+            }]
         }, {
             id: 6,
             substepTitle: "Other Algorithms",
-            all_questions: []
+            all_questions: [{
+                id: 380,
+                questionTitle: "Bridges in Graph",
+                level: "hard",
+                lecturelink: "https://youtu.be/qrAub5z8FeA",
+                problemlink: "https://leetcode.com/problems/critical-connections-in-a-network/solutions/382385/find-bridges-in-a-graph/",
+                articlelink: "https://takeuforward.org/graph/bridges-in-graph-using-tarjans-algorithm-of-time-in-and-low-time-g-55/"
+            }, {
+                id: 381,
+                questionTitle: "Articulation Point",
+                level: "hard",
+                lecturelink: "https://youtu.be/j1QDfU21iZk",
+                problemlink: "https://www.geeksforgeeks.org/problems/articulation-point-1/1",
+                articlelink: "https://takeuforward.org/data-structure/articulation-point-in-graph-g-56/"
+            }, {
+                id: 382,
+                questionTitle: "Kosaraju's Algorithm",
+                level: "hard",
+                lecturelink: "https://youtu.be/R6uoSjZ2imo",
+                problemlink: "https://www.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1",
+                articlelink: "https://takeuforward.org/graph/strongly-connected-components-kosarajus-algorithm-g-54/"
+            }]
         }]
     }, {
         id: 16,
@@ -2626,7 +2962,7 @@ const all_steps = [
             id: 1,
             substepTitle: "Introduction to DP",
             all_questions: [{
-                id: 382,
+                id: 383,
                 questionTitle: "Dynamic Programming Introduction",
                 level: "medium",
                 lecturelink: "https://youtu.be/tyB0ztf0DNY",
@@ -2636,43 +2972,414 @@ const all_steps = [
         }, {
             id: 2,
             substepTitle: "1D DP",
-            all_questions: []
+            all_questions: [{
+                id: 384,
+                questionTitle: "Climbing Stairs",
+                level: "medium",
+                lecturelink: "https://youtu.be/mLfjzJsN8us",
+                problemlink: "https://leetcode.com/problems/climbing-stairs/description/",
+                articlelink: "https://takeuforward.org/data-structure/dynamic-programming-climbing-stairs/"
+            }, {
+                id: 385,
+                questionTitle: "Frog Jump (DP - 3)",
+                level: "medium",
+                lecturelink: "https://youtu.be/EgG3jsGoPvQ",
+                problemlink: "https://www.geeksforgeeks.org/problems/geek-jump/1",
+                articlelink: "https://takeuforward.org/data-structure/dynamic-programming-frog-jump-dp-3/"
+            }, {
+                id: 386,
+                questionTitle: "Frog Jump with k distances (DP - 4)",
+                level: "medium",
+                lecturelink: "https://youtu.be/Kmh3rhyEtB8",
+                problemlink: "https://www.geeksforgeeks.org/problems/minimal-cost/1",
+                articlelink: "https://takeuforward.org/data-structure/dynamic-programming-frog-jump-with-k-distances-dp-4/"
+            }, {
+                id: 387,
+                questionTitle: "Maximum sum of non-adjacent elements (DP - 5)",
+                level: "medium",
+                lecturelink: "https://youtu.be/GrMBfJNk_NY",
+                problemlink: "https://leetcode.com/problems/house-robber/description/",
+                articlelink: "https://takeuforward.org/data-structure/maximum-sum-of-non-adjacent-elements-dp-5/"
+            }, {
+                id: 388,
+                questionTitle: "House Robber (DP - 6)",
+                level: "medium",
+                lecturelink: "https://youtu.be/3WaxQMELSkw",
+                problemlink: "https://leetcode.com/problems/house-robber-ii/description/",
+                articlelink: "https://takeuforward.org/data-structure/dynamic-programming-house-robber-dp-6/"
+            }]
         }, {
             id: 3,
             substepTitle: "2D/3D DP and DP on Grids",
-            all_questions: []
+            all_questions: [{
+                id: 389,
+                questionTitle: "Ninja's Training (DP 7)",
+                level: "medium",
+                lecturelink: "https://youtu.be/AE39gJYuRog",
+                problemlink: "https://www.geeksforgeeks.org/problems/geeks-training/1",
+                articlelink: "https://takeuforward.org/data-structure/dynamic-programming-ninjas-training-dp-7/"
+            }, {
+                id: 390,
+                questionTitle: "Grid Unique Paths : DP on Grids (DP8)",
+                level: "medium",
+                lecturelink: "https://youtu.be/sdE0A2Oxofw",
+                problemlink: "https://leetcode.com/problems/unique-paths/description/",
+                articlelink: "https://takeuforward.org/data-structure/grid-unique-paths-dp-on-grids-dp8/"
+            }, {
+                id: 391,
+                questionTitle: "Grid Unique Paths 2 (DP 9)",
+                level: "medium",
+                lecturelink: "https://youtu.be/TmhpgXScLyY",
+                problemlink: "https://leetcode.com/problems/unique-paths-ii/description/",
+                articlelink: "https://takeuforward.org/data-structure/grid-unique-paths-2-dp-9/"
+            }, {
+                id: 392,
+                questionTitle: "Minimum path sum in Grid (DP 10)",
+                level: "medium",
+                lecturelink: "https://youtu.be/_rgTlyky1uQ",
+                problemlink: "https://leetcode.com/problems/minimum-path-sum/description/",
+                articlelink: "https://takeuforward.org/data-structure/minimum-path-sum-in-a-grid-dp-10/"
+            }, {
+                id: 393,
+                questionTitle: "Minimum path sum in Triangular Grid (DP 11)",
+                level: "medium",
+                lecturelink: "https://youtu.be/SrP-PiLSYC0",
+                problemlink: "https://leetcode.com/problems/triangle/description/",
+                articlelink: "https://takeuforward.org/data-structure/minimum-path-sum-in-triangular-grid-dp-11/"
+            }, {
+                id: 394,
+                questionTitle: "Minimum/Maximum Falling Path Sum (DP-12)",
+                level: "medium",
+                lecturelink: "https://youtu.be/N_aJ5qQbYA0",
+                problemlink: "https://leetcode.com/problems/minimum-falling-path-sum/description/",
+                articlelink: "https://takeuforward.org/data-structure/minimum-maximum-falling-path-sum-dp-12/"
+            }, {
+                id: 395,
+                questionTitle: "3-d DP : Ninja and his friends (DP-13)",
+                level: "medium",
+                lecturelink: "https://youtu.be/QGfn7JeXK54",
+                problemlink: "https://www.geeksforgeeks.org/problems/chocolates-pickup/1",
+                articlelink: "https://takeuforward.org/data-structure/3-d-dp-ninja-and-his-friends-dp-13/"
+            }]
         }, {
             id: 4,
             substepTitle: "DP on Subsequences",
-            all_questions: []
+            all_questions: [{
+                id: 396,
+                questionTitle: "Subset sum equal to target (DP- 14)",
+                level: "medium",
+                lecturelink: "https://youtu.be/fWX9xDmIzRI",
+                problemlink: "https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1",
+                articlelink: "https://takeuforward.org/data-structure/subset-sum-equal-to-target-dp-14/"
+            }, {
+                id: 397,
+                questionTitle: "Partition Equal Subset Sum (DP- 15)",
+                level: "medium",
+                lecturelink: "https://youtu.be/7win3dcgo3k",
+                problemlink: "https://leetcode.com/problems/partition-equal-subset-sum/description/",
+                articlelink: "https://takeuforward.org/data-structure/partition-equal-subset-sum-dp-15/"
+            }, {
+                id: 398,
+                questionTitle: "Partition Set Into 2 Subsets With Min Absolute Sum Diff (DP- 16)",
+                level: "medium",
+                lecturelink: "https://youtu.be/GS_OqZb2CWc",
+                problemlink: "https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/description/",
+                articlelink: "https://takeuforward.org/data-structure/partition-set-into-2-subsets-with-min-absolute-sum-diff-dp-16/"
+            }, {
+                id: 399,
+                questionTitle: "Count Subsets with Sum K (DP - 17)",
+                level: "medium",
+                lecturelink: "https://youtu.be/ZHyb-A2Mte4",
+                problemlink: "https://www.geeksforgeeks.org/problems/perfect-sum-problem5633/1",
+                articlelink: "https://takeuforward.org/data-structure/count-subsets-with-sum-k-dp-17/"
+            }, {
+                id: 400,
+                questionTitle: "Count Partitions with Given Difference (DP - 18)",
+                level: "medium",
+                lecturelink: "https://youtu.be/zoilQD1kYSg",
+                problemlink: "https://www.geeksforgeeks.org/problems/partitions-with-given-difference/1",
+                articlelink: "https://takeuforward.org/data-structure/count-partitions-with-given-difference-dp-18/"
+            }, {
+                id: 401,
+                questionTitle: "0/1 Knapsack (DP - 19)",
+                level: "hard",
+                lecturelink: "https://youtu.be/GqOmJHQZivw",
+                problemlink: "https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1",
+                articlelink: "https://takeuforward.org/data-structure/0-1-knapsack-dp-19/"
+            }, {
+                id: 402,
+                questionTitle: "Minimum Coins (DP - 20)",
+                level: "hard",
+                lecturelink: "https://youtu.be/myPeWb3Y68A",
+                problemlink: "https://leetcode.com/problems/coin-change/description/",
+                articlelink: "https://takeuforward.org/data-structure/minimum-coins-dp-20/"
+            }, {
+                id: 403,
+                questionTitle: "Target Sum (DP - 21)",
+                level: "medium",
+                lecturelink: "https://youtu.be/b3GD8263-PQ",
+                problemlink: "https://leetcode.com/problems/target-sum/description/",
+                articlelink: "https://takeuforward.org/data-structure/target-sum-dp-21/"
+            }, {
+                id: 404,
+                questionTitle: "Coin Change 2 (DP - 22)",
+                level: "hard",
+                lecturelink: "https://youtu.be/HgyouUi11zk",
+                problemlink: "https://leetcode.com/problems/coin-change-ii/description/",
+                articlelink: "https://takeuforward.org/data-structure/coin-change-2-dp-22/"
+            }, {
+                id: 405,
+                questionTitle: "Unbounded Knapsack (DP - 23)",
+                level: "hard",
+                lecturelink: "https://youtu.be/OgvOZ6OrJoY",
+                problemlink: "https://www.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1",
+                articlelink: "https://takeuforward.org/data-structure/unbounded-knapsack-dp-23/"
+            }, {
+                id: 406,
+                questionTitle: "Rod Cutting Problem | (DP - 24)",
+                level: "hard",
+                lecturelink: "https://youtu.be/mO8XpGoJwuo",
+                problemlink: "https://www.geeksforgeeks.org/problems/rod-cutting0840/1",
+                articlelink: "https://takeuforward.org/data-structure/rod-cutting-problem-dp-24/"
+            }]
         }, {
             id: 5,
             substepTitle: "DP on Strings",
-            all_questions: []
+            all_questions: [{
+                id: 407,
+                questionTitle: "Longest Common Subsequence | (DP - 25)",
+                level: "hard",
+                lecturelink: "https://youtu.be/NPZn9jBrX8U",
+                problemlink: "https://leetcode.com/problems/longest-common-subsequence/description/",
+                articlelink: "https://takeuforward.org/data-structure/longest-common-subsequence-dp-25/"
+            }, {
+                id: 408,
+                questionTitle: "Print Longest Common Subsequence | (DP - 26)",
+                level: "hard",
+                lecturelink: "https://youtu.be/-zI4mrF2Pb4",
+                problemlink: "https://www.geeksforgeeks.org/problems/print-all-lcs-sequences3413/1",
+                articlelink: "https://takeuforward.org/data-structure/print-longest-common-subsequence-dp-26/"
+            }, {
+                id: 409,
+                questionTitle: "Longest Common Substring | (DP - 27)",
+                level: "hard",
+                lecturelink: "https://youtu.be/_wP9mWNPL5w",
+                problemlink: "https://www.geeksforgeeks.org/problems/longest-common-substring1452/1",
+                articlelink: "https://takeuforward.org/data-structure/longest-common-substring-dp-27/"
+            }, {
+                id: 410,
+                questionTitle: "Longest Palindromic Subsequence | (DP-28)",
+                level: "hard",
+                lecturelink: "https://youtu.be/6i_T5kkfv4A",
+                problemlink: "https://leetcode.com/problems/longest-palindromic-subsequence/description/",
+                articlelink: "https://takeuforward.org/data-structure/longest-palindromic-subsequence-dp-28/"
+            }, {
+                id: 411,
+                questionTitle: "Minimum insertions to make string palindrome | DP-29",
+                level: "hard",
+                lecturelink: "https://youtu.be/xPBLEj41rFU",
+                problemlink: "https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/description/",
+                articlelink: "https://takeuforward.org/data-structure/minimum-insertions-to-make-string-palindrome-dp-29/"
+            }, {
+                id: 412,
+                questionTitle: "Minimum Insertions/Deletions to Convert String | (DP- 30)",
+                level: "hard",
+                lecturelink: "https://youtu.be/yMnH0jrir0Q",
+                problemlink: "https://leetcode.com/problems/delete-operation-for-two-strings/description/",
+                articlelink: "https://takeuforward.org/data-structure/minimum-insertions-deletions-to-convert-string-dp-30/"
+            }, {
+                id: 413,
+                questionTitle: "Shortest Common Supersequence | (DP - 31)",
+                level: "hard",
+                lecturelink: "https://youtu.be/xElxAuBcvsU",
+                problemlink: "https://leetcode.com/problems/shortest-common-supersequence/description/",
+                articlelink: "https://takeuforward.org/data-structure/shortest-common-supersequence-dp-31/"
+            }, {
+                id: 414,
+                questionTitle: "Distinct Subsequences| (DP-32)",
+                level: "hard",
+                lecturelink: "https://youtu.be/nVG7eTiD2bY",
+                problemlink: "https://leetcode.com/problems/distinct-subsequences/description/",
+                articlelink: "https://takeuforward.org/data-structure/distinct-subsequences-dp-32/"
+            }, {
+                id: 415,
+                questionTitle: "Edit Distance | (DP-33)",
+                level: "hard",
+                lecturelink: "https://youtu.be/fJaKO8FbDdo",
+                problemlink: "https://leetcode.com/problems/edit-distance/description/",
+                articlelink: "https://takeuforward.org/data-structure/edit-distance-dp-33/"
+            }, {
+                id: 416,
+                questionTitle: "Wildcard Matching | (DP-34)",
+                level: "medium",
+                lecturelink: "https://youtu.be/ZmlQ3vgAOMo",
+                problemlink: "https://leetcode.com/problems/wildcard-matching/description/",
+                articlelink: "https://takeuforward.org/data-structure/wildcard-matching-dp-34/"
+            }]
         }, {
             id: 6,
             substepTitle: "DP on Stocks",
-            all_questions: []
-        }, , {
+            all_questions: [{
+                id: 417,
+                questionTitle: "Best Time to Buy and Sell Stock (DP-35)",
+                level: "hard",
+                lecturelink: "https://youtu.be/excAOvwF_Wk",
+                problemlink: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/",
+                articlelink: "https://takeuforward.org/data-structure/stock-buy-and-sell-dp-35/"
+            }, {
+                id: 418,
+                questionTitle: "Buy and Sell Stock II (DP-36)",
+                level: "hard",
+                lecturelink: "https://youtu.be/nGJmxkUJQGs",
+                problemlink: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/",
+                articlelink: "https://takeuforward.org/data-structure/buy-and-sell-stock-ii-dp-36/"
+            }, {
+                id: 419,
+                questionTitle: "Buy and Sell Stocks III (DP-37)",
+                level: "hard",
+                lecturelink: "https://youtu.be/-uQGzhYj8BQ",
+                problemlink: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/",
+                articlelink: "https://takeuforward.org/data-structure/buy-and-sell-stock-iii-dp-37/"
+            }, {
+                id: 420,
+                questionTitle: "Buy and Sell Stock IV (DP-38)",
+                level: "hard",
+                lecturelink: "https://youtu.be/IV1dHbk5CDc",
+                problemlink: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/",
+                articlelink: "https://takeuforward.org/data-structure/buy-and-sell-stock-iv-dp-38/"
+            }, {
+                id: 421,
+                questionTitle: "Buy and Sell Stocks with Cooldown (DP-39)",
+                level: "hard",
+                lecturelink: "https://youtu.be/IGIe46xw3YY",
+                problemlink: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/",
+                articlelink: "https://takeuforward.org/data-structure/buy-and-sell-stocks-with-cooldown-dp-39/"
+            }, {
+                id: 422,
+                questionTitle: "Buy and Sell Stocks with Transaction Fee (DP-40)",
+                level: "hard",
+                lecturelink: "https://youtu.be/k4eK-vEmnKg",
+                problemlink: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/",
+                articlelink: "https://takeuforward.org/data-structure/buy-and-sell-stocks-with-transaction-fees-dp-40/"
+            }]
+        }, {
             id: 7,
             substepTitle: "DP on LIS",
-            all_questions: []
+            all_questions: [{
+                id: 423,
+                questionTitle: "Longest Increasing Subsequence (DP-41)",
+                level: "hard",
+                lecturelink: "https://youtu.be/ekcwMsSIzVc",
+                problemlink: "https://leetcode.com/problems/longest-increasing-subsequence/description/",
+                articlelink: "https://takeuforward.org/data-structure/longest-increasing-subsequence-dp-41/"
+            }, {
+                id: 424,
+                questionTitle: "Orinting Longest Increasing Subsequence (DP-42)",
+                level: "hard",
+                lecturelink: "https://youtu.be/IFfYfonAFGc",
+                problemlink: "https://www.geeksforgeeks.org/problems/printing-longest-increasing-subsequence/1",
+                articlelink: "https://takeuforward.org/data-structure/printing-longest-increasing-subsequence-dp-42/"
+            }, {
+                id: 425,
+                questionTitle: "Longest Increasing Subsequence (DP-43)",
+                level: "hard",
+                lecturelink: "https://youtu.be/on2hvxBXJH4",
+                problemlink: "https://www.geeksforgeeks.org/problems/longest-increasing-subsequence-1587115620/1",
+                articlelink: "https://takeuforward.org/data-structure/longest-increasing-subsequence-binary-search-dp-43/"
+            }, {
+                id: 426,
+                questionTitle: "Largest Divisible Subset (DP-44)",
+                level: "hard",
+                lecturelink: "https://youtu.be/gDuZwBW9VvM",
+                problemlink: "https://leetcode.com/problems/largest-divisible-subset/description/",
+                articlelink: "https://takeuforward.org/data-structure/longest-divisible-subset-dp-44/"
+            }, {
+                id: 427,
+                questionTitle: "Longest String Chain (DP-45)",
+                level: "hard",
+                lecturelink: "https://youtu.be/YY8iBaYcc4g",
+                problemlink: "https://leetcode.com/problems/longest-string-chain/description/",
+                articlelink: "https://takeuforward.org/data-structure/longest-string-chain-dp-45/"
+            }, {
+                id: 428,
+                questionTitle: "Longest Bitonic Subsequence (DP-46)",
+                level: "hard",
+                lecturelink: "https://youtu.be/y4vN0WNdrlg",
+                problemlink: "https://www.geeksforgeeks.org/problems/longest-bitonic-subsequence0824/1",
+                articlelink: "https://takeuforward.org/data-structure/longest-bitonic-subsequence-dp-46/"
+            }, {
+                id: 429,
+                questionTitle: "Number of Longest Increasing Subsequence (DP-47)",
+                level: "hard",
+                lecturelink: "https://youtu.be/cKVl1TFdNXg",
+                problemlink: "https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/",
+                articlelink: "https://takeuforward.org/data-structure/number-of-longest-increasing-subsequences-dp-47/"
+            }]
         }, {
             id: 8,
             substepTitle: "MCM DP | Partition DP",
-            all_questions: []
+            all_questions: [{
+                id: 430,
+                questionTitle: "Matrix Chain Multiplication (DP-48)",
+                level: "hard",
+                lecturelink: "https://youtu.be/vRVfmbCFW7Y",
+                problemlink: "https://www.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1",
+                articlelink: "https://takeuforward.org/dynamic-programming/matrix-chain-multiplication-dp-48/"
+            }, {
+                id: 431,
+                questionTitle: "Matrix Chain Multiplication | Bottom-Up (DP-49)",
+                level: "hard",
+                lecturelink: "https://youtu.be/pDCXsbAw5Cg",
+                problemlink: "https://www.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1",
+                articlelink: "https://takeuforward.org/data-structure/matrix-chain-multiplication-tabulation-method-dp-49/"
+            }, {
+                id: 432,
+                questionTitle: "Minimum Cost to Cut the Stick (DP-50)",
+                level: "hard",
+                lecturelink: "https://youtu.be/xwomavsC86c",
+                problemlink: "https://leetcode.com/problems/minimum-cost-to-cut-a-stick/description/",
+                articlelink: "https://takeuforward.org/data-structure/minimum-cost-to-cut-the-stick-dp-50/"
+            }, {
+                id: 433,
+                questionTitle: "Burst Ballons (DP-51)",
+                level: "hard",
+                lecturelink: "https://youtu.be/Yz4LlDSlkns",
+                problemlink: "https://leetcode.com/problems/burst-balloons/description/",
+                articlelink: "https://takeuforward.org/data-structure/burst-balloons-partition-dp-dp-51/"
+            }, {
+                id: 434,
+                questionTitle: "Evaluate Boolean Expression to True (DP-52)",
+                level: "hard",
+                lecturelink: "https://youtu.be/MM7fXopgyjw",
+                problemlink: "https://leetcode.com/problems/parsing-a-boolean-expression/description/",
+                articlelink: "https://takeuforward.org/data-structure/evaluate-boolean-expression-to-true-partition-dp-dp-52/"
+            }, {
+                id: 435,
+                questionTitle: "Palindrome Partioning II (DP-53)",
+                level: "hard",
+                lecturelink: "https://youtu.be/_H8V5hJUGd0",
+                problemlink: "https://leetcode.com/problems/palindrome-partitioning-ii/description/",
+                articlelink: "https://takeuforward.org/data-structure/palindrome-partitioning-ii-front-partition-dp-53/"
+            }, {
+                id: 436,
+                questionTitle: "Partition Array for Maximum Sum(DP-54)",
+                level: "hard",
+                lecturelink: "https://youtu.be/PhWWJmaKfMc",
+                problemlink: "https://leetcode.com/problems/partition-array-for-maximum-sum/description/",
+                articlelink: "https://takeuforward.org/data-structure/partition-array-for-maximum-sum-front-partition-dp-54/"
+            },]
         }, {
             id: 9,
             substepTitle: "DP on Squares",
             all_questions: [{
-                id: 436,
+                id: 437,
                 questionTitle: "Maximum Rectangle Area with all 1's|(DP-55)",
                 level: "hard",
                 lecturelink: "https://youtu.be/tOylVCugy9k",
                 problemlink: "https://leetcode.com/problems/maximal-rectangle/",
                 articlelink: "https://takeuforward.org/data-structure/maximum-rectangle-area-with-all-1s-dp-on-rectangles-dp-55/"
             }, {
-                id: 437,
+                id: 438,
                 questionTitle: "Count Square Submatrices with All Ones|(DP-56)",
                 level: "hard",
                 lecturelink: "https://youtu.be/auS1fynpnjo",
@@ -2687,7 +3394,7 @@ const all_steps = [
             id: 1,
             substepTitle: "Theory",
             all_questions: [{
-                id: 438,
+                id: 439,
                 questionTitle: "Implement TRIE | INSERT | SEARCH | STARTSWITH",
                 level: "hard",
                 lecturelink: "https://youtu.be/dBGUmUQhjaM",
@@ -2698,42 +3405,42 @@ const all_steps = [
             id: 2,
             substepTitle: "Problems",
             all_questions: [{
-                id: 439,
+                id: 440,
                 questionTitle: "Implement Trie - 2 (Prefix Tree)",
                 level: "hard",
                 lecturelink: "",
                 problemlink: "https://www.naukri.com/code360/problems/implement-trie_1387095",
                 articlelink: "https://takeuforward.org/data-structure/implement-trie-ii/"
             }, {
-                id: 440,
+                id: 441,
                 questionTitle: "Longest String with All Prefixes",
                 level: "medium",
                 lecturelink: "https://youtu.be/AWnBa91lThI",
                 problemlink: "https://www.naukri.com/code360/problems/complete-string_2687860",
                 articlelink: ""
             }, {
-                id: 441,
+                id: 442,
                 questionTitle: "Number of Distinct Substrings in a String",
                 level: "hard",
                 lecturelink: "https://youtu.be/RV0QeTyHZxo",
                 problemlink: "https://www.naukri.com/code360/problems/count-distinct-substrings_985292",
                 articlelink: "https://takeuforward.org/data-structure/number-of-distinct-substrings-in-a-string-using-trie/"
             }, {
-                id: 442,
+                id: 443,
                 questionTitle: "Bit PreRequisites for TRIE Problems",
                 level: "hard",
                 lecturelink: "https://youtu.be/5iyuU4hQFrw",
                 problemlink: "https://www.geeksforgeeks.org/problems/bits-basic-operations/1",
                 articlelink: ""
             }, {
-                id: 443,
+                id: 444,
                 questionTitle: "Maximum XOR of two numbers in an array",
                 level: "medium",
                 lecturelink: "https://youtu.be/EIhAwfHubE8",
                 problemlink: "https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/",
                 articlelink: "https://takeuforward.org/data-structure/maximum-xor-of-two-numbers-in-an-array/"
             }, {
-                id: 444,
+                id: 445,
                 questionTitle: "Maximum XOR With an Element From Array",
                 level: "hard",
                 lecturelink: "https://youtu.be/Q8LhG9Pi5KM",
@@ -2748,63 +3455,63 @@ const all_steps = [
             id: 1,
             substepTitle: "Hard Problems",
             all_questions: [{
-                id: 445,
+                id: 446,
                 questionTitle: "Minimum number of bracket reversals needed to make an expression balanced",
                 level: "medium",
                 lecturelink: "",
                 problemlink: "https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/",
                 articlelink: ""
             }, {
-                id: 446,
+                id: 447,
                 questionTitle: "Count and say",
                 level: "medium",
                 lecturelink: "",
                 problemlink: "https://leetcode.com/problems/count-and-say/description/",
                 articlelink: ""
             }, {
-                id: 447,
+                id: 448,
                 questionTitle: "Hashing In Strings | Theory",
                 level: "medium",
                 lecturelink: "",
                 problemlink: "https://www.geeksforgeeks.org/problems/index-of-the-first-occurrence-of-pattern-in-a-text/1",
                 articlelink: ""
             }, {
-                id: 448,
+                id: 449,
                 questionTitle: "Rabin Karp",
                 level: "hard",
                 lecturelink: "",
                 problemlink: "https://leetcode.com/problems/repeated-string-match/solutions/416144/Rabin-Karp-algorithm-C++-implementation/",
                 articlelink: ""
             }, {
-                id: 449,
+                id: 450,
                 questionTitle: "Z-Function",
                 level: "easy",
                 lecturelink: "",
                 problemlink: "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/",
                 articlelink: ""
             }, {
-                id: 450,
+                id: 451,
                 questionTitle: "KMP algo/LPS(pi) array",
                 level: "hard",
                 lecturelink: "",
                 problemlink: "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/",
                 articlelink: ""
             }, {
-                id: 451,
+                id: 452,
                 questionTitle: "Shortest Palindrome",
                 level: "hard",
                 lecturelink: "",
                 problemlink: "https://leetcode.com/problems/shortest-palindrome/description/",
                 articlelink: ""
             }, {
-                id: 452,
+                id: 453,
                 questionTitle: "Longest happy prefix",
                 level: "hard",
                 lecturelink: "",
                 problemlink: "https://leetcode.com/problems/longest-happy-prefix/description/",
                 articlelink: ""
             }, {
-                id: 453,
+                id: 454,
                 questionTitle: "Count palindromic subsequence in given string",
                 level: "hard",
                 lecturelink: "",

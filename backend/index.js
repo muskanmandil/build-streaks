@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
+require('dotenv').config();
+const dbPassword = process.env.DB_PASSWORD;
+
 // Declaring the port
 const port = 4000;
 
@@ -18,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 // Connecting with database
-mongoose.connect("mongodb+srv://muskanmandil:YAa0W4IzmbX1QBDy@cluster0.tvcijwm.mongodb.net/build-streaks");
+mongoose.connect(`mongodb+srv://muskanmandil:${dbPassword}@cluster0.tvcijwm.mongodb.net/build-streaks`);
 
 // Creating Users Schema
 const Users = mongoose.model("Users", {

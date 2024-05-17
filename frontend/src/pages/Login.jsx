@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import "./CSS/Login.css";
 import { AppContext } from "../context/AppContext";
 
-const Login = () => {
+const Login = () => { 
+  const backendUrl =  process.env.REACT_APP_BACKEND_URL;
   const { isSignedUp, setSignedUp } = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: "",
@@ -28,7 +29,7 @@ const Login = () => {
 
       // if it does then try to fetch response
       try {
-        const res = await fetch("http://localhost:4000/signup", {
+        const res = await fetch(`${backendUrl}/signup`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -76,7 +77,7 @@ const Login = () => {
 
     // try to fetch response
     try{
-      const res = await fetch("http://localhost:4000/login", {
+      const res = await fetch(`${backendUrl}/login`, {
         method: "POST",
         headers: {
           "Content-Type" : "application/json"

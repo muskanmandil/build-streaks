@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import streak_logo from "../../assets/streak_logo.svg";
@@ -26,12 +26,15 @@ const Navbar = () => {
         <img src={streak_logo} className="logo-streak-icon" alt="" />
         <i>Build Streaks</i>
       </h2>
-      <div className="total-progress-container">
-        <p className="total-progress-percentage">
-          {Math.ceil((totalQuestionsDone / 454) * 100)}% completed
-        </p>
-        <p className="total-progress">{totalQuestionsDone} / 454</p>
-      </div>
+      {localStorage.getItem("auth-token") && (
+        <div className="total-progress-container">
+          <p className="total-progress-percentage">
+            {Math.ceil((totalQuestionsDone / 454) * 100)}% completed
+          </p>
+          <p className="total-progress">{totalQuestionsDone} / 454</p>
+        </div>
+      )}
+
       <div className="navbar-right">
         {localStorage.getItem("auth-token") ? (
           <>
