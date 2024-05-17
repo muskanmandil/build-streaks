@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, useCallback} from "react";
 
 export const AppContext = createContext();
 
@@ -11,7 +11,7 @@ export const AppProvider = ({ children }) => {
   });
   const [leaderboard, setLeaderboard] = useState([]);
 
-  const fetchUserInfo = async () => {
+  const fetchUserInfo = useCallback(async () => {
     // check if auth-token is present or not
     if (localStorage.getItem("auth-token")) {
       // if present then try to fetch response
@@ -37,9 +37,9 @@ export const AppProvider = ({ children }) => {
         console.log(error);
       }
     }
-  };
+  },[backendUrl])
 
-  const fetchLeaderboard = async () => {
+  const fetchLeaderboard = useCallback(async () => {
     // check if auth-token is present or not
     if (localStorage.getItem("auth-token")) {
       // if present then try to fetch response
@@ -64,13 +64,13 @@ export const AppProvider = ({ children }) => {
         console.log(error);
       }
     }
-  };
+  },[backendUrl])
 
 
   useEffect(() => {
     fetchUserInfo();
     fetchLeaderboard();
-  }, []);
+  }, [fetchUserInfo, fetchLeaderboard]);
 
   return (
     <AppContext.Provider

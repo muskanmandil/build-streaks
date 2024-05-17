@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import all_steps from "../roadmap";
 
 export const ProgressContext = createContext();
@@ -22,15 +22,7 @@ export const ProgressProvider = ({ children }) => {
 
   const [totalQuestionsDone, setTotalQuestionsDone] = useState(0);
 
-  useEffect(() => {
-    fetchProgressInfo();
-  }, [progressInfo])
-
-  useEffect(()=>{
-    updateTotalQuestionsDone();
-  },[progressInfo])
-
-  const fetchProgressInfo = async () => {
+  const fetchProgressInfo = useCallback(async () => {
     if (localStorage.getItem("auth-token")) {
       try {
         const res = await fetch(`${backendUrl}/progressinfo`, {
@@ -55,10 +47,12 @@ export const ProgressProvider = ({ children }) => {
         console.log(error);
       }
     }
-  };
+  }, [backendUrl])
 
+  useEffect(() => {
+    fetchProgressInfo();
+  }, [fetchProgressInfo])
   
-
   const markQuestionDone = (questionId, questionLevel) => {
     fetch(`${backendUrl}/questiondone`, {
       method: "POST",
@@ -114,7 +108,7 @@ export const ProgressProvider = ({ children }) => {
     return totalLength;
   };
 
-  const updateTotalQuestionsDone = () => {
+  const updateTotalQuestionsDone = useCallback(() => {
     let count = 0;
     all_steps.forEach((step) => {
       step.all_substeps.forEach((substep) => {
@@ -126,7 +120,11 @@ export const ProgressProvider = ({ children }) => {
       });
     });
     setTotalQuestionsDone(count);
-  };
+  },[progressInfo.questionsData])
+
+  useEffect(()=>{
+    updateTotalQuestionsDone();
+  },[updateTotalQuestionsDone])
 
   return (
     <ProgressContext.Provider
@@ -135,7 +133,7 @@ export const ProgressProvider = ({ children }) => {
         totalQuestionsDone,
         totalQuestionsInStep,
         markQuestionDone,
-        markQuestionUndone,
+        markQuestionUndone
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import "./StepCard.css";
 import SubstepCard from "../substep-card/SubstepCard";
 import { ProgressContext } from "../../context/ProgressContext";
@@ -7,7 +7,7 @@ const StepCard = (props) => {
   const { totalQuestionsInStep, progressInfo } = useContext(ProgressContext);
 
   const [questionsDoneInStep, setQuestionsDoneInStep] = useState(0);
-  const updateQuestionsDoneInStep = () => {
+  const updateQuestionsDoneInStep = useCallback(() => {
     let count = 0;
     props.all_substeps.forEach((substep) => {
       substep.all_questions.forEach((question) => {
@@ -17,11 +17,11 @@ const StepCard = (props) => {
       });
     });
     setQuestionsDoneInStep(count);
-  };
+  }, [props.all_substeps, progressInfo.questionsData]);
 
   useEffect(() => {
     updateQuestionsDoneInStep();
-  }, [progressInfo]);
+  }, [updateQuestionsDoneInStep]);
 
   const progress = (questionsDoneInStep / totalQuestionsInStep(props.id)) * 100;
 

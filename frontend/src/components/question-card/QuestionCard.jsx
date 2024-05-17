@@ -4,7 +4,6 @@ import youtube from "../../assets/youtube.svg";
 import gfg from "../../assets/gfg.svg";
 import leetcode from "../../assets/leetcode.svg";
 import codestudio from "../../assets/codestudio.png";
-import article_icon from "../../assets/article_icon.svg";
 import { ProgressContext } from "../../context/ProgressContext";
 import interviewbit from "../../assets/interviewbit.svg";
 import spoj from "../../assets/spoj.jpg";
