@@ -1,10 +1,11 @@
-import React, { useState, createContext, useEffect, useCallback} from "react";
+import React, { useState, createContext, useEffect, useCallback } from "react";
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
-  const [isSignedUp, setSignedUp] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isSignedUp, setSignedUp] = useState(true);
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -15,6 +16,7 @@ export const AppProvider = ({ children }) => {
     // check if auth-token is present or not
     if (localStorage.getItem("auth-token")) {
       // if present then try to fetch response
+      setLoading(true);
       try {
         const res = await fetch(`${backendUrl}/userinfo`, {
           method: "POST",
@@ -35,14 +37,17 @@ export const AppProvider = ({ children }) => {
       } catch (error) {
         // catch if any error occurs and log it
         console.log(error);
+      }finally{
+        setLoading(false);
       }
     }
-  },[backendUrl])
+  }, [backendUrl]);
 
   const fetchLeaderboard = useCallback(async () => {
     // check if auth-token is present or not
     if (localStorage.getItem("auth-token")) {
       // if present then try to fetch response
+      setLoading(true);
       try {
         const res = await fetch(`${backendUrl}/leaderboard`, {
           method: "GET",
@@ -62,10 +67,11 @@ export const AppProvider = ({ children }) => {
       } catch (error) {
         // catch if any error occurs and log it
         console.log(error);
+      }finally{
+        setLoading(false);
       }
     }
-  },[backendUrl])
-
+  }, [backendUrl]);
 
   useEffect(() => {
     fetchUserInfo();
@@ -75,10 +81,12 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        loading,
+        setLoading,
         isSignedUp,
         setSignedUp,
         userInfo,
-        leaderboard
+        leaderboard,
       }}
     >
       {children}

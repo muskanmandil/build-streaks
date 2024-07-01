@@ -10,7 +10,7 @@ import leaderboard from "../../assets/leaderboard.svg";
 import pointsxp from "../../assets/pointsxp.svg";
 
 const Navbar = () => {
-  const { progressInfo, totalQuestionsDone } = useContext(ProgressContext);
+  const {progressInfo} = useContext(ProgressContext);
 
   let today = new Date(Date.now())
     .toLocaleString("en-IN", {
@@ -29,9 +29,9 @@ const Navbar = () => {
       {localStorage.getItem("auth-token") && (
         <div className="total-progress-container">
           <p className="total-progress-percentage">
-            {Math.ceil((totalQuestionsDone / 454) * 100)}% completed
+            {Math.ceil((progressInfo.totalQuestionsDone / 454) * 100)}% completed
           </p>
-          <p className="total-progress">{totalQuestionsDone} / 454</p>
+          <p className="total-progress">{progressInfo.totalQuestionsDone} / 454</p>
         </div>
       )}
 

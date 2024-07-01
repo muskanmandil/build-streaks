@@ -2,9 +2,10 @@ import React, { useContext, useState } from "react";
 import "./CSS/Login.css";
 import { AppContext } from "../context/AppContext";
 
-const Login = () => { 
-  const backendUrl =  process.env.REACT_APP_BACKEND_URL;
-  const { isSignedUp, setSignedUp } = useContext(AppContext);
+const Login = () => {
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const { setLoading, isSignedUp, setSignedUp } =
+    useContext(AppContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,14 +21,13 @@ const Login = () => {
   };
 
   const handleSignup = async (e) => {
-
     // preventing default event
     e.preventDefault();
 
     // checking if password & confirm password matches
     if (formData.password.trim() === formData.confirm_password.trim()) {
-
       // if it does then try to fetch response
+      setLoading(true);
       try {
         const res = await fetch(`${backendUrl}/signup`, {
           method: "POST",
@@ -50,42 +50,43 @@ const Login = () => {
           setSignedUp(true);
 
           // store auth-token in local storage
-          localStorage.setItem('auth-token', data.token);
+          localStorage.setItem("auth-token", data.token);
 
           // redirect to dashboard
-          window.location.href='/dashboard'
+          window.location.href = "/dashboard";
         }
 
         // alert the response message
         alert(data.message);
-      } 
-      // if any error occurs catch it and log it
-      catch(error) {
+      } catch (error) {
+        // if any error occurs catch it and log it
         console.log(error);
+      } finally {
+        setLoading(false);
       }
-    } 
+    }
     // if passwords do not matches alert user about it
     else {
       alert("Passwords do not match");
+      setLoading(false);
     }
   };
 
-  const handleLogin = async (e) =>{
-
+  const handleLogin = async (e) => {
     // prevent default event
     e.preventDefault();
-
+    setLoading(true);
     // try to fetch response
-    try{
+    try {
       const res = await fetch(`${backendUrl}/login`, {
         method: "POST",
         headers: {
-          "Content-Type" : "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify ({
+        body: JSON.stringify({
           email: formData.email,
-          password: formData.password
-        })
+          password: formData.password,
+        }),
       });
 
       // console.log(res);
@@ -93,24 +94,23 @@ const Login = () => {
       const data = await res.json();
 
       // if response is successful i.e. status code 200
-      if(res.status===200){
-
+      if (res.status === 200) {
         // store auth-token in local storage
-        localStorage.setItem('auth-token', data.token);
+        localStorage.setItem("auth-token", data.token);
 
         // redirect to dashboard
-        window.location.href = '/dashboard';
-
+        window.location.href = "/dashboard";
       }
 
       // alert the response message
       alert(data.message);
-    }
-    // if any error occurs catch it and log it
-    catch(error){
+    } catch (error) {
+      // if any error occurs catch it and log it
       console.log(error);
-    } 
-  }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="login-container">

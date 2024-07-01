@@ -3,8 +3,9 @@ import "./CSS/Profile.css";
 import { AppContext } from "../context/AppContext";
 
 const Profile = () => {
-  const { userInfo } = useContext(AppContext);
+  const { setLoading, userInfo } = useContext(AppContext);
   const handleLogout = () => {
+    setLoading(true);
     localStorage.removeItem("auth-token");
     alert("User Logged out successfully");
     window.location.href = "/";

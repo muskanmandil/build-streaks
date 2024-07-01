@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 // Connecting with database
-mongoose.connect(`mongodb+srv://muskanmandil:${dbPassword}@cluster0.tvcijwm.mongodb.net/build-streaks`);
+mongoose.connect(`mongodb+srv://muskanmandil:${dbPassword}@cluster0.uajhxxn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0s`);
 
 // Creating Users Schema
 const Users = mongoose.model("Users", {
@@ -37,6 +37,9 @@ const Users = mongoose.model("Users", {
     },
     questionsData: {
         type: Object
+    },
+    totalQuestionsDone: {
+        type: Number
     },
     streak: {
         type: Number
@@ -76,6 +79,7 @@ app.post('/signup', async (req, res) => {
             email: req.body.email,
             password: req.body.password,
             questionsData: questionsObj,
+            totalQuestionsDone: 0,
             streak: 0,
             points: 0,
             lastActiveDate: new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-')
@@ -177,38 +181,38 @@ app.post('/userinfo', fetchUser, async (req, res) => {
     })
 })
 
+
 // Function for calculating days diff
-const calculateDaysDiff = (user, latestActiveDate) => {
-    // initialize last & latest active date
-    let lastActiveDate = user.lastActiveDate;
+const calculateDaysDiff = (date1, date2) => {
 
     // Parse the date strings into Date objects
-    const date1 = new Date(`${lastActiveDate.slice(6, 10)}-${lastActiveDate.slice(3, 5)}-${lastActiveDate.slice(0, 2)}`);
-    const date2 = new Date(`${latestActiveDate.slice(6, 10)}-${latestActiveDate.slice(3, 5)}-${latestActiveDate.slice(0, 2)}`);
+    const d1 = new Date(`${date1.slice(6, 10)}-${date1.slice(3, 5)}-${date1.slice(0, 2)}`);
+    const d2 = new Date(`${date2.slice(6, 10)}-${date2.slice(3, 5)}-${date2.slice(0, 2)}`);
 
     // Calculate the time difference in milliseconds
-    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const timeDiff = Math.abs(d2.getTime() - d1.getTime());
 
     // Convert the time difference from milliseconds to days
     const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
     return daysDiff;
-}
+  };
 
 // Progress info API 
 app.post('/progressinfo', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
     let currDate = new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
-    let daysDiff = calculateDaysDiff(user, currDate);
+    let daysDiff = calculateDaysDiff(currDate, user.lastActiveDate);
     if (daysDiff > 1) {
         user.streak = 0;
     }
     await Users.findOneAndUpdate({ _id: req.user.id }, { streak: user.streak });
     res.status(200).json({
         questionsData: user.questionsData,
+        totalQuestionsDone: user.totalQuestionsDone,
         streak: user.streak,
-        lastActiveDate: user.lastActiveDate,
-        points: user.points
+        points: user.points,
+        lastActiveDate: user.lastActiveDate
     })
 })
 
@@ -221,35 +225,17 @@ app.post('/questiondone', fetchUser, async (req, res) => {
     // update the questions data
     user.questionsData[req.body.questionId] = 1;
 
-    let latestActiveDate = new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
-    
-    // for testing purpose
-    // let latestActiveDate = new Date(2024, 4, 14).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
-
-    // update points
-    if (req.body.questionLevel === 'easy') {
-        user.points += 10;
-    } else if (req.body.questionLevel === 'medium') {
-        user.points += 20;
-    } else {
-        user.points += 40;
-    }
-
-    // if days diff is 1 then update streak
-    const daysDiff = calculateDaysDiff(user, latestActiveDate);
-
-    if (daysDiff === 0 && user.streak === 0 || daysDiff > 1) {
-        user.streak = 1;
-    }
-    else if (daysDiff === 1) {
-        user.streak += 1;
-    }
+    // Use the values calculated on the frontend
+    user.totalQuestionsDone = req.body.totalQuestionsDone;
+    user.streak = req.body.streak;
+    user.points = req.body.points;
+    user.lastActiveDate = req.body.lastActiveDate;
 
     // save updated information
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points, streak: user.streak, lastActiveDate: latestActiveDate });
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, totalQuestionsDone: user.totalQuestionsDone, points: user.points, streak: user.streak, lastActiveDate: user.lastActiveDate });
 
     // response
-    res.status(200).json({ streak: user.streak, points: user.points, lastActiveDate: latestActiveDate, message: "Question mark as completed" });
+    res.status(200).json({ message: "Question mark as completed" });
 });
 
 // Question undo API
@@ -261,20 +247,15 @@ app.post('/questionundo', fetchUser, async (req, res) => {
     // update the questions data
     user.questionsData[req.body.questionId] = 0;
 
-    // update points
-    if (req.body.questionLevel === 'easy') {
-        user.points -= 10;
-    } else if (req.body.questionLevel === 'medium') {
-        user.points -= 20;
-    } else {
-        user.points -= 40;
-    }
+    // Use the points calculated on the frontend
+    user.totalQuestionsDone = req.body.totalQuestionsDone;
+    user.points = req.body.points;
 
     // save updated information
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points });
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, totalQuestionsDone: user.totalQuestionsDone, points: user.points });
 
     // response
-    res.status(200).json({ points: user.points, message: "Question mark as uncompleted" });
+    res.status(200).json({ message: "Question mark as uncompleted" });
 });
 
 // Leaderboard API
