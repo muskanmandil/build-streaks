@@ -48,10 +48,9 @@ export const ProgressProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProgressInfo();
-  }, [progressInfo, fetchProgressInfo]);
+  });
 
-  const markQuestionDone = (questionId, questionLevel) => {
-
+  const markQuestionDone = async (questionId, questionLevel) => {
     // Update points
     let pointsToAdd = 0;
     if (questionLevel === "easy") pointsToAdd = 10;
@@ -62,14 +61,23 @@ export const ProgressProvider = ({ children }) => {
     // let currentDate = new Date(2024, 4, 14).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
 
     // Update streak
-    const currentDate = new Date().toLocaleString("en-IN", {day: "2-digit",month: "2-digit",year: "numeric",}).replace(/\//g, "-");
+    const currentDate = new Date()
+      .toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+      .replace(/\//g, "-");
     let newStreak = progressInfo.streak;
-    const daysDiff = calculateDaysDiff(progressInfo.lastActiveDate,currentDate);
+    const daysDiff = calculateDaysDiff(
+      progressInfo.lastActiveDate,
+      currentDate
+    );
 
     if ((daysDiff === 0 && newStreak === 0) || daysDiff > 1) {
       newStreak = 1;
     } else if (daysDiff === 1) {
-      newStreak+=1;
+      newStreak += 1;
     }
 
     // update progress info locally
@@ -83,28 +91,40 @@ export const ProgressProvider = ({ children }) => {
     }));
 
     // send progress info to backend
-    fetch(`${backendUrl}/questiondone`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": `${localStorage.getItem("auth-token")}`,
-      },
-      body: JSON.stringify({
-        questionId: questionId,
-        totalQuestionsDone: progressInfo.totalQuestionsDone + 1,
-        streak: newStreak,
-        points: progressInfo.points + pointsToAdd,
-        lastActiveDate: currentDate,
-      }),
-    })
+    try {
+      const res = await fetch(`${backendUrl}/questiondone`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+        },
+        body: JSON.stringify({
+          questionId: questionId,
+          totalQuestionsDone: progressInfo.totalQuestionsDone + 1,
+          streak: newStreak,
+          points: progressInfo.points + pointsToAdd,
+          lastActiveDate: currentDate,
+        }),
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error marking question as done:", error);
+    }
   };
 
   // Function for calculating days diff
   const calculateDaysDiff = (date1, date2) => {
-
     // Parse the date strings into Date objects
-    const d1 = new Date(`${date1.slice(6, 10)}-${date1.slice(3, 5)}-${date1.slice(0, 2)}`);
-    const d2 = new Date(`${date2.slice(6, 10)}-${date2.slice(3, 5)}-${date2.slice(0, 2)}`);
+    const d1 = new Date(
+      `${date1.slice(6, 10)}-${date1.slice(3, 5)}-${date1.slice(0, 2)}`
+    );
+    const d2 = new Date(
+      `${date2.slice(6, 10)}-${date2.slice(3, 5)}-${date2.slice(0, 2)}`
+    );
 
     // Calculate the time difference in milliseconds
     const timeDiff = Math.abs(d2.getTime() - d1.getTime());
@@ -115,8 +135,7 @@ export const ProgressProvider = ({ children }) => {
     return daysDiff;
   };
 
-  const markQuestionUndone = (questionId, questionLevel) => {
-
+  const markQuestionUndone = async (questionId, questionLevel) => {
     // Update points
     let pointsToSubtract = 0;
     if (questionLevel === "easy") pointsToSubtract = 10;
@@ -128,27 +147,38 @@ export const ProgressProvider = ({ children }) => {
       ...prevProgressInfo,
       questionsData: { ...prevProgressInfo.questionsData, [questionId]: 0 },
       totalQuestionsDone: prevProgressInfo.totalQuestionsDone - 1,
-      points: prevProgressInfo.points - pointsToSubtract
+      points: prevProgressInfo.points - pointsToSubtract,
     }));
 
+    try {
+      const res = await fetch(`${backendUrl}/questionundo`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+        },
+        body: JSON.stringify({
+          questionId: questionId,
+          totalQuestionsDone: progressInfo.totalQuestionsDone - 1,
+          points: progressInfo.points - pointsToSubtract,
+        }),
+      });
 
-    fetch(`${backendUrl}/questionundo`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": `${localStorage.getItem("auth-token")}`,
-      },
-      body: JSON.stringify({
-        questionId: questionId,
-        totalQuestionsDone: progressInfo.totalQuestionsDone - 1,
-        points: progressInfo.points - pointsToSubtract
-      }),
-    });
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error marking question as undone:", error);
+    }
   };
 
   const totalQuestionsInStep = (stepId) => {
     const step = all_steps.find((s) => s.id === stepId);
-    const totalLength = step.all_substeps.reduce((sum, substep) => sum + substep.all_questions.length,0);
+    const totalLength = step.all_substeps.reduce(
+      (sum, substep) => sum + substep.all_questions.length,
+      0
+    );
     return totalLength;
   };
 
