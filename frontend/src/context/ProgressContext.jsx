@@ -173,20 +173,46 @@ export const ProgressProvider = ({ children }) => {
     }
   };
 
-  const totalQuestionsInStep = (stepId) => {
-    const step = all_steps.find((s) => s.id === stepId);
-    const totalLength = step.all_substeps.reduce(
-      (sum, substep) => sum + substep.all_questions.length,
-      0
-    );
-    return totalLength;
+  const levelQuestions = (level) => {
+    if(level===""){
+      return 454;
+    }
+    let levelQuestions = 0;
+    all_steps.forEach((steps) => {
+      steps.all_substeps.forEach(substeps=>{
+        substeps.all_questions.forEach(questions=>{
+          if(questions.level === level){
+            levelQuestions++;
+          }
+        })
+      })
+    });
+    return levelQuestions;
+  };
+
+  const levelQuestionsDone = (level) => {
+    if(level===""){
+      return progressInfo.totalQuestionsDone;
+    }
+    let levelQuestionsDone = 0;
+    all_steps.forEach((steps) => {
+      steps.all_substeps.forEach(substeps=>{
+        substeps.all_questions.forEach(questions=>{
+          if(questions.level === level && progressInfo.questionsData[questions.id]===1){
+            levelQuestionsDone++;
+          }
+        })
+      })
+    });
+    return levelQuestionsDone;
   };
 
   return (
     <ProgressContext.Provider
       value={{
         progressInfo,
-        totalQuestionsInStep,
+        levelQuestions,
+        levelQuestionsDone,
         markQuestionDone,
         markQuestionUndone,
       }}

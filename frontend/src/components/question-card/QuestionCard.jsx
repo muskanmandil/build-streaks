@@ -8,8 +8,10 @@ import { ProgressContext } from "../../context/ProgressContext";
 import interviewbit from "../../assets/interviewbit.svg";
 import spoj from "../../assets/spoj.jpg";
 import tuf_circle from "../../assets/tuf_circle.svg"
+import { AppContext } from "../../context/AppContext";
 
 const QuestionCard = (props) => {
+  const { filter } = useContext(AppContext)
   const { progressInfo, markQuestionDone, markQuestionUndone } =
     useContext(ProgressContext);
 
@@ -28,7 +30,9 @@ const QuestionCard = (props) => {
     domain = new URL(props.problemlink).hostname;
   }
 
+  
   return (
+    (filter===props.level || filter==="") &&
     <div
       className={`question-card ${
         progressInfo.questionsData[props.id] === 1 ? "question-completed" : null
@@ -40,7 +44,7 @@ const QuestionCard = (props) => {
         }`}
         onClick={() => handleDone(props.id, props.level)}
       ></div>
-      <p className="question-title  ">{props.questionTitle}</p>
+      <p className="question-title">{props.questionTitle}</p>
       <p
         className={`question-level ${
           props.level === "medium"

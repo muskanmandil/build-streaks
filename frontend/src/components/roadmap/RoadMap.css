@@ -4,6 +4,17 @@
   overflow-y: scroll;
 }
 
+.filters-div{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0;
+}
+
+#reset{
+  color: var(--black);
+}
+
 .roadmap-timeline {
   display: flex;
   flex-direction: column;
@@ -18,3 +29,5 @@
   width: 4px;
   height: 100%;
 }
+
+

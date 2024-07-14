@@ -1,0 +1,40 @@
+.filter-btn {
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--white);
+  background: transparent;
+  border: 3px var(--light-neutral) solid;
+}
+
+#easy {
+  color: var(--secondary);
+}
+
+#medium {
+  color: var(--light-orange);
+}
+
+#hard {
+  color: var(--red);
+}
+
+.clicked {
+  border: none;
+}
+#easy.clicked {
+  background-color: var(--secondary);
+  color: var(--white);
+}
+
+#medium.clicked {
+  background-color: var(--light-orange);
+  color: var(--white);
+}
+
+#hard.clicked {
+  background-color: var(--red);
+  color: var(--white);
+}

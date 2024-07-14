@@ -6,11 +6,13 @@ import streak_dull from "../../assets/streak_dull.svg";
 import streak_lit from "../../assets/streak_lit.svg";
 import user_avatar from "../../assets/user_avatar.svg";
 import { ProgressContext } from "../../context/ProgressContext";
+import { AppContext } from "../../context/AppContext";
 import leaderboard from "../../assets/leaderboard.svg";
 import pointsxp from "../../assets/pointsxp.svg";
 
 const Navbar = () => {
-  const {progressInfo} = useContext(ProgressContext);
+  const {filter} = useContext(AppContext);
+  const {progressInfo, levelQuestions, levelQuestionsDone} = useContext(ProgressContext);
 
   let today = new Date(Date.now())
     .toLocaleString("en-IN", {
@@ -29,9 +31,9 @@ const Navbar = () => {
       {localStorage.getItem("auth-token") && (
         <div className="total-progress-container">
           <p className="total-progress-percentage">
-            {Math.ceil((progressInfo.totalQuestionsDone / 454) * 100)}% completed
+            {Math.ceil((levelQuestionsDone(filter)/ levelQuestions(filter)) * 100)}% completed
           </p>
-          <p className="total-progress">{progressInfo.totalQuestionsDone} / 454</p>
+          <p className="total-progress">{levelQuestionsDone(filter)} / {levelQuestions(filter)}</p>
         </div>
       )}
 

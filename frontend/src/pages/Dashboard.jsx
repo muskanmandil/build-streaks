@@ -4,11 +4,10 @@ import RoadMap from "../components/roadmap/RoadMap";
 import { ProgressProvider } from "../context/ProgressContext";
 
 const Dashboard = () => {
-
   return (
     <div className="dashboard">
       <ProgressProvider>
-        <RoadMap />
+        <RoadMap/>
         {/* <RoadmapStats />*/}
       </ProgressProvider>
     </div>

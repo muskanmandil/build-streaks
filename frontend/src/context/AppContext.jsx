@@ -11,6 +11,8 @@ export const AppProvider = ({ children }) => {
     email: "",
   });
   const [leaderboard, setLeaderboard] = useState([]);
+  const [filter, setFilter] = useState("");
+  const levels = ["easy","medium","hard"];
 
   const fetchUserInfo = useCallback(async () => {
     // check if auth-token is present or not
@@ -87,6 +89,9 @@ export const AppProvider = ({ children }) => {
         setSignedUp,
         userInfo,
         leaderboard,
+        levels,
+        filter,
+        setFilter
       }}
     >
       {children}
