@@ -175,7 +175,7 @@ export const ProgressProvider = ({ children }) => {
 
   const levelQuestions = (level) => {
     if(level===""){
-      return 454;
+      return 455;
     }
     let levelQuestions = 0;
     all_steps.forEach((steps) => {
