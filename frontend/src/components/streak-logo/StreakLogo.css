@@ -17,6 +17,7 @@
 
 .streak-logo {
   width: 10vw;
+  max-width: 8rem;
   position: relative;
   /* animation: none !important; */
 }
@@ -47,5 +48,27 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 600px){
+
+  .streak-logo-container {
+    transform: translate(-50%, -25%);
+  }
+  .streak-logo{
+    width: 12vw;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .streak-logo{
+    width: 14vw;
+  }
+}
+
+@media screen and (max-width: 420px){
+  .streak-logo{
+    width: 16vw;
   }
 }
