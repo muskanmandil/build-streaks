@@ -59,7 +59,7 @@
     width: 0;
   }
   to {
-    width: 35%;
+    width: 400px;
   }
 }
 
@@ -85,6 +85,14 @@
 }
 
 @media screen and (max-width: 840px){
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 340px;
+    }
+  }
   .introduction h2{
     font-size: 2.25rem;
   }
@@ -113,5 +121,12 @@
 
   .introduction h3{
     margin-bottom: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .introduction p{
+    width: 85%;
+    font-size: 1rem;
   }
 }
