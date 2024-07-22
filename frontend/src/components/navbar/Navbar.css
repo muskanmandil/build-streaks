@@ -113,6 +113,7 @@
     position: absolute;
     right: 4rem;
     top: 4.5rem;
+    background: var(--background);
   }
   .mobile-navbar-leaderboard,
   .mobile-navbar-profile {

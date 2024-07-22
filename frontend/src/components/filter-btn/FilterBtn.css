@@ -38,3 +38,36 @@
   background-color: var(--red);
   color: var(--white);
 }
+
+@media screen and (max-width: 840px){
+  .filter-btn{
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+@media screen and (max-width: 680px){
+  .filter-btn{
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .filter-btn{
+    padding: 0.6rem 1rem;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .filter-btn{
+    padding: 0.5rem 0.65rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 420px){
+  .filter-btn{
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+}

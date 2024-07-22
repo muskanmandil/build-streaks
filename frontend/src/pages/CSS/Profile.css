@@ -1,24 +1,22 @@
-.profile-container{
-    border: 1px solid var(--light-neutral);
-    width: 50vw;
-    margin: 0 auto;
-    margin-top: 5vh;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.profile-container {
+  border: 1px solid var(--light-neutral);
+  width: 50vw;
+  margin: 0 auto;
+  margin-top: 5vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .info-div {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
-.info-div h3{
-    font-weight: 600;
+.info-div h3 {
+  font-weight: 600;
 }
-
-
 
 .change-passw-btn {
   padding: 0.75rem 2rem;
@@ -41,4 +39,30 @@
   cursor: pointer;
   color: var(--white);
   width: fit-content;
+}
+
+@media screen and (max-width: 840px) {
+  .profile-container {
+    padding: 1.5rem;
+  }
+  .logout-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .profile-container {
+    width: 75vw;
+  }
+
+  .logout-btn {
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .profile-container {
+    width: 85vw;
+  }
 }

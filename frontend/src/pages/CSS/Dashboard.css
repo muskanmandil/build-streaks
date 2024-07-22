@@ -17,3 +17,14 @@
   /* column-gap: 2rem;
   row-gap: 2rem; */
 }
+
+.filters-div{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.75rem 0;
+}
+
+#reset{
+  color: var(--black);
+}
