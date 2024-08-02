@@ -47,8 +47,8 @@ const Navbar = () => {
       )}
 
       <div className="navbar-right">
-        {/* {true ? ( //for testing purpose */}
-        {localStorage.getItem("auth-token") ? (
+        {true ? ( //for testing purpose
+        // {localStorage.getItem("auth-token") ? (
           <>
             <div className="navbar-points">
               <img src={pointsxp} alt="" className="navbar-points-logo" />
@@ -86,6 +86,21 @@ const Navbar = () => {
                   <img src={burger_menu} alt="" className="burger-menu-logo" />
                 </div>
                 <div className="mobile-navbar-popup">
+                  {localStorage.getItem("auth-token") && (
+                    <div className="total-progress-container mobile-total-progress-container">
+                      <p className="total-progress-percentage">
+                        {Math.ceil(
+                          (levelQuestionsDone(filter) /
+                            levelQuestions(filter)) *
+                            100
+                        )}
+                        % completed
+                      </p>
+                      <p className="total-progress">
+                        {levelQuestionsDone(filter)} / {levelQuestions(filter)}
+                      </p>
+                    </div>
+                  )}
                   <Link
                     to="/leaderboard"
                     className="navbar-leaderboard mobile-navbar-leaderboard"
