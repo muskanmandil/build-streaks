@@ -48,7 +48,7 @@ export const ProgressProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProgressInfo();
-  });
+  },[fetchProgressInfo]);
 
   const markQuestionDone = async (questionId, questionLevel) => {
     // Update points
@@ -211,6 +211,7 @@ export const ProgressProvider = ({ children }) => {
     <ProgressContext.Provider
       value={{
         progressInfo,
+        fetchProgressInfo,
         levelQuestions,
         levelQuestionsDone,
         markQuestionDone,

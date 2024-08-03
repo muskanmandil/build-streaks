@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import streak_logo from "../../assets/streak_logo.svg";
@@ -12,11 +12,15 @@ import pointsxp from "../../assets/pointsxp.svg";
 import burger_menu from "../../assets/burger_menu.svg";
 
 const Navbar = () => {
-  const { filter } = useContext(AppContext);
-  const { progressInfo, levelQuestions, levelQuestionsDone } =
+  const { filter, fetchLeaderboard } = useContext(AppContext);
+  const { progressInfo, fetchProgressInfo, levelQuestions, levelQuestionsDone } =
     useContext(ProgressContext);
 
   const [mobileMenu, setMobileMenu] = useState(false);
+
+  useEffect(()=>{
+    fetchProgressInfo();
+  },[fetchProgressInfo, progressInfo]);
 
   let today = new Date(Date.now())
     .toLocaleString("en-IN", {
@@ -71,7 +75,7 @@ const Navbar = () => {
                 </div>
               </div>
             </Link>
-            <Link to="/leaderboard" className="navbar-leaderboard">
+            <Link to="/leaderboard" className="navbar-leaderboard" onClick={fetchLeaderboard}>
               <img src={leaderboard} alt="" />
             </Link>
             <Link to="/profile" className="navbar-profile">
@@ -104,7 +108,7 @@ const Navbar = () => {
                   <Link
                     to="/leaderboard"
                     className="navbar-leaderboard mobile-navbar-leaderboard"
-                    onClick={() => setMobileMenu(false)}
+                    onClick={() => {fetchLeaderboard(); setMobileMenu(false);}}
                   >
                     <img src={leaderboard} alt="" />
                     <p>Leaderboard</p>

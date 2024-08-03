@@ -89,6 +89,7 @@ export const AppProvider = ({ children }) => {
         setSignedUp,
         userInfo,
         leaderboard,
+        fetchLeaderboard,
         levels,
         filter,
         setFilter
