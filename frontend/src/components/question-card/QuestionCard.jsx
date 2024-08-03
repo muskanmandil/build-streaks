@@ -7,16 +7,17 @@ import codestudio from "../../assets/codestudio.png";
 import { ProgressContext } from "../../context/ProgressContext";
 import interviewbit from "../../assets/interviewbit.svg";
 import spoj from "../../assets/spoj.jpg";
-import tuf_circle from "../../assets/tuf_circle.svg"
+import tuf_circle from "../../assets/tuf_circle.svg";
 import { AppContext } from "../../context/AppContext";
 
 const QuestionCard = (props) => {
-  const { filter } = useContext(AppContext)
-  const { progressInfo, markQuestionDone, markQuestionUndone } =
-    useContext(ProgressContext);
-
+  const { filter } = useContext(AppContext);
+  const { progressInfo, markQuestionDone, markQuestionUndone } = useContext(ProgressContext);
+  
+  // to render the updated question card again
   useEffect(() => {}, [props.id, progressInfo]);
 
+  // handling question done state on frontend
   const handleDone = async (questionId, questionLevel) => {
     if (progressInfo.questionsData[questionId] === 1) {
       markQuestionUndone(questionId, questionLevel);
@@ -25,80 +26,85 @@ const QuestionCard = (props) => {
     }
   };
 
+  // domain check for correct problem platform icon
   let domain = "";
   if (props.problemlink !== "") {
     domain = new URL(props.problemlink).hostname;
   }
 
-  
   return (
-    (filter===props.level || filter==="") &&
-    <div
-      className={`question-card ${
-        progressInfo.questionsData[props.id] === 1 ? "question-completed" : null
-      }`}
-    >
+    // filter check
+    (filter === props.level || filter === "") && (
       <div
-        className={`check-btn ${
-          progressInfo.questionsData[props.id] === 1 ? "completed" : null
-        }`}
-        onClick={() => handleDone(props.id, props.level)}
-      ></div>
-      <p className="question-title">{props.questionTitle}</p>
-      <p
-        className={`question-level ${
-          props.level === "medium"
-            ? "medium-level"
-            : props.level === "hard"
-            ? "hard-level"
-            : "easy-level"
+        className={`question-card ${
+          progressInfo.questionsData[props.id] === 1
+            ? "question-completed"
+            : null
         }`}
       >
-        {props.level}
-      </p>
+         {/*tick button  */}
+        <div
+          className={`check-btn ${
+            progressInfo.questionsData[props.id] === 1 ? "completed" : null
+          }`}
+          onClick={() => handleDone(props.id, props.level)}
+        ></div>
+        <p className="question-title">{props.questionTitle}</p>
+        <p
+          className={`question-level ${
+            props.level === "medium"
+              ? "medium-level"
+              : props.level === "hard"
+              ? "hard-level"
+              : "easy-level"
+          }`}
+        >
+          {props.level}
+        </p>
 
-      <a
-        href={props.lecturelink}
-        className="lecture-link"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img src={props.lecturelink !== "" ? youtube : null} alt="" />
-      </a>
+        <a
+          href={props.lecturelink}
+          className="lecture-link"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={props.lecturelink !== "" ? youtube : null} alt="" />
+        </a>
 
-      <a
-        href={props.problemlink}
-        className="problem-link"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img
-          src={
-            domain === "www.geeksforgeeks.org"
-              ? gfg
-              : domain === "leetcode.com"
-              ? leetcode
-              : domain === "www.naukri.com"
-              ? codestudio
-              : domain === "www.interviewbit.com"
-              ? interviewbit
-              : domain === "www.spoj.com"
-              ? spoj
-              : ""
-          }
-          alt=""
-        />
-      </a>
+        <a
+          href={props.problemlink}
+          className="problem-link"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            src={
+              domain === "www.geeksforgeeks.org"
+                ? gfg
+                : domain === "leetcode.com"
+                ? leetcode
+                : domain === "www.naukri.com"
+                ? codestudio
+                : domain === "www.interviewbit.com"
+                ? interviewbit
+                : domain === "www.spoj.com"
+                ? spoj
+                : ""
+            }
+            alt=""
+          />
+        </a>
 
-      <a
-        href={props.articlelink}
-        className="article-link"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img src={props.articlelink !== "" ? tuf_circle : null} alt="" />
-      </a>
-    </div>
+        <a
+          href={props.articlelink}
+          className="article-link"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={props.articlelink !== "" ? tuf_circle : null} alt="" />
+        </a>
+      </div>
+    )
   );
 };
 

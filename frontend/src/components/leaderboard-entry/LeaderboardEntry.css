@@ -1,5 +1,5 @@
 .leaderboard-entry{
-    border: 1px solid var(--light-neutral);
+    border: 1px solid var(--border-light);
     display: grid;
     grid-template-columns: 2fr 16fr 3fr 3fr;
     gap: 1rem;
@@ -12,7 +12,7 @@
 .leaderboard-rank{
     font-size: 2rem;
     text-align: center;
-    color: var(--brown);
+    color: var(--branding);
 }
 
 .leaderboard-points, .leaderboard-streak{
@@ -22,11 +22,11 @@
 }
 
 .leaderboard-points {
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 .leaderboard-streak {
-    color: var(--dark-orange);
+    color: var(--accent-dark-orange);
 }
 
 .leaderboard-points img, .leaderboard-streak img {
@@ -35,6 +35,6 @@
 }
 
 .this-user{
-    border: 0.5rem solid var(--accent);
+    border: 0.5rem solid var(--secondary);
     padding: 0.25rem 0.5rem;
 }

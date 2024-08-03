@@ -75,6 +75,7 @@ export const AppProvider = ({ children }) => {
     }
   }, [backendUrl]);
 
+  // to fetch the userinfo & leaderboard on the first render of the app
   useEffect(() => {
     fetchUserInfo();
     fetchLeaderboard();

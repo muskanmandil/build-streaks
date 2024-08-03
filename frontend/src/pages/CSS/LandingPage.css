@@ -14,7 +14,7 @@
   overflow: hidden;
   white-space: nowrap;
   animation: typing 5s steps(40, end) infinite;
-  border-right: 0.15rem solid var(--light-orange);
+  border-right: 0.15rem solid var(--accent-light-orange);
 }
 
 .introduction h3 {
@@ -31,7 +31,7 @@
 }
 
 .credits-container {
-  border: 1px solid var(--gray);
+  border: 1px solid var(--border-dark);
   width: fit-content;
   margin: 3rem;
   padding: 1rem 2rem 1rem 1rem;
@@ -48,7 +48,6 @@
 
 .tuf-logo {
   width: 5rem;
-  /* color: var(--black); */
 }
 
 .arrow {

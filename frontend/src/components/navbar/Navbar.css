@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--light-neutral);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .logo {
@@ -17,7 +17,7 @@
 }
 
 .logo i {
-  color: var(--brown);
+  color: var(--branding);
 }
 
 .logo-streak-icon {
@@ -46,13 +46,13 @@
 .navbar-streak-number {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--dark-orange);
+  color: var(--accent-dark-orange);
 }
 
 .navbar-points-number {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--secondary);
+  color: var(--primary);
 }
 
 .navbar-profile,
@@ -60,16 +60,6 @@
   padding: 0.5rem 1rem;
 }
 
-.login-btn {
-  padding: 0.75rem 2rem;
-  border: none;
-  background: var(--secondary);
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--white);
-}
 
 .total-progress-container {
   display: flex;
@@ -79,11 +69,11 @@
 }
 
 .total-progress-percentage {
-  color: var(--secondary);
+  color: var(--primary);
 }
 
 .total-progress {
-  color: var(--brown);
+  color: var(--branding);
 }
 
 .mobile-navbar,
@@ -122,7 +112,7 @@
     align-items: center;
     gap: 1rem;
     width: 12.5rem;
-    border: 1px var(--light-neutral) solid;
+    border: 1px var(--border-light) solid;
   }
 }
 
@@ -147,8 +137,8 @@
     font-size: 1.1rem;
   }
   .login-btn {
-    padding: 0.5rem 1.5rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 1.5rem !important;
+    font-size: 0.85rem !important;
   }
 }
 
@@ -168,10 +158,10 @@
     text-align: center;
     gap: 0.25rem;
     padding: 0.5rem 0;
-    border: 1px var(--light-neutral) solid;
+    border: 1px var(--border-light) solid;
   }
   .login-btn {
-    padding: 0.5rem 1.25rem;
+    padding: 0.5rem 1.25rem !important;
   }
 }
 
@@ -234,6 +224,6 @@
     height: 1.25rem;
   }
   .login-btn {
-    font-size: 0.75rem;
+    font-size: 0.75rem !important;
   }
 }

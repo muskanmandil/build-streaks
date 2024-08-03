@@ -8,7 +8,7 @@
 
 .streak-div {
   border-radius: 50%;
-  background-color: var(--primary);
+  background-color: var(--accent-dark-yellow);
   padding: 0.5rem;
   box-shadow: 0px 2px 6px rgba(255, 150, 0, 0.8);
   animation: pulse 2s ease-in-out infinite;
@@ -19,7 +19,6 @@
   width: 10vw;
   max-width: 8rem;
   position: relative;
-  /* animation: none !important; */
 }
 
 .click-text {
@@ -32,13 +31,13 @@
 
 @keyframes pulse {
   0% {
-    transform: scale(1); /* Start with normal scale */
+    transform: scale(1); 
   }
   50% {
-    transform: scale(1.05); /* Scale up to 110% halfway through */
+    transform: scale(1.05); 
   }
   100% {
-    transform: scale(1); /* Return to normal scale */
+    transform: scale(1); 
   }
 }
 

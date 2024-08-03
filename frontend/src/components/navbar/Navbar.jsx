@@ -10,18 +10,19 @@ import { AppContext } from "../../context/AppContext";
 import leaderboard from "../../assets/leaderboard.svg";
 import pointsxp from "../../assets/pointsxp.svg";
 import burger_menu from "../../assets/burger_menu.svg";
+import PrimaryBtn from "../primary-btn/PrimaryBtn";
 
 const Navbar = () => {
   const { filter, fetchLeaderboard } = useContext(AppContext);
-  const { progressInfo, fetchProgressInfo, levelQuestions, levelQuestionsDone } =
-    useContext(ProgressContext);
-
+  const { progressInfo, fetchProgressInfo, levelQuestions, levelQuestionsDone } = useContext(ProgressContext);
   const [mobileMenu, setMobileMenu] = useState(false);
 
+  // fetching progress info as progress info changes explicitly here to avoid that done then undone and then done state management issue of questions
   useEffect(()=>{
     fetchProgressInfo();
   },[fetchProgressInfo, progressInfo]);
 
+  // fetching this date to update the streak
   let today = new Date(Date.now())
     .toLocaleString("en-IN", {
       day: "2-digit",
@@ -36,6 +37,8 @@ const Navbar = () => {
         <img src={streak_logo} className="logo-streak-icon" alt="" />
         <i>Build Streaks</i>
       </h2>
+
+      {/* progress view */}
       {localStorage.getItem("auth-token") && (
         <div className="total-progress-container">
           <p className="total-progress-percentage">
@@ -52,12 +55,14 @@ const Navbar = () => {
 
       <div className="navbar-right">
         {/* {true ? ( //for testing purpose */}
+        {/* login check */}
         {localStorage.getItem("auth-token") ? (
           <>
             <div className="navbar-points">
               <img src={pointsxp} alt="" className="navbar-points-logo" />
               <div className="navbar-points-number">{progressInfo.points}</div>
             </div>
+
             <Link to="/dashboard">
               <div className="navbar-streak">
                 <img
@@ -75,21 +80,32 @@ const Navbar = () => {
                 </div>
               </div>
             </Link>
+
             <Link to="/leaderboard" className="navbar-leaderboard" onClick={fetchLeaderboard}>
               <img src={leaderboard} alt="" />
             </Link>
+
             <Link to="/profile" className="navbar-profile">
               <img src={user_avatar} alt="" />
             </Link>
+
+            {/* mobile menu state */}
             {mobileMenu ? (
+              // open state
               <div className="mobile-navbar-expanded">
+
+                {/* burger menu icon */}
                 <div
                   className="burger-menu"
                   onClick={() => setMobileMenu(false)}
                 >
                   <img src={burger_menu} alt="" className="burger-menu-logo" />
                 </div>
+
+                {/* mobile menu popup */}
                 <div className="mobile-navbar-popup">
+
+                  {/* progress-view */}
                   {localStorage.getItem("auth-token") && (
                     <div className="total-progress-container mobile-total-progress-container">
                       <p className="total-progress-percentage">
@@ -105,6 +121,7 @@ const Navbar = () => {
                       </p>
                     </div>
                   )}
+
                   <Link
                     to="/leaderboard"
                     className="navbar-leaderboard mobile-navbar-leaderboard"
@@ -113,6 +130,7 @@ const Navbar = () => {
                     <img src={leaderboard} alt="" />
                     <p>Leaderboard</p>
                   </Link>
+
                   <Link
                     to="/profile"
                     className="navbar-profile mobile-navbar-profile"
@@ -124,6 +142,7 @@ const Navbar = () => {
                 </div>
               </div>
             ) : (
+              // mobile menu closed state
               <div className="mobile-navbar">
                 <div
                   className="burger-menu"
@@ -135,8 +154,9 @@ const Navbar = () => {
             )}
           </>
         ) : (
+          // login btn 
           <Link to="/login">
-            <button className="login-btn">Login</button>
+            <PrimaryBtn className="login-btn" text="Login"/>
           </Link>
         )}
       </div>

@@ -3,6 +3,8 @@ import "./StreakLogo.css";
 
 const StreakLogo = () => {
   const [isClicked, setClick] = useState(false);
+
+  // click to start function
   const handleClick = (e) => {
     setClick(true);
     setTimeout(() => {
@@ -10,6 +12,7 @@ const StreakLogo = () => {
       setClick(false);
     }, 2000);
   };
+  
   return (
     <div className="streak-logo-container">
       <div

@@ -1,21 +1,6 @@
-/* .dashboard-page {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow-y: hidden;
-} */
-
 .dashboard {
-  /* flex: 1; */
   height: calc(100% - 4.5rem);
-  /* overflow-y: hidden; */
-  /* display: grid;
-  grid-template-columns: 4fr 2fr;
-  grid-template-rows: 1fr 1fr; */
   padding: 0 3vw;
-  /* column-gap: 2rem;
-  row-gap: 2rem; */
 }
 
 .filters-div{
@@ -26,7 +11,7 @@
 }
 
 #reset{
-  color: var(--black);
+  color: var(--primary-text);
 }
 
 @media screen and (max-width: 500px){

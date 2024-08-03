@@ -11,6 +11,8 @@ const StepCard = (props) => {
   const { progressInfo } = useContext(ProgressContext);
   const [isOpen, setIsOpen] = useState(true);
   const [questionsDoneInStep, setQuestionsDoneInStep] = useState(0);
+
+  // calculate and updates questions done in step
   const updateQuestionsDoneInStep = useCallback(() => {
     let count = 0;
     props.all_substeps.forEach((substep) => {
@@ -26,10 +28,12 @@ const StepCard = (props) => {
     setQuestionsDoneInStep(count);
   }, [props.all_substeps, progressInfo.questionsData, filter]);
 
+  // to keep updating questions done of each step
   useEffect(() => {
     updateQuestionsDoneInStep();
   }, [updateQuestionsDoneInStep]);
 
+  // to render filtered questions in the step
   const filteredQuestionsInStep = () => {
     let length = 0;
     props.all_substeps.forEach((substep) => {
@@ -42,52 +46,69 @@ const StepCard = (props) => {
     return length;
   };
 
+  // progress variable
   const progress = (questionsDoneInStep / filteredQuestionsInStep()) * 100;
 
   return (
     <div className="step-card">
       <div className="card-header-container">
-      <div className="card-header">
-        <h3 className="card-heading">{props.title}</h3>
-        <div className="progress">
-          {questionsDoneInStep} / {filteredQuestionsInStep()}
-        </div>
-        <div className="step-progress-bar-container">
-          <div
-            className="step-progress-bar"
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
-        <button className="step-toggle-btn" onClick={() => setIsOpen(!isOpen)}>
-          {!isOpen ? (
-            <img src={arrow_down} alt="arrow_icon" />
-          ) : (
-            <img src={arrow_up} alt="arrow_icon" />
-          )}
-        </button>
-      </div>
-      <div
-        className={`card-number-outer-circle ${
-          progress === 100 ? "step-complete" : null
-        }`}
-      >
-        <div className="card-number">{props.id}</div>
-      </div>
-      </div>
 
-      {isOpen ? filteredQuestionsInStep()!==0 ? (<div className="substeps-list">
-          {props.all_substeps.map((substep, index) => {
-            return (
-              <SubstepCard
-                key={index}
-                id={substep.id}
-                substepTitle={substep.substepTitle}
-                all_questions={substep.all_questions}
-              />
-            );
-          })}
-        </div>): (<p className="substeps-list">No questions at this level</p>) : null}
+        <div className="card-header">
+          <h3 className="card-heading">{props.title}</h3>
+          <div className="progress">
+            {questionsDoneInStep} / {filteredQuestionsInStep()}
+          </div>
+          <div className="step-progress-bar-container">
+            <div
+              className="step-progress-bar"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+
+          {/* toggle-button only for mobile views */}
+          <button
+            className="step-toggle-btn"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {!isOpen ? (
+              <img src={arrow_down} alt="arrow_icon" />
+            ) : (
+              <img src={arrow_up} alt="arrow_icon" />
+            )}
+          </button>
+        </div>
+
+         {/* step-number-circle  */}
+        <div
+          className={`card-number-outer-circle ${
+            progress === 100 ? "step-complete" : null
+          }`}
+        >
+          <div className="card-number">{props.id}</div>
+        </div>
       </div>
+      
+      {/* toggle-btn check */}
+      {isOpen ? (
+        // filter check
+        filteredQuestionsInStep() !== 0 ? (
+          <div className="substeps-list">
+            {props.all_substeps.map((substep, index) => {
+              return (
+                <SubstepCard
+                  key={index}
+                  id={substep.id}
+                  substepTitle={substep.substepTitle}
+                  all_questions={substep.all_questions}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <p className="substeps-list">No questions at this level</p>
+        )
+      ) : null}
+    </div>
   );
 };
 

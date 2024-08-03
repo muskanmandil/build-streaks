@@ -16,7 +16,6 @@ const App = () => {
   return loading ? (
     <Loading />
   ) : (
-  // return (
     <div className="app">
       <BrowserRouter>
         <ProgressProvider>

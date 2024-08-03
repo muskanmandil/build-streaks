@@ -1,10 +1,10 @@
 .leaderboard-container {
-  border: 1px solid var(--light-neutral);
+  border: 1px solid var(--border-light);
   width: 50vw;
   margin: 0 auto;
   margin-top: 1rem;
   padding: 1.5rem 2rem;
-  background: var(--light-yellow);
+  background: var(--accent-light-yellow);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +25,7 @@
 .leaderboard-heading{
     font-size: 2.5rem;
     font-family: "Ysabeau Infant", sans-serif;
-    color: var(--brown);
+    color: var(--branding);
 }
 
 @media screen and (max-width: 1200px){

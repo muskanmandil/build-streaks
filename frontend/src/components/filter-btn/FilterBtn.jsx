@@ -6,6 +6,8 @@ import { AppContext } from "../../context/AppContext";
 const FilterBtn = ({ level }) => {
   const { filter, setFilter } = useContext(AppContext);
   const { levelQuestions } = useContext(ProgressContext);
+
+  // setting filter state value
   const filterBtnClick = (e) => {
     let id = e.target.getAttribute("id");
     setFilter(id);

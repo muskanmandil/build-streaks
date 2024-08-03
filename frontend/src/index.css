@@ -1,42 +1,53 @@
 :root {
+  /* some color suggestions */
+
   /* --background: #F6F5F2;
   --background-2: #FAEED1; 
   --primary-1: #65451f;
-  /* --dark-neutral-1: #52656d; */
-  /* --dark-neutral-2: #37464f; */
+  --dark-neutral-1: #52656d;
+  --dark-neutral-2: #37464f; */
 
-  /* 
-#F4E06D
-#FFFFDE
-#C499BA */
+  /* #F4E06D
+    #FFFFDE
+    #C499BA */
 
   /* #FF6868
-#DCFFB7
-#FFBB64
-#FFEAA7 */
-  --primary: #ffd92e;
-  --secondary: #58cc02;
-  --accent: #ff7396;
-  --background: #fbf9f1;
-  --black: #111009;
-  --white: #f5f5f5;
-  --light-orange: #ffa113;
-  --dark-orange: #ff8a00;
-  --light-neutral: #e5e5e5;
-  --gray: #afafaf;
-  --brown: #76453b;
-  --pastel-green: #c6ff67;
-  --light-green: #8ffc49;
-  --red: #ff4b4b;
-  --light-yellow: #fed84e;
+    #DCFFB7
+    #FFBB64
+    #FFEAA7 */
+
+  /* ----------------------------------------------------- */
+
+  --primary: #58cc02; /* easy level, points number, login/signup btns, progress bar, completed  */
+  --secondary: #ff7396; /* highlighing user, substep-heading & progress bar*/
+
+  --background: #fbf9f1; /* background */
+  --primary-text: #111009;
+  --secondary-text: #f5f5f5;
+
+  --accent-dark-yellow: #ffd92e; /* streak-div*/
+  --accent-light-yellow: #fed84e; /* leaderboard background*/
+  --accent-light-orange: #ffa113; /* medium level */
+  --accent-dark-orange: #ff8a00; /* streak number*/
+
+  --border-light: #e5e5e5; /* minimalistic border, to show emptiness*/
+  --border-dark: #afafaf; /* dark border*/
+
+  --semantic-green: #8ffc49; /* completion contrast -light*/
+  --semantic-red: #ff4b4b; /* hard-level logout */
+
+  --branding: #76453b; /* headings, branding*/
+
+  --timeline: #c6ff67; /* timeline */
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Arsenal", sans-serif;
   text-decoration: none;
-  color: var(--black);
+  color: var(--primary-text);
 }
 
 * ::-webkit-scrollbar {

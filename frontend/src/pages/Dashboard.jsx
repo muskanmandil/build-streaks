@@ -17,7 +17,6 @@ const Dashboard = () => {
         <button id="reset" className="filter-btn" onClick={()=>setFilter("")}>Reset Filter</button>
       </div>
         <RoadMap/>
-        {/* <RoadmapStats />*/}
       </ProgressProvider>
     </div>
   );

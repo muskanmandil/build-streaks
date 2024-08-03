@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import "./CSS/Login.css";
 import { AppContext } from "../context/AppContext";
+import PrimaryBtn from "../components/primary-btn/PrimaryBtn";
 
 const Login = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
-  const { setLoading, isSignedUp, setSignedUp } =
-    useContext(AppContext);
+  const { setLoading, isSignedUp, setSignedUp } = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,13 +13,14 @@ const Login = () => {
     confirm_password: "",
   });
 
+  // maintaning form input states
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevValue) => {
       return { ...prevValue, [name]: value };
     });
   };
-
+  
   const handleSignup = async (e) => {
     // preventing default event
     e.preventDefault();
@@ -171,10 +172,8 @@ const Login = () => {
             />
           </div>
         ) : null}
-
-        <button className="login-signup-btn">
-          {!isSignedUp ? "Signup" : "Login"}
-        </button>
+        
+        <PrimaryBtn className="login-signup-btn" text={!isSignedUp ? "Signup" : "Login"}/>
       </form>
     </div>
   );

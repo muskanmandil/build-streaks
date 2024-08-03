@@ -22,7 +22,9 @@ export const ProgressProvider = ({ children }) => {
   });
 
   const fetchProgressInfo = useCallback(async () => {
+    // if auth-token is present
     if (localStorage.getItem("auth-token")) {
+      // try fetching the progress info
       try {
         const res = await fetch(`${backendUrl}/progressinfo`, {
           method: "POST",
@@ -35,6 +37,7 @@ export const ProgressProvider = ({ children }) => {
 
         if (res.status === 200) {
           const data = await res.json();
+          // set the local progress info state with the data from backend
           setProgressInfo((prevProgressInfo) => ({
             ...prevProgressInfo,
             ...data,
@@ -46,6 +49,7 @@ export const ProgressProvider = ({ children }) => {
     }
   }, [backendUrl]);
 
+  // to fetch the progress info on the first-render of the app
   useEffect(() => {
     fetchProgressInfo();
   },[fetchProgressInfo]);
@@ -142,7 +146,7 @@ export const ProgressProvider = ({ children }) => {
     else if (questionLevel === "medium") pointsToSubtract = 20;
     else pointsToSubtract = 40;
 
-    // Update local state
+    // Update progress info local state
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
       questionsData: { ...prevProgressInfo.questionsData, [questionId]: 0 },
@@ -150,6 +154,7 @@ export const ProgressProvider = ({ children }) => {
       points: prevProgressInfo.points - pointsToSubtract,
     }));
 
+    // send updates progress info data to backend
     try {
       const res = await fetch(`${backendUrl}/questionundo`, {
         method: "POST",
@@ -173,6 +178,7 @@ export const ProgressProvider = ({ children }) => {
     }
   };
 
+  // filtering questions by levelthrough json file
   const levelQuestions = (level) => {
     if(level===""){
       return 455;
@@ -190,6 +196,7 @@ export const ProgressProvider = ({ children }) => {
     return levelQuestions;
   };
 
+  // filtering questions done by level through progress info
   const levelQuestionsDone = (level) => {
     if(level===""){
       return progressInfo.totalQuestionsDone;

@@ -24,23 +24,22 @@
 
 .card-heading {
   font-size: 1.5rem;
-  color: var(--brown);
+  color: var(--branding);
   font-family: "Ysabeau Infant", sans-serif;
 }
 
 .progress {
   text-align: center;
-  color: var(--black);
-  /* font-weight: 600; */
+  color: var(--primary-text);
   margin-top: 0.5rem;
 }
 .card-number-outer-circle {
   width: 100px;
   height: 100px;
-  background: var(--light-neutral);
+  background: var(--border-light);
   border-radius: 50%;
   position: relative;
-  border: 4px solid var(--gray);
+  border: 4px solid var(--border-dark);
 }
 .card-number {
   position: absolute;
@@ -63,7 +62,7 @@
 .step-progress-bar-container {
   width: 15vw;
   height: 1.5rem;
-  background: var(--light-neutral);
+  background: var(--border-light);
   border-radius: 1rem;
   position: relative;
   max-width: 300px;
@@ -74,19 +73,19 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: var(--secondary);
+  background: var(--primary);
   border-radius: 1rem;
   transition: width 0.3s ease;
 }
 
 .step-complete {
-  background: var(--light-green);
-  border-color: var(--secondary);
+  background: var(--semantic-green);
+  border-color: var(--primary);
 }
 
 .step-complete .card-number {
   font-weight: 600;
-  color: var(--brown);
+  color: var(--branding);
 }
 
 @media screen and (max-width: 1000px) {
@@ -124,7 +123,7 @@
 @media screen and (max-width: 680px) {
   .step-card {
     flex-direction: column;
-    border: 1px var(--light-neutral) solid;
+    border: 1px var(--border-light) solid;
     border-radius: 4px;
     gap: 1.25rem;
     padding: 1rem 0;

@@ -4,39 +4,38 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  color: var(--white);
   background: transparent;
-  border: 3px var(--light-neutral) solid;
+  border: 3px var(--border-light) solid;
 }
 
 #easy {
-  color: var(--secondary);
+  color: var(--primary);
 }
 
 #medium {
-  color: var(--light-orange);
+  color: var(--accent-light-orange);
 }
 
 #hard {
-  color: var(--red);
+  color: var(--semantic-red);
 }
 
 .clicked {
   border: none;
 }
 #easy.clicked {
-  background-color: var(--secondary);
-  color: var(--white);
+  background-color: var(--primary);
+  color: var(--secondary-text);
 }
 
 #medium.clicked {
-  background-color: var(--light-orange);
-  color: var(--white);
+  background-color: var(--accent-light-orange);
+  color: var(--secondary-text);
 }
 
 #hard.clicked {
-  background-color: var(--red);
-  color: var(--white);
+  background-color: var(--semantic-red);
+  color: var(--secondary-text);
 }
 
 @media screen and (max-width: 840px){

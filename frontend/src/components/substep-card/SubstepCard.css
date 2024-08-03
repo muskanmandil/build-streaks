@@ -1,5 +1,5 @@
 .substep-card {
-  border: 1px var(--light-neutral) solid;
+  border: 1px var(--border-light) solid;
   padding: 0.5rem 1rem;
   border-radius: 4px;
 }
@@ -26,13 +26,13 @@
 
 .substep-heading span{
   font-weight: 700;
-  color: var(--accent);
+  color: var(--secondary);
 }
 
 .progress-bar-container{
   width: 35%;
   height: 1.5rem;
-  background: var(--light-neutral);
+  background: var(--border-light);
   border-radius: 1rem;
   position: relative;
   max-width: 400px;
@@ -43,7 +43,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: var(--accent);
+  background: var(--secondary);
   border-radius: 1rem;
   transition: width 0.3s ease;
 }
@@ -57,7 +57,7 @@
 }
 
 .half-substep-complete{
-   color: var(--white);
+  color: var(--secondary-text);
 }
 
 .toggle-btn {
