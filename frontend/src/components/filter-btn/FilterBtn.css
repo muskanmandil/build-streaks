@@ -13,7 +13,7 @@
 }
 
 #medium {
-  color: var(--accent-light-orange);
+  color: var(--semantic-orange);
 }
 
 #hard {
@@ -29,7 +29,7 @@
 }
 
 #medium.clicked {
-  background-color: var(--accent-light-orange);
+  background-color: var(--semantic-orange);
   color: var(--secondary-text);
 }
 

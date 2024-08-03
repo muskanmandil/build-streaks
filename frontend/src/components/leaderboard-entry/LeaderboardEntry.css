@@ -26,7 +26,7 @@
 }
 
 .leaderboard-streak {
-    color: var(--accent-dark-orange);
+    color: var(--streak-number);
 }
 
 .leaderboard-points img, .leaderboard-streak img {

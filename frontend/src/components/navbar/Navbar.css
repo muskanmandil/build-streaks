@@ -46,7 +46,7 @@
 .navbar-streak-number {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--accent-dark-orange);
+  color: var(--streak-number);
 }
 
 .navbar-points-number {
@@ -79,6 +79,11 @@
 .mobile-navbar,
 .mobile-navabar-expanded {
   display: none;
+}
+
+.burger-menu-logo {
+background-color: var(--branding);
+border-radius: 40%;
 }
 
 @media screen and (max-width: 1000px) {

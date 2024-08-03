@@ -1,44 +1,49 @@
 :root {
-  /* some color suggestions */
+  --primary: #58cc02; /* login/signup btns, easy level, points number, progress bar, completed question tick */
+  --secondary: #ff7396; /* substep-heading & progress bar, highlighing user, */
 
-  /* --background: #F6F5F2;
-  --background-2: #FAEED1; 
-  --primary-1: #65451f;
-  --dark-neutral-1: #52656d;
-  --dark-neutral-2: #37464f; */
-
-  /* #F4E06D
-    #FFFFDE
-    #C499BA */
-
-  /* #FF6868
-    #DCFFB7
-    #FFBB64
-    #FFEAA7 */
-
-  /* ----------------------------------------------------- */
-
-  --primary: #58cc02; /* easy level, points number, login/signup btns, progress bar, completed  */
-  --secondary: #ff7396; /* highlighing user, substep-heading & progress bar*/
-
-  --background: #fbf9f1; /* background */
+  --background: #fbf9f1; 
   --primary-text: #111009;
   --secondary-text: #f5f5f5;
-
-  --accent-dark-yellow: #ffd92e; /* streak-div*/
-  --accent-light-yellow: #fed84e; /* leaderboard background*/
-  --accent-light-orange: #ffa113; /* medium level */
-  --accent-dark-orange: #ff8a00; /* streak number*/
 
   --border-light: #e5e5e5; /* minimalistic border, to show emptiness*/
   --border-dark: #afafaf; /* dark border*/
 
-  --semantic-green: #8ffc49; /* completion contrast -light*/
-  --semantic-red: #ff4b4b; /* hard-level logout */
+  --semantic-green: #8ffc49; /* completion contrast - light*/
+  --semantic-red: #ff4b4b; /* hard-level, logout */
+  --semantic-orange: #ffa113; /* medium level */
 
   --branding: #76453b; /* headings, branding*/
 
-  --timeline: #c6ff67; /* timeline */
+  --streak-background: #ffd92e;
+  --streak-number: #ff8a00; 
+  --leaderboard: #fed84e; 
+  --timeline: #c6ff67;
+}
+
+:root.dark-mode {
+  --primary: #77d64e;
+  --secondary: #dc6385;
+
+  /* --background: #121212; */
+  --background: #1a1a1a;
+  --primary-text: #f5f5f5;
+  /* --secondary-text: #e0e0e0; */
+  --secondary-text: #eaeaea;
+
+  --border-light: #2e2e2e;
+  --border-dark: #444444;
+
+  --semantic-green: #37900e;
+  --semantic-red: #fa6060;
+  --semantic-orange: #eb9628;
+
+  --branding: #16dec0;
+
+  /* --streak-background: #ffce09; */
+  --streak-background: transparent;
+  --leaderboard: #0957a58f;
+  --timeline: #9faa90;  
 }
 
 * {
@@ -57,4 +62,8 @@
 body {
   background: var(--background);
   overflow-y: hidden;
+}
+
+.icon-path {
+  fill: var(--branding);
 }

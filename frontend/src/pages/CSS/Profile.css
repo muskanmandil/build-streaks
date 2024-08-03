@@ -15,6 +15,7 @@
   gap: 2rem;
 }
 .info-div h3 {
+  color: var(--branding);
   font-weight: 600;
 }
 

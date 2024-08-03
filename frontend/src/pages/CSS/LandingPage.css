@@ -14,7 +14,7 @@
   overflow: hidden;
   white-space: nowrap;
   animation: typing 5s steps(40, end) infinite;
-  border-right: 0.15rem solid var(--accent-light-orange);
+  border-right: 0.15rem solid var(--semantic-orange);
 }
 
 .introduction h3 {

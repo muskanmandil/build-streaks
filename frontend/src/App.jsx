@@ -13,6 +13,7 @@ import Loading from "./components/loading/Loading";
 
 const App = () => {
   const { loading } = useContext(AppContext);
+
   return loading ? (
     <Loading />
   ) : (
