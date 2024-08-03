@@ -47,8 +47,8 @@ const Navbar = () => {
       )}
 
       <div className="navbar-right">
-        {true ? ( //for testing purpose
-        // {localStorage.getItem("auth-token") ? (
+        {/* {true ? ( //for testing purpose */}
+        {localStorage.getItem("auth-token") ? (
           <>
             <div className="navbar-points">
               <img src={pointsxp} alt="" className="navbar-points-logo" />
