@@ -7,8 +7,8 @@ const getDefaultQuestionsData = () => {
   let questionsObj = {};
   for (let i = 0; i < 455; i++) {
     questionsObj[i] = {
-      completionStatus: 0,
-      revisionStatus: 0
+      completed: false,
+      revision: false
     }
   }
   return questionsObj;
@@ -18,7 +18,6 @@ export const ProgressProvider = ({ children }) => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [progressInfo, setProgressInfo] = useState({
     questionsData: getDefaultQuestionsData(),
-    totalQuestionsDone: 0,
     streak: "",
     points: "",
     lastActiveDate: "",
@@ -90,8 +89,7 @@ export const ProgressProvider = ({ children }) => {
     // update progress info locally
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], completionStatus: 1} },
-      totalQuestionsDone: prevProgressInfo.totalQuestionsDone + 1,
+      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], completed: true} },
       streak: newStreak,
       points: prevProgressInfo.points + pointsToAdd,
       lastActiveDate: currentDate,
@@ -107,7 +105,6 @@ export const ProgressProvider = ({ children }) => {
         },
         body: JSON.stringify({
           questionId: questionId,
-          totalQuestionsDone: progressInfo.totalQuestionsDone + 1,
           streak: newStreak,
           points: progressInfo.points + pointsToAdd,
           lastActiveDate: currentDate,
@@ -152,8 +149,7 @@ export const ProgressProvider = ({ children }) => {
     // Update progress info local state
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], completionStatus: 0} },
-      totalQuestionsDone: prevProgressInfo.totalQuestionsDone - 1,
+      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], completed: false} },
       points: prevProgressInfo.points - pointsToSubtract,
     }));
 
@@ -167,7 +163,6 @@ export const ProgressProvider = ({ children }) => {
         },
         body: JSON.stringify({
           questionId: questionId,
-          totalQuestionsDone: progressInfo.totalQuestionsDone - 1,
           points: progressInfo.points - pointsToSubtract,
         }),
       });
@@ -185,7 +180,7 @@ export const ProgressProvider = ({ children }) => {
     // update progress info locally
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], revisionStatus: 1} },
+      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], revision: true} },
     }));
 
     // send progress info to backend
@@ -215,7 +210,7 @@ export const ProgressProvider = ({ children }) => {
     // Update progress info local state
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId] : {...prevProgressInfo.questionsData[questionId], revisionStatus: 0 }},
+      questionsData: { ...prevProgressInfo.questionsData, [questionId] : {...prevProgressInfo.questionsData[questionId], revision: false}},
     }));
 
     // send updates progress info data to backend
@@ -240,40 +235,34 @@ export const ProgressProvider = ({ children }) => {
     }
   };
 
-  // filtering questions by levelthrough json file
-  const levelQuestions = (level) => {
-    if(level===""){
-      return 455;
-    }
-    let levelQuestions = 0;
-    all_steps.forEach((steps) => {
-      steps.all_substeps.forEach(substeps=>{
-        substeps.all_questions.forEach(questions=>{
-          if(questions.level === level){
-            levelQuestions++;
+  // filtering all questions
+  const filteredQuestions = (level, revision) => {
+    let filteredQuestions = 0;
+    all_steps.forEach((step) => {
+      step.all_substeps.forEach(substep=>{
+        substep.all_questions.forEach(question=>{
+          if((revision ? progressInfo.questionsData[question.id].revision : true) && (level==="" || question.level === level)){
+            filteredQuestions++;
           }
         })
       })
     });
-    return levelQuestions;
+    return filteredQuestions;
   };
 
-  // filtering questions done by level through progress info
-  const levelQuestionsDone = (level) => {
-    if(level===""){
-      return progressInfo.totalQuestionsDone;
-    }
-    let levelQuestionsDone = 0;
-    all_steps.forEach((steps) => {
-      steps.all_substeps.forEach(substeps=>{
-        substeps.all_questions.forEach(questions=>{
-          if(questions.level === level && progressInfo.questionsData[questions.id].completionStatus===1){
-            levelQuestionsDone++;
+  // filtering questions done 
+  const filteredQuestionsDone = (level,revision) => {
+    let filteredQuestionsDone = 0;
+    all_steps.forEach((step) => {
+      step.all_substeps.forEach(substep=>{
+        substep.all_questions.forEach(question=>{
+          if((revision ? progressInfo.questionsData[question.id].revision : true) && (level==="" ||question.level === level) && progressInfo.questionsData[question.id].completed){
+            filteredQuestionsDone++;
           }
         })
       })
     });
-    return levelQuestionsDone;
+    return filteredQuestionsDone;
   };
 
   return (
@@ -281,8 +270,8 @@ export const ProgressProvider = ({ children }) => {
       value={{
         progressInfo,
         fetchProgressInfo,
-        levelQuestions,
-        levelQuestionsDone,
+        filteredQuestions,
+        filteredQuestionsDone,
         markQuestionDone,
         markQuestionUndone,
         addToRevision,

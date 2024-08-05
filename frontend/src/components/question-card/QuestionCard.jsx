@@ -11,7 +11,7 @@ import tuf_circle from "../../assets/tuf_circle.svg";
 import { AppContext } from "../../context/AppContext";
 
 const QuestionCard = (props) => {
-  const { filter } = useContext(AppContext);
+  const { filter, revision } = useContext(AppContext);
   const {
     progressInfo,
     markQuestionDone,
@@ -25,7 +25,7 @@ const QuestionCard = (props) => {
 
   // handling question done state on frontend
   const handleDone = async (questionId, questionLevel) => {
-    if (progressInfo.questionsData[questionId].completionStatus === 1) {
+    if (progressInfo.questionsData[questionId].completed) {
       markQuestionUndone(questionId, questionLevel);
     } else {
       markQuestionDone(questionId, questionLevel);
@@ -33,7 +33,7 @@ const QuestionCard = (props) => {
   };
 
   const handleRevision = async (questionId) => {
-    if (progressInfo.questionsData[questionId].revisionStatus === 1) {
+    if (progressInfo.questionsData[questionId].revision) {
       removeFromRevision(questionId);
     } else {
       addToRevision(questionId);
@@ -48,17 +48,17 @@ const QuestionCard = (props) => {
 
   return (
     // filter check
-    (filter === props.level || filter === "") && (
+    (revision ? progressInfo.questionsData[props.id].revision : true) && (filter === props.level || filter === "") && (
       <div
         className={`question-card ${
-          progressInfo.questionsData[props.id].completionStatus === 1 &&
+          progressInfo.questionsData[props.id].completed &&
           "question-completed"
         }`}
       >
         {/*tick button  */}
         <div
           className={`check-btn ${
-            progressInfo.questionsData[props.id].completionStatus === 1 &&
+            progressInfo.questionsData[props.id].completed &&
             "completed"
           }`}
           onClick={() => handleDone(props.id, props.level)}
@@ -121,7 +121,7 @@ const QuestionCard = (props) => {
         {/*add to revision button  */}
         <div
           className={`revision-btn ${
-            progressInfo.questionsData[props.id].revisionStatus === 1 &&
+            progressInfo.questionsData[props.id].revision &&
             "revision"
           }`}
           onClick={() => handleRevision(props.id)}

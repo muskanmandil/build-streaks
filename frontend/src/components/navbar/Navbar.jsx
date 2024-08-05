@@ -13,14 +13,19 @@ import burger_menu from "../../assets/burger_menu.svg";
 import PrimaryBtn from "../primary-btn/PrimaryBtn";
 
 const Navbar = () => {
-  const { filter, fetchLeaderboard } = useContext(AppContext);
-  const { progressInfo, fetchProgressInfo, levelQuestions, levelQuestionsDone } = useContext(ProgressContext);
+  const { filter, fetchLeaderboard, revision } = useContext(AppContext);
+  const {
+    progressInfo,
+    fetchProgressInfo,
+    filteredQuestions,
+    filteredQuestionsDone,
+  } = useContext(ProgressContext);
   const [mobileMenu, setMobileMenu] = useState(false);
 
   // fetching progress info as progress info changes explicitly here to avoid that done then undone and then done state management issue of questions
-  useEffect(()=>{
+  useEffect(() => {
     fetchProgressInfo();
-  },[fetchProgressInfo, progressInfo]);
+  }, [fetchProgressInfo, progressInfo]);
 
   // fetching this date to update the streak
   let today = new Date(Date.now())
@@ -42,13 +47,18 @@ const Navbar = () => {
       {localStorage.getItem("auth-token") && (
         <div className="total-progress-container">
           <p className="total-progress-percentage">
-            {Math.floor(
-              (levelQuestionsDone(filter) / levelQuestions(filter)) * 100
-            )}
+            {filteredQuestions(filter, revision) === 0
+              ? "0"
+              : Math.floor(
+                  (filteredQuestionsDone(filter, revision) /
+                    filteredQuestions(filter, revision)) *
+                    100
+                )}
             % completed
           </p>
           <p className="total-progress">
-            {levelQuestionsDone(filter)} / {levelQuestions(filter)}
+            {filteredQuestionsDone(filter, revision)} /{" "}
+            {filteredQuestions(filter, revision)}
           </p>
         </div>
       )}
@@ -81,7 +91,11 @@ const Navbar = () => {
               </div>
             </Link>
 
-            <Link to="/leaderboard" className="navbar-leaderboard" onClick={fetchLeaderboard}>
+            <Link
+              to="/leaderboard"
+              className="navbar-leaderboard"
+              onClick={fetchLeaderboard}
+            >
               <img src={leaderboard} alt="" />
             </Link>
 
@@ -93,7 +107,6 @@ const Navbar = () => {
             {mobileMenu ? (
               // open state
               <div className="mobile-navbar-expanded">
-
                 {/* burger menu icon */}
                 <div
                   className="burger-menu"
@@ -104,20 +117,22 @@ const Navbar = () => {
 
                 {/* mobile menu popup */}
                 <div className="mobile-navbar-popup">
-
                   {/* progress-view */}
                   {localStorage.getItem("auth-token") && (
                     <div className="total-progress-container mobile-total-progress-container">
                       <p className="total-progress-percentage">
-                        {Math.floor(
-                          (levelQuestionsDone(filter) /
-                            levelQuestions(filter)) *
-                            100
-                        )}
+                        {filteredQuestions(filter, revision) === 0
+                          ? "0"
+                          : Math.floor(
+                              (filteredQuestionsDone(filter, revision) /
+                                filteredQuestions(filter, revision)) *
+                                100
+                            )}
                         % completed
                       </p>
                       <p className="total-progress">
-                        {levelQuestionsDone(filter)} / {levelQuestions(filter)}
+                        {filteredQuestionsDone(filter, revision)} /{" "}
+                        {filteredQuestions(filter, revision)}
                       </p>
                     </div>
                   )}
@@ -125,7 +140,10 @@ const Navbar = () => {
                   <Link
                     to="/leaderboard"
                     className="navbar-leaderboard mobile-navbar-leaderboard"
-                    onClick={() => {fetchLeaderboard(); setMobileMenu(false);}}
+                    onClick={() => {
+                      fetchLeaderboard();
+                      setMobileMenu(false);
+                    }}
                   >
                     <img src={leaderboard} alt="" />
                     <p>Leaderboard</p>
@@ -154,9 +172,9 @@ const Navbar = () => {
             )}
           </>
         ) : (
-          // login btn 
+          // login btn
           <Link to="/login">
-            <PrimaryBtn className="login-btn" text="Login"/>
+            <PrimaryBtn className="login-btn" text="Login" />
           </Link>
         )}
       </div>

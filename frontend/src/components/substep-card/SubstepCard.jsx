@@ -7,7 +7,7 @@ import { ProgressContext } from "../../context/ProgressContext";
 import { AppContext } from "../../context/AppContext";
 
 const SubstepCard = (props) => {
-  const {filter} = useContext(AppContext);
+  const {filter, revision} = useContext(AppContext);
   const { progressInfo } = useContext(ProgressContext);
   const [isOpen, setIsOpen] = useState(false);
   const [questionsDoneInSubstep, setQuestionsDoneInSubstep] = useState(0);
@@ -16,12 +16,12 @@ const SubstepCard = (props) => {
   const updateQuestionsDoneInSubstep = useCallback(() => {
     let count = 0;
     props.all_questions.forEach((question) => {
-      if (progressInfo.questionsData[question.id].completionStatus === 1 && (question.level===filter || filter==="")) {
+      if ((revision ? progressInfo.questionsData[question.id].revision : true) && progressInfo.questionsData[question.id].completed && (question.level===filter || filter==="")) {
         count++;
       }
     });
     setQuestionsDoneInSubstep(count);
-  },[props.all_questions, progressInfo.questionsData, filter])
+  },[props.all_questions, progressInfo.questionsData, filter,revision])
 
   // to keep rendering updated questions done in substep
   useEffect(() => {
@@ -32,7 +32,7 @@ const SubstepCard = (props) => {
   const filteredQuestionsInSubstep = () => {
     let length=0;
     props.all_questions.forEach(question => {
-      if(filter==="" || question.level===filter){
+      if((revision ? progressInfo.questionsData[question.id].revision : true) && (filter==="" || question.level===filter)){
         length++;
       }
     })

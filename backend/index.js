@@ -7,7 +7,7 @@ const cors = require("cors");
 require('dotenv').config();
 const dbPassword = process.env.DB_PASSWORD;
 const dbUser = "muskanmandil";
-const dbName = "test";
+const dbName = "deploy";
 
 // Declaring the port
 const port = 4000;
@@ -31,7 +31,6 @@ const Users = mongoose.model("Users", {
     email: { type: String, unique: true },
     password: String,
     questionsData: Object,
-    totalQuestionsDone: Number,
     streak: Number,
     points: Number,
     lastActiveDate: String,
@@ -53,8 +52,8 @@ app.post('/signup', async (req, res) => {
         let questionsObj = {};
         for (let i = 0; i < 455; i++) {
             questionsObj[i] = {
-                completionStatus: 0,
-                revisionStatus: 0
+                completed: false,
+                revision: false
             };
         }
 
@@ -64,7 +63,6 @@ app.post('/signup', async (req, res) => {
             email: req.body.email,
             password: req.body.password,
             questionsData: questionsObj,
-            totalQuestionsDone: 0,
             streak: 0,
             points: 0,
             lastActiveDate: new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-')
@@ -194,7 +192,6 @@ app.post('/progressinfo', fetchUser, async (req, res) => {
     await Users.findOneAndUpdate({ _id: req.user.id }, { streak: user.streak });
     res.status(200).json({
         questionsData: user.questionsData,
-        totalQuestionsDone: user.totalQuestionsDone,
         streak: user.streak,
         points: user.points,
         lastActiveDate: user.lastActiveDate
@@ -208,16 +205,15 @@ app.post('/questiondone', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     // update the questions data
-    user.questionsData[req.body.questionId].completionStatus = 1;
+    user.questionsData[req.body.questionId].completed = true;
 
     // Use the values calculated on the frontend
-    user.totalQuestionsDone = req.body.totalQuestionsDone;
     user.streak = req.body.streak;
     user.points = req.body.points;
     user.lastActiveDate = req.body.lastActiveDate;
 
     // save updated information
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, totalQuestionsDone: user.totalQuestionsDone, points: user.points, streak: user.streak, lastActiveDate: user.lastActiveDate });
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points, streak: user.streak, lastActiveDate: user.lastActiveDate });
 
     // response
     res.status(200).json({ message: "Question mark as completed" });
@@ -230,14 +226,13 @@ app.post('/questionundo', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     // update the questions data
-    user.questionsData[req.body.questionId].completionStatus = 0;
+    user.questionsData[req.body.questionId].completed = false;
 
     // Use the points calculated on the frontend
-    user.totalQuestionsDone = req.body.totalQuestionsDone;
     user.points = req.body.points;
 
     // save updated information
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, totalQuestionsDone: user.totalQuestionsDone, points: user.points });
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points });
 
     // response
     res.status(200).json({ message: "Question mark as uncompleted" });
@@ -250,7 +245,7 @@ app.post('/addToRevision', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     // update the questions data
-    user.questionsData[req.body.questionId].revisionStatus = 1;
+    user.questionsData[req.body.questionId].revision = true;
 
     // save updated information
     await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData});
@@ -266,7 +261,7 @@ app.post('/removeFromRevision', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     // update the questions data
-    user.questionsData[req.body.questionId].revisionStatus = 0;
+    user.questionsData[req.body.questionId].revision = false;
 
     // save updated information
     await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData});

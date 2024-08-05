@@ -7,7 +7,7 @@ import { ProgressContext } from "../../context/ProgressContext";
 import { AppContext } from "../../context/AppContext";
 
 const StepCard = (props) => {
-  const { filter } = useContext(AppContext);
+  const { filter, revision } = useContext(AppContext);
   const { progressInfo } = useContext(ProgressContext);
   const [isOpen, setIsOpen] = useState(true);
   const [questionsDoneInStep, setQuestionsDoneInStep] = useState(0);
@@ -17,13 +17,13 @@ const StepCard = (props) => {
     let count = 0;
     props.all_substeps.forEach((substep) => {
       substep.all_questions.forEach((question) => {
-        if (progressInfo.questionsData[question.id].completionStatus === 1 && (question.level === filter || filter === "")) {
+        if ((revision ? progressInfo.questionsData[question.id].revision: true) && progressInfo.questionsData[question.id].completed && (question.level === filter || filter === "")) {
           count++;
         }
       });
     });
     setQuestionsDoneInStep(count);
-  }, [props.all_substeps, progressInfo.questionsData, filter]);
+  }, [props.all_substeps, progressInfo.questionsData, filter, revision]);
 
   // to keep updating questions done of each step
   useEffect(() => {
@@ -35,7 +35,7 @@ const StepCard = (props) => {
     let length = 0;
     props.all_substeps.forEach((substep) => {
       substep.all_questions.forEach((question) => {
-        if (filter === "" || question.level === filter) {
+        if ((revision ? progressInfo.questionsData[question.id].revision : true) && (filter === "" || question.level === filter)) {
           length++;
         }
       });
@@ -44,7 +44,7 @@ const StepCard = (props) => {
   };
 
   // progress variable
-  const progress = (questionsDoneInStep / filteredQuestionsInStep()) * 100;
+  const progress = filteredQuestionsInStep()===0 ? 0 : (questionsDoneInStep / filteredQuestionsInStep()) * 100;
 
   return (
     <div className="step-card">
@@ -102,7 +102,7 @@ const StepCard = (props) => {
             })}
           </div>
         ) : (
-          <p className="substeps-list">No questions at this level</p>
+          <p className="substeps-list">No questions found</p>
         )
       ) : null}
     </div>
