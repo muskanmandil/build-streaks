@@ -63,7 +63,3 @@ body {
   background: var(--background);
   overflow-y: hidden;
 }
-
-.icon-path {
-  fill: var(--branding);
-}

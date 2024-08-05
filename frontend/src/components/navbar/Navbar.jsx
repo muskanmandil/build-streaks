@@ -42,7 +42,7 @@ const Navbar = () => {
       {localStorage.getItem("auth-token") && (
         <div className="total-progress-container">
           <p className="total-progress-percentage">
-            {Math.ceil(
+            {Math.floor(
               (levelQuestionsDone(filter) / levelQuestions(filter)) * 100
             )}
             % completed
@@ -109,7 +109,7 @@ const Navbar = () => {
                   {localStorage.getItem("auth-token") && (
                     <div className="total-progress-container mobile-total-progress-container">
                       <p className="total-progress-percentage">
-                        {Math.ceil(
+                        {Math.floor(
                           (levelQuestionsDone(filter) /
                             levelQuestions(filter)) *
                             100

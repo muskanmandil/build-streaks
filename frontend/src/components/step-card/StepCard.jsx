@@ -17,10 +17,7 @@ const StepCard = (props) => {
     let count = 0;
     props.all_substeps.forEach((substep) => {
       substep.all_questions.forEach((question) => {
-        if (
-          progressInfo.questionsData[question.id] === 1 &&
-          (question.level === filter || filter === "")
-        ) {
+        if (progressInfo.questionsData[question.id].completionStatus === 1 && (question.level === filter || filter === "")) {
           count++;
         }
       });

@@ -6,6 +6,8 @@ const cors = require("cors");
 
 require('dotenv').config();
 const dbPassword = process.env.DB_PASSWORD;
+const dbUser = "muskanmandil";
+const dbName = "test";
 
 // Declaring the port
 const port = 4000;
@@ -21,39 +23,19 @@ app.get('/', (req, res) => {
 })
 
 // Connecting with database
-mongoose.connect(`mongodb+srv://muskanmandil:${dbPassword}@cluster0.uajhxxn.mongodb.net/deploy?retryWrites=true&w=majority&appName=Cluster0s`);
+mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@cluster0.uajhxxn.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster0s`);
 
 // Creating Users Schema
 const Users = mongoose.model("Users", {
-    name: {
-        type: String
-    },
-    email: {
-        type: String,
-        unique: true
-    },
-    password: {
-        type: String,
-    },
-    questionsData: {
-        type: Object
-    },
-    totalQuestionsDone: {
-        type: Number
-    },
-    streak: {
-        type: Number
-    },
-    points: {
-        type: Number
-    },
-    lastActiveDate: {
-        type: String
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    name: String,
+    email: { type: String, unique: true },
+    password: String,
+    questionsData: Object,
+    totalQuestionsDone: Number,
+    streak: Number,
+    points: Number,
+    lastActiveDate: String,
+    date: Date
 })
 
 // Signup API
@@ -70,7 +52,10 @@ app.post('/signup', async (req, res) => {
         // if not then making a default questionsObj for questionsData for the user on signup
         let questionsObj = {};
         for (let i = 0; i < 455; i++) {
-            questionsObj[i] = 0;
+            questionsObj[i] = {
+                completionStatus: 0,
+                revisionStatus: 0
+            };
         }
 
         // creating a new user
@@ -223,7 +208,7 @@ app.post('/questiondone', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     // update the questions data
-    user.questionsData[req.body.questionId] = 1;
+    user.questionsData[req.body.questionId].completionStatus = 1;
 
     // Use the values calculated on the frontend
     user.totalQuestionsDone = req.body.totalQuestionsDone;
@@ -245,7 +230,7 @@ app.post('/questionundo', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     // update the questions data
-    user.questionsData[req.body.questionId] = 0;
+    user.questionsData[req.body.questionId].completionStatus = 0;
 
     // Use the points calculated on the frontend
     user.totalQuestionsDone = req.body.totalQuestionsDone;
@@ -256,6 +241,38 @@ app.post('/questionundo', fetchUser, async (req, res) => {
 
     // response
     res.status(200).json({ message: "Question mark as uncompleted" });
+});
+
+//  add Question to revision API
+app.post('/addToRevision', fetchUser, async (req, res) => {
+
+    // find the user
+    let user = await Users.findOne({ _id: req.user.id });
+
+    // update the questions data
+    user.questionsData[req.body.questionId].revisionStatus = 1;
+
+    // save updated information
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData});
+
+    // response
+    res.status(200).json({ message: "Question added to revision" });
+});
+
+// remove Question from revision API
+app.post('/removeFromRevision', fetchUser, async (req, res) => {
+
+    // find the user
+    let user = await Users.findOne({ _id: req.user.id });
+
+    // update the questions data
+    user.questionsData[req.body.questionId].revisionStatus = 0;
+
+    // save updated information
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData});
+
+    // response
+    res.status(200).json({ message: "Question removed from revision" });
 });
 
 // Leaderboard API

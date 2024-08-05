@@ -111,6 +111,9 @@ border-radius: 40%;
     background: var(--background);
     z-index: 2;
   }
+  .mobile-total-progress-container {
+    display: none;
+  }
   .mobile-navbar-leaderboard,
   .mobile-navbar-profile {
     display: flex;

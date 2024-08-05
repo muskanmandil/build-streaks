@@ -12,17 +12,31 @@ import { AppContext } from "../../context/AppContext";
 
 const QuestionCard = (props) => {
   const { filter } = useContext(AppContext);
-  const { progressInfo, markQuestionDone, markQuestionUndone } = useContext(ProgressContext);
-  
+  const {
+    progressInfo,
+    markQuestionDone,
+    markQuestionUndone,
+    addToRevision,
+    removeFromRevision,
+  } = useContext(ProgressContext);
+
   // to render the updated question card again
   useEffect(() => {}, [props.id, progressInfo]);
 
   // handling question done state on frontend
   const handleDone = async (questionId, questionLevel) => {
-    if (progressInfo.questionsData[questionId] === 1) {
+    if (progressInfo.questionsData[questionId].completionStatus === 1) {
       markQuestionUndone(questionId, questionLevel);
     } else {
       markQuestionDone(questionId, questionLevel);
+    }
+  };
+
+  const handleRevision = async (questionId) => {
+    if (progressInfo.questionsData[questionId].revisionStatus === 1) {
+      removeFromRevision(questionId);
+    } else {
+      addToRevision(questionId);
     }
   };
 
@@ -37,15 +51,15 @@ const QuestionCard = (props) => {
     (filter === props.level || filter === "") && (
       <div
         className={`question-card ${
-          progressInfo.questionsData[props.id] === 1
-            ? "question-completed"
-            : null
+          progressInfo.questionsData[props.id].completionStatus === 1 &&
+          "question-completed"
         }`}
       >
-         {/*tick button  */}
+        {/*tick button  */}
         <div
           className={`check-btn ${
-            progressInfo.questionsData[props.id] === 1 ? "completed" : null
+            progressInfo.questionsData[props.id].completionStatus === 1 &&
+            "completed"
           }`}
           onClick={() => handleDone(props.id, props.level)}
         ></div>
@@ -103,6 +117,15 @@ const QuestionCard = (props) => {
         >
           <img src={props.articlelink !== "" ? tuf_circle : null} alt="" />
         </a>
+
+        {/*add to revision button  */}
+        <div
+          className={`revision-btn ${
+            progressInfo.questionsData[props.id].revisionStatus === 1 &&
+            "revision"
+          }`}
+          onClick={() => handleRevision(props.id)}
+        ></div>
       </div>
     )
   );

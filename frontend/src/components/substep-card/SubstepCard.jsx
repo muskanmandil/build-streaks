@@ -16,7 +16,7 @@ const SubstepCard = (props) => {
   const updateQuestionsDoneInSubstep = useCallback(() => {
     let count = 0;
     props.all_questions.forEach((question) => {
-      if (progressInfo.questionsData[question.id] === 1 && (question.level===filter || filter==="")) {
+      if (progressInfo.questionsData[question.id].completionStatus === 1 && (question.level===filter || filter==="")) {
         count++;
       }
     });

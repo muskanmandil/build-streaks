@@ -6,7 +6,10 @@ export const ProgressContext = createContext();
 const getDefaultQuestionsData = () => {
   let questionsObj = {};
   for (let i = 0; i < 455; i++) {
-    questionsObj[i] = 0;
+    questionsObj[i] = {
+      completionStatus: 0,
+      revisionStatus: 0
+    }
   }
   return questionsObj;
 };
@@ -87,7 +90,7 @@ export const ProgressProvider = ({ children }) => {
     // update progress info locally
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId]: 1 },
+      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], completionStatus: 1} },
       totalQuestionsDone: prevProgressInfo.totalQuestionsDone + 1,
       streak: newStreak,
       points: prevProgressInfo.points + pointsToAdd,
@@ -149,7 +152,7 @@ export const ProgressProvider = ({ children }) => {
     // Update progress info local state
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId]: 0 },
+      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], completionStatus: 0} },
       totalQuestionsDone: prevProgressInfo.totalQuestionsDone - 1,
       points: prevProgressInfo.points - pointsToSubtract,
     }));
@@ -175,6 +178,65 @@ export const ProgressProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error marking question as undone:", error);
+    }
+  };
+
+  const addToRevision = async (questionId) => {
+    // update progress info locally
+    setProgressInfo((prevProgressInfo) => ({
+      ...prevProgressInfo,
+      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], revisionStatus: 1} },
+    }));
+
+    // send progress info to backend
+    try {
+      const res = await fetch(`${backendUrl}/addToRevision`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+        },
+        body: JSON.stringify({
+          questionId: questionId,
+        }),
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error adding question to revision:", error);
+    }
+  };
+
+  const removeFromRevision = async (questionId) => {
+
+    // Update progress info local state
+    setProgressInfo((prevProgressInfo) => ({
+      ...prevProgressInfo,
+      questionsData: { ...prevProgressInfo.questionsData, [questionId] : {...prevProgressInfo.questionsData[questionId], revisionStatus: 0 }},
+    }));
+
+    // send updates progress info data to backend
+    try {
+      const res = await fetch(`${backendUrl}/removeFromRevision`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+        },
+        body: JSON.stringify({
+          questionId: questionId,
+        }),
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error while removing question form revision:", error);
     }
   };
 
@@ -205,7 +267,7 @@ export const ProgressProvider = ({ children }) => {
     all_steps.forEach((steps) => {
       steps.all_substeps.forEach(substeps=>{
         substeps.all_questions.forEach(questions=>{
-          if(questions.level === level && progressInfo.questionsData[questions.id]===1){
+          if(questions.level === level && progressInfo.questionsData[questions.id].completionStatus===1){
             levelQuestionsDone++;
           }
         })
@@ -223,6 +285,8 @@ export const ProgressProvider = ({ children }) => {
         levelQuestionsDone,
         markQuestionDone,
         markQuestionUndone,
+        addToRevision,
+        removeFromRevision,
       }}
     >
       {children}
