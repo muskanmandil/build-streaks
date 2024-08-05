@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 // Connecting with database
-mongoose.connect(`mongodb+srv://muskanmandil:${dbPassword}@cluster0.uajhxxn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0s`);
+mongoose.connect(`mongodb+srv://muskanmandil:${dbPassword}@cluster0.uajhxxn.mongodb.net/deploy?retryWrites=true&w=majority&appName=Cluster0s`);
 
 // Creating Users Schema
 const Users = mongoose.model("Users", {
