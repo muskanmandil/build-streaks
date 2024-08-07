@@ -8,7 +8,7 @@ require('dotenv').config();
 // Database variables
 const dbPassword = process.env.DB_PASSWORD;
 const dbUser = "muskanmandil";
-const dbName = "test";
+const dbName = "deploy";
 
 // Declaring the port
 const port = 4000;

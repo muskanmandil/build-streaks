@@ -2,27 +2,28 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 
 const dbPassword = process.env.DB_PASSWORD;
+const dbName = "deploy";
 
-// Connection URL for test database
-const dbUriTest = `mongodb+srv://muskanmandil:${dbPassword}@cluster0.uajhxxn.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0s`;
+// Connection URL for database
+const dbUri = `mongodb+srv://muskanmandil:${dbPassword}@cluster0.uajhxxn.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster0s`;
 
 // Function to update
-async function updateQuestionData() {
+async function updateDatabase() {
     try {
 
-        // Connect to the database (Test)
-        await mongoose.connect(dbUriTest);
-        console.log("Connected to test database");
+        // Connect to the database
+        await mongoose.connect(dbUri);
+        console.log("Connected to database");
 
         // Get the 'users' collection
         const usersCollection = mongoose.connection.db.collection('users');
 
         // Find all documents in the collection
         const users = await usersCollection.find({}).toArray();
-        console.log(`Fetched ${users.length} documents from test database`);
+        console.log(`Fetched ${users.length} documents from database`);
 
 
-        // Iterate through each user and update the questionData
+        // Iterate through each user and update the schema
         await Promise.all(users.map(async (user) => {
 
             const updatedQuestionsData = {};
@@ -30,8 +31,12 @@ async function updateQuestionData() {
             // Convert current questionData structure
             Object.keys(user.questionsData).forEach(key => {
                 updatedQuestionsData[key] = {
-                    completionStatus: user.questionsData[key],
-                    revisionStatus: 0,
+                    completed: user.questionsData[key].completed,
+                    revision: user.questionsData[key].revision,
+                    note: {
+                        status: false,
+                        content: ""
+                    }
                 };
             });
 
@@ -41,19 +46,17 @@ async function updateQuestionData() {
                 { $set: { questionsData: updatedQuestionsData } }
             );
 
-
         }));
 
         console.log("All users' questionData updated successfully.");
     } catch (err) {
-        console.error("Error updating questionData:", err);
+
+        console.error("Error while updating:", err);
     } finally {
+
         mongoose.connection.close();
         console.log("Connection closed.");
     }
 }
 
-// Execute the function to update questionData
-updateQuestionData();
-
-
+updateDatabase();
