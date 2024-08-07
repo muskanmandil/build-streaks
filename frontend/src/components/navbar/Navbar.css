@@ -60,7 +60,6 @@
   padding: 0.5rem 1rem;
 }
 
-
 .total-progress-container {
   display: flex;
   gap: 2rem;
@@ -82,8 +81,8 @@
 }
 
 .burger-menu-logo {
-background-color: var(--branding);
-border-radius: 40%;
+  background-color: var(--branding);
+  border-radius: 40%;
 }
 
 @media screen and (max-width: 1000px) {
@@ -157,10 +156,10 @@ border-radius: 40%;
   .mobile-navbar-popup {
     right: 1.25rem;
   }
-  .total-progress-container{
+  .total-progress-container {
     display: none;
   }
-  .mobile-total-progress-container{
+  .mobile-total-progress-container {
     display: flex;
     flex-direction: column;
     text-align: center;

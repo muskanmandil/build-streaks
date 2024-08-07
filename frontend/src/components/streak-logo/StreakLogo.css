@@ -31,13 +31,13 @@
 
 @keyframes pulse {
   0% {
-    transform: scale(1); 
+    transform: scale(1);
   }
   50% {
-    transform: scale(1.05); 
+    transform: scale(1.05);
   }
   100% {
-    transform: scale(1); 
+    transform: scale(1);
   }
 }
 
@@ -50,24 +50,23 @@
   }
 }
 
-@media screen and (max-width: 600px){
-
+@media screen and (max-width: 600px) {
   .streak-logo-container {
     transform: translate(-50%, -25%);
   }
-  .streak-logo{
+  .streak-logo {
     width: 12vw;
   }
 }
 
-@media screen and (max-width: 500px){
-  .streak-logo{
+@media screen and (max-width: 500px) {
+  .streak-logo {
     width: 14vw;
   }
 }
 
-@media screen and (max-width: 420px){
-  .streak-logo{
+@media screen and (max-width: 420px) {
+  .streak-logo {
     width: 16vw;
   }
 }

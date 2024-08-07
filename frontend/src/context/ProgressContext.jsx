@@ -8,8 +8,12 @@ const getDefaultQuestionsData = () => {
   for (let i = 0; i < 455; i++) {
     questionsObj[i] = {
       completed: false,
-      revision: false
-    }
+      revision: false,
+      note: {
+        status: false,
+        content: "",
+      },
+    };
   }
   return questionsObj;
 };
@@ -54,7 +58,7 @@ export const ProgressProvider = ({ children }) => {
   // to fetch the progress info on the first-render of the app
   useEffect(() => {
     fetchProgressInfo();
-  },[fetchProgressInfo]);
+  }, [fetchProgressInfo]);
 
   const markQuestionDone = async (questionId, questionLevel) => {
     // Update points
@@ -89,7 +93,13 @@ export const ProgressProvider = ({ children }) => {
     // update progress info locally
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], completed: true} },
+      questionsData: {
+        ...prevProgressInfo.questionsData,
+        [questionId]: {
+          ...prevProgressInfo.questionsData[questionId],
+          completed: true,
+        },
+      },
       streak: newStreak,
       points: prevProgressInfo.points + pointsToAdd,
       lastActiveDate: currentDate,
@@ -149,7 +159,13 @@ export const ProgressProvider = ({ children }) => {
     // Update progress info local state
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], completed: false} },
+      questionsData: {
+        ...prevProgressInfo.questionsData,
+        [questionId]: {
+          ...prevProgressInfo.questionsData[questionId],
+          completed: false,
+        },
+      },
       points: prevProgressInfo.points - pointsToSubtract,
     }));
 
@@ -180,7 +196,13 @@ export const ProgressProvider = ({ children }) => {
     // update progress info locally
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId]: {...prevProgressInfo.questionsData[questionId], revision: true} },
+      questionsData: {
+        ...prevProgressInfo.questionsData,
+        [questionId]: {
+          ...prevProgressInfo.questionsData[questionId],
+          revision: true,
+        },
+      },
     }));
 
     // send progress info to backend
@@ -206,11 +228,16 @@ export const ProgressProvider = ({ children }) => {
   };
 
   const removeFromRevision = async (questionId) => {
-
     // Update progress info local state
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
-      questionsData: { ...prevProgressInfo.questionsData, [questionId] : {...prevProgressInfo.questionsData[questionId], revision: false}},
+      questionsData: {
+        ...prevProgressInfo.questionsData,
+        [questionId]: {
+          ...prevProgressInfo.questionsData[questionId],
+          revision: false,
+        },
+      },
     }));
 
     // send updates progress info data to backend
@@ -235,32 +262,118 @@ export const ProgressProvider = ({ children }) => {
     }
   };
 
+  const addNote = async (questionId, content) => {
+    if (content === null) {
+      return;
+    }
+
+    // update progress info locally
+    setProgressInfo((prevProgressInfo) => ({
+      ...prevProgressInfo,
+      questionsData: {
+        ...prevProgressInfo.questionsData,
+        [questionId]: {
+          ...prevProgressInfo.questionsData[questionId],
+          note: { status: true, content: content },
+        },
+      },
+    }));
+
+    // send progress info to backend
+    try {
+      const res = await fetch(`${backendUrl}/addNote`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+        },
+        body: JSON.stringify({
+          questionId: questionId,
+          content: content,
+        }),
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error adding note:", error);
+    }
+  };
+
+  const deleteNote = async (questionId) => {
+    // Update progress info local state
+    setProgressInfo((prevProgressInfo) => ({
+      ...prevProgressInfo,
+      questionsData: {
+        ...prevProgressInfo.questionsData,
+        [questionId]: {
+          ...prevProgressInfo.questionsData[questionId],
+          note: { status: false, content: "" },
+        },
+      },
+    }));
+
+    // send updates progress info data to backend
+    try {
+      const res = await fetch(`${backendUrl}/deleteNote`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+        },
+        body: JSON.stringify({
+          questionId: questionId,
+        }),
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.error("Error while removing note from question:", error);
+    }
+  };
+
   // filtering all questions
   const filteredQuestions = (level, revision) => {
     let filteredQuestions = 0;
     all_steps.forEach((step) => {
-      step.all_substeps.forEach(substep=>{
-        substep.all_questions.forEach(question=>{
-          if((revision ? progressInfo.questionsData[question.id].revision : true) && (level==="" || question.level === level)){
+      step.all_substeps.forEach((substep) => {
+        substep.all_questions.forEach((question) => {
+          if (
+            (revision
+              ? progressInfo.questionsData[question.id].revision
+              : true) &&
+            (level === "" || question.level === level)
+          ) {
             filteredQuestions++;
           }
-        })
-      })
+        });
+      });
     });
     return filteredQuestions;
   };
 
-  // filtering questions done 
-  const filteredQuestionsDone = (level,revision) => {
+  // filtering questions done
+  const filteredQuestionsDone = (level, revision) => {
     let filteredQuestionsDone = 0;
     all_steps.forEach((step) => {
-      step.all_substeps.forEach(substep=>{
-        substep.all_questions.forEach(question=>{
-          if((revision ? progressInfo.questionsData[question.id].revision : true) && (level==="" ||question.level === level) && progressInfo.questionsData[question.id].completed){
+      step.all_substeps.forEach((substep) => {
+        substep.all_questions.forEach((question) => {
+          if (
+            (revision
+              ? progressInfo.questionsData[question.id].revision
+              : true) &&
+            (level === "" || question.level === level) &&
+            progressInfo.questionsData[question.id].completed
+          ) {
             filteredQuestionsDone++;
           }
-        })
-      })
+        });
+      });
     });
     return filteredQuestionsDone;
   };
@@ -276,6 +389,8 @@ export const ProgressProvider = ({ children }) => {
         markQuestionUndone,
         addToRevision,
         removeFromRevision,
+        addNote,
+        deleteNote,
       }}
     >
       {children}

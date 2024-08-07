@@ -17,7 +17,7 @@ const LeaderboardEntry = (props) => {
       }`}
     >
       <p className="leaderboard-rank">
-        {props.rank <=3 ? (
+        {props.rank <= 3 ? (
           <img
             src={
               props.rank === 1

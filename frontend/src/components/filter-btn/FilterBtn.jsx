@@ -4,7 +4,7 @@ import { AppContext } from "../../context/AppContext";
 
 const FilterBtn = ({ level }) => {
   const { filter, setFilter } = useContext(AppContext);
-  
+
   // setting filter state value
   const filterBtnClick = (e) => {
     let id = e.target.getAttribute("id");
@@ -13,9 +13,7 @@ const FilterBtn = ({ level }) => {
   return (
     <button
       id={level}
-      className={`filter-btn ${
-        filter === level && "clicked"
-      }`}
+      className={`filter-btn ${filter === level && "clicked"}`}
       onClick={filterBtnClick}
     >
       {level}

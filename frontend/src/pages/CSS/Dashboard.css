@@ -28,35 +28,8 @@
   background: var(--secondary);
 }
 
-@media screen and (max-width: 840px) {
-  .show-hide-revision,
-  .reset-btn {
-    padding: 0.75rem 1.5rem;
-  }
-}
-@media screen and (max-width: 680px) {
-  .show-hide-revision,
-  .reset-btn {
-    padding: 0.6rem 1.25rem;
-    font-size: 0.9rem;
-  }
-}
-
 @media screen and (max-width: 500px) {
   .dashboard {
     padding: 0 1rem;
-  }
-  .show-hide-revision,
-  .reset-btn {
-    padding: 0.5rem 0.65rem;
-    font-size: 0.8rem;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  .show-hide-revision,
-  .reset-btn {
-    padding: 0.5rem;
-    font-size: 0.8rem;
   }
 }

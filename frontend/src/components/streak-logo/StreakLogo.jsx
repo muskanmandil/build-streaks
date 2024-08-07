@@ -12,7 +12,7 @@ const StreakLogo = () => {
       setClick(false);
     }, 2000);
   };
-  
+
   return (
     <div className="streak-logo-container">
       <div

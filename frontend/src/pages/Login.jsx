@@ -20,7 +20,7 @@ const Login = () => {
       return { ...prevValue, [name]: value };
     });
   };
-  
+
   const handleSignup = async (e) => {
     // preventing default event
     e.preventDefault();
@@ -172,8 +172,11 @@ const Login = () => {
             />
           </div>
         ) : null}
-        
-        <PrimaryBtn className="login-signup-btn" text={!isSignedUp ? "Signup" : "Login"}/>
+
+        <PrimaryBtn
+          className="login-signup-btn"
+          text={!isSignedUp ? "Signup" : "Login"}
+        />
       </form>
     </div>
   );

@@ -3,21 +3,22 @@ const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-
 require('dotenv').config();
+
+// Database variables
 const dbPassword = process.env.DB_PASSWORD;
 const dbUser = "muskanmandil";
-const dbName = "deploy";
+const dbName = "test";
 
 // Declaring the port
 const port = 4000;
 
-// Creating app instance, and using necessary packages
+// Creating app instance, and using necessary packages for app
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Get request from deafult path to check if app is running or not (localhost:4000)
+// Default Route
 app.get('/', (req, res) => {
     res.send("Express app is running");
 })
@@ -37,23 +38,25 @@ const Users = mongoose.model("Users", {
     date: Date
 })
 
-// Signup API
+// Signup Route
 app.post('/signup', async (req, res) => {
 
-    // checking if user with requested email already exists or not
+    // checking if user already exists 
     let check = await Users.findOne({ email: req.body.email });
-
     if (check) {
-        // if exists then sending a bad request(400) response
         res.status(400).json({ message: "User with this email already exists" });
     }
     else {
-        // if not then making a default questionsObj for questionsData for the user on signup
+        // default data
         let questionsObj = {};
         for (let i = 0; i < 455; i++) {
             questionsObj[i] = {
                 completed: false,
-                revision: false
+                revision: false,
+                note: {
+                    status: false,
+                    content: ""
+                }
             };
         }
 
@@ -67,8 +70,6 @@ app.post('/signup', async (req, res) => {
             points: 0,
             lastActiveDate: new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-')
         })
-
-        // saving that user
         await user.save();
 
         // creating a new data object containing user's id 
@@ -78,26 +79,23 @@ app.post('/signup', async (req, res) => {
             }
         }
 
-        // generates a json web token using user's id
+        // generates a json web token using user's id and sending it in response
         const token = jwt.sign(data, "secret_key");
-
-        // sending a ok request(200) response [token]
         res.status(200).json({ message: "User has been registered successfully", token });
-
     }
 })
 
 
-// Login API
+// Login Route
 app.post('/login', async (req, res) => {
-    // checking if user with requested email exists or not
+
+    // checking if user exists or not
     let user = await Users.findOne({ email: req.body.email });
-
     if (user) {
-        // comparing requested and stored passwords
+        // checking passwords
         let passwCompare = user.password === req.body.password
-
         if (passwCompare) {
+
             // if passwords matches then creating a new data object containing user's id 
             const data = {
                 user: {
@@ -105,19 +103,15 @@ app.post('/login', async (req, res) => {
                 }
             }
 
-            // generates a json web token using user's id
+            // generates a json web token using user's id and sending response
             const token = jwt.sign(data, 'secret_key');
-
-            // sending ok request (200) response along with token
             res.status(200).json({ message: "Logged in successful", token })
         }
         else {
-            // sending bad request (400) repsonse if password do not match
             res.status(400).json({ message: "Wrong password" });
         }
     }
     else {
-        // if no user is found then send a bad request(400) response 
         res.status(400).json({ message: "No user found with this email. Signup first" });
     }
 })
@@ -131,7 +125,6 @@ const fetchUser = async (req, res, next) => {
 
     // if token is not present or empty string
     if (!token) {
-
         // sending a unauthorized request(400) response of invalid token
         res.status(401).json({ message: "Please authenticate using a valid token" });
     }
@@ -155,7 +148,7 @@ const fetchUser = async (req, res, next) => {
     }
 }
 
-// User info API for profile
+// User info Route
 app.post('/userinfo', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
     res.status(200).json({
@@ -179,17 +172,20 @@ const calculateDaysDiff = (date1, date2) => {
     const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
     return daysDiff;
-  };
+};
 
-// Progress info API 
+// Progress info Route 
 app.post('/progressinfo', fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
+
     let currDate = new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
     let daysDiff = calculateDaysDiff(currDate, user.lastActiveDate);
     if (daysDiff > 1) {
         user.streak = 0;
     }
+
     await Users.findOneAndUpdate({ _id: req.user.id }, { streak: user.streak });
+
     res.status(200).json({
         questionsData: user.questionsData,
         streak: user.streak,
@@ -198,79 +194,79 @@ app.post('/progressinfo', fetchUser, async (req, res) => {
     })
 })
 
-//  Question done API
+//  Question done Route
 app.post('/questiondone', fetchUser, async (req, res) => {
-
-    // find the user
     let user = await Users.findOne({ _id: req.user.id });
 
-    // update the questions data
     user.questionsData[req.body.questionId].completed = true;
-
-    // Use the values calculated on the frontend
     user.streak = req.body.streak;
     user.points = req.body.points;
     user.lastActiveDate = req.body.lastActiveDate;
 
-    // save updated information
     await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points, streak: user.streak, lastActiveDate: user.lastActiveDate });
 
-    // response
     res.status(200).json({ message: "Question mark as completed" });
 });
 
-// Question undo API
+// Question undo Route
 app.post('/questionundo', fetchUser, async (req, res) => {
-
-    // find the user
     let user = await Users.findOne({ _id: req.user.id });
 
-    // update the questions data
     user.questionsData[req.body.questionId].completed = false;
-
-    // Use the points calculated on the frontend
     user.points = req.body.points;
 
-    // save updated information
     await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points });
 
-    // response
     res.status(200).json({ message: "Question mark as uncompleted" });
 });
 
-//  add Question to revision API
+// Add to Revision Route
 app.post('/addToRevision', fetchUser, async (req, res) => {
-
-    // find the user
     let user = await Users.findOne({ _id: req.user.id });
 
-    // update the questions data
     user.questionsData[req.body.questionId].revision = true;
 
-    // save updated information
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData});
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });
 
-    // response
     res.status(200).json({ message: "Question added to revision" });
 });
 
-// remove Question from revision API
+// Remove from Revision route
 app.post('/removeFromRevision', fetchUser, async (req, res) => {
-
-    // find the user
     let user = await Users.findOne({ _id: req.user.id });
 
-    // update the questions data
     user.questionsData[req.body.questionId].revision = false;
 
-    // save updated information
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData});
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });
 
-    // response
     res.status(200).json({ message: "Question removed from revision" });
 });
 
-// Leaderboard API
+//  Add Note Route
+app.post('/addNote', fetchUser, async (req, res) => {
+    let user = await Users.findOne({ _id: req.user.id });
+
+    user.questionsData[req.body.questionId].note.status = true;
+    user.questionsData[req.body.questionId].note.content = req.body.content;
+
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });
+
+    res.status(200).json({ message: "Note added to Question" });
+});
+
+// Delete Note Route
+app.post('/deleteNote', fetchUser, async (req, res) => {
+    let user = await Users.findOne({ _id: req.user.id });
+
+    user.questionsData[req.body.questionId].note.status = false;
+    user.questionsData[req.body.questionId].note.content = "";
+
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });
+
+    res.status(200).json({ message: "Note removed from question" });
+});
+
+// Leaderboard Route
 app.get('/leaderboard', fetchUser, async (req, res) => {
 
     const users = await Users.find({}, { name: 1, email: 1, points: 1, streak: 1 })
@@ -288,7 +284,7 @@ app.get('/leaderboard', fetchUser, async (req, res) => {
     res.status(200).json(leaderboard);
 });
 
-// starting our app by listening to the port we declared
+// starting app by listening to the port we declared
 app.listen(port, (error) => {
     if (!error) {
         console.log("server is running on port : " + port);

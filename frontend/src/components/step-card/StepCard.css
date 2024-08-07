@@ -144,7 +144,7 @@
     align-items: center;
     padding: 0.25rem 0;
   }
-  .card-heading{
+  .card-heading {
     max-width: 30vw;
   }
   .card-number-outer-circle {
@@ -170,12 +170,12 @@
   }
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 500px) {
   .card-header-container {
     padding: 0 0.5rem;
     gap: 0.5rem;
   }
-  .card-heading{
+  .card-heading {
     font-size: 1.1rem;
     max-width: 25vw;
   }

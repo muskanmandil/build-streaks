@@ -39,7 +39,7 @@ export const AppProvider = ({ children }) => {
       } catch (error) {
         // catch if any error occurs and log it
         console.log(error);
-      }finally{
+      } finally {
         setLoading(false);
       }
     }
@@ -69,7 +69,7 @@ export const AppProvider = ({ children }) => {
       } catch (error) {
         // catch if any error occurs and log it
         console.log(error);
-      }finally{
+      } finally {
         setLoading(false);
       }
     }
@@ -94,7 +94,7 @@ export const AppProvider = ({ children }) => {
         filter,
         setFilter,
         revision,
-        setRevision
+        setRevision,
       }}
     >
       {children}

@@ -13,7 +13,7 @@ const Profile = () => {
     alert("User Logged out successfully");
     window.location.href = "/";
   };
-  
+
   return (
     <div className="profile-container">
       <div className="info-div">
@@ -24,7 +24,7 @@ const Profile = () => {
         <h3>Email:</h3>
         <p>{userInfo.email}</p>
       </div>
-      <PrimaryBtn className="logout-btn" text="Logout" onClick={handleLogout}/>
+      <PrimaryBtn className="logout-btn" text="Logout" onClick={handleLogout} />
     </div>
   );
 };

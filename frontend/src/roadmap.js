@@ -91,7 +91,7 @@ const all_steps = [
                 lecturelink: "https://youtu.be/RRVYpIET_RU",
                 problemlink: "",
                 articlelink: "https://takeuforward.org/c/c-stl-tutorial-most-frequent-used-stl-containers/",
-            },{
+            }, {
                 id: 11,
                 questionTitle: "Java Collections",
                 level: "easy",

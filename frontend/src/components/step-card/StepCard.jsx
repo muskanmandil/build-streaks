@@ -17,7 +17,13 @@ const StepCard = (props) => {
     let count = 0;
     props.all_substeps.forEach((substep) => {
       substep.all_questions.forEach((question) => {
-        if ((revision ? progressInfo.questionsData[question.id].revision: true) && progressInfo.questionsData[question.id].completed && (question.level === filter || filter === "")) {
+        if (
+          (revision
+            ? progressInfo.questionsData[question.id].revision
+            : true) &&
+          progressInfo.questionsData[question.id].completed &&
+          (question.level === filter || filter === "")
+        ) {
           count++;
         }
       });
@@ -35,7 +41,12 @@ const StepCard = (props) => {
     let length = 0;
     props.all_substeps.forEach((substep) => {
       substep.all_questions.forEach((question) => {
-        if ((revision ? progressInfo.questionsData[question.id].revision : true) && (filter === "" || question.level === filter)) {
+        if (
+          (revision
+            ? progressInfo.questionsData[question.id].revision
+            : true) &&
+          (filter === "" || question.level === filter)
+        ) {
           length++;
         }
       });
@@ -44,12 +55,14 @@ const StepCard = (props) => {
   };
 
   // progress variable
-  const progress = filteredQuestionsInStep()===0 ? 0 : (questionsDoneInStep / filteredQuestionsInStep()) * 100;
+  const progress =
+    filteredQuestionsInStep() === 0
+      ? 0
+      : (questionsDoneInStep / filteredQuestionsInStep()) * 100;
 
   return (
     <div className="step-card">
       <div className="card-header-container">
-
         <div className="card-header">
           <h3 className="card-heading">{props.title}</h3>
           <div className="progress">
@@ -75,7 +88,7 @@ const StepCard = (props) => {
           </button>
         </div>
 
-         {/* step-number-circle  */}
+        {/* step-number-circle  */}
         <div
           className={`card-number-outer-circle ${
             progress === 100 ? "step-complete" : null
@@ -84,7 +97,7 @@ const StepCard = (props) => {
           <div className="card-number">{props.id}</div>
         </div>
       </div>
-      
+
       {/* toggle-btn check */}
       {isOpen ? (
         // filter check

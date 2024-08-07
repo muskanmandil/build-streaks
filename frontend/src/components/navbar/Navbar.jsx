@@ -56,6 +56,7 @@ const Navbar = () => {
                 )}
             % completed
           </p>
+
           <p className="total-progress">
             {filteredQuestionsDone(filter, revision)} /{" "}
             {filteredQuestions(filter, revision)}
@@ -130,6 +131,7 @@ const Navbar = () => {
                             )}
                         % completed
                       </p>
+
                       <p className="total-progress">
                         {filteredQuestionsDone(filter, revision)} /{" "}
                         {filteredQuestions(filter, revision)}

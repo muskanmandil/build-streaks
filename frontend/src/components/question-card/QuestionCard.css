@@ -1,6 +1,6 @@
 .question-card {
   display: grid;
-  grid-template-columns: 1fr 15fr 5fr 1.5fr 1.5fr 1.5fr 1fr;
+  grid-template-columns: 1fr 15fr 5fr 1.5fr 1.5fr 1.5fr 1fr 1fr;
   gap: 2.5rem;
   padding: 0.5rem 0;
   align-items: center;
@@ -23,18 +23,23 @@
   color: var(--semantic-red);
 }
 
-.check-btn {
-  border-radius: 50%;
-  border: 1px solid var(--border-dark);
+.check-btn,
+.revision-btn,
+.note-btn {
   cursor: pointer;
   height: 2rem;
   width: 2rem;
+  background-position: center;
+}
+
+.check-btn {
+  border-radius: 50%;
+  border: 1px solid #afafaf;
 }
 
 .completed {
   background: url("../../assets/tick.svg");
   background-color: var(--primary);
-  background-position: center;
   border-color: var(--primary);
 }
 
@@ -51,24 +56,20 @@
 
 .revision-btn {
   background: url("../../assets/outline_star.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  height: 2rem;
-  width: 2rem;
-}
-
-:root.dark-mode .revision-btn {
-  background: url("../../assets//outline_star_dark-mode.svg");
-  background-position: center;
   background-repeat: no-repeat;
 }
 
-.revision,
-:root.dark-mode .revision {
+.revision {
   background: url("../../assets/filled_star.svg");
-  background-position: center;
   background-repeat: no-repeat;
+}
+
+.note-btn {
+  background: url("../../assets/bookmark.svg");
+}
+
+.note {
+  background: url("../../assets/bookmark_filled.svg");
 }
 
 @media screen and (max-width: 840px) {
@@ -78,7 +79,8 @@
   }
 
   .check-btn,
-  .revision-btn {
+  .revision-btn,
+  .note-btn {
     transform: scale(0.9);
   }
 }
@@ -99,7 +101,8 @@
   }
 
   .check-btn,
-  .revision-btn {
+  .revision-btn,
+  .note-btn {
     transform: scale(0.8);
   }
 }

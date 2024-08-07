@@ -26,12 +26,12 @@
   width: 35%;
 }
 
-.substep-heading span{
+.substep-heading span {
   font-weight: 700;
   color: var(--secondary);
 }
 
-.progress-bar-container{
+.progress-bar-container {
   width: 35%;
   height: 1.5rem;
   background: var(--border-light);
@@ -40,7 +40,7 @@
   max-width: 400px;
 }
 
-.progress-bar{
+.progress-bar {
   position: absolute;
   top: 0;
   left: 0;
@@ -53,12 +53,12 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   font-size: 0.85rem;
   font-weight: 600;
 }
 
-.half-substep-complete{
+.half-substep-complete {
   color: var(--secondary-text);
 }
 
@@ -70,11 +70,11 @@
 }
 
 @media screen and (max-width: 840px) {
-  .substep-heading{
+  .substep-heading {
     font-size: 1.05rem;
   }
-  
-  .progress-bar-container{
+
+  .progress-bar-container {
     height: 1.25rem;
   }
 
@@ -82,27 +82,26 @@
     margin-top: 0.75rem;
     padding: 0.75rem;
     gap: 1rem;
-  }  
+  }
 }
 
-@media screen and (max-width: 760px){
-  .substep-heading{
+@media screen and (max-width: 760px) {
+  .substep-heading {
     font-size: 1rem;
   }
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
   .substep-heading {
     width: 45%;
   }
   .questions-list {
     padding: 0.75rem 0;
-  } 
+  }
 }
 
-@media screen and (max-width: 500px){
-  .progress-bar-container{
+@media screen and (max-width: 500px) {
+  .progress-bar-container {
     width: 30%;
   }
-  
 }

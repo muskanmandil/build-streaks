@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./QuestionCard.css";
 import youtube from "../../assets/youtube.svg";
 import gfg from "../../assets/gfg.svg";
@@ -8,6 +8,7 @@ import { ProgressContext } from "../../context/ProgressContext";
 import interviewbit from "../../assets/interviewbit.svg";
 import spoj from "../../assets/spoj.jpg";
 import tuf_circle from "../../assets/tuf_circle.svg";
+import NotePopup from "../note-popup/NotePopup";
 import { AppContext } from "../../context/AppContext";
 
 const QuestionCard = (props) => {
@@ -19,6 +20,8 @@ const QuestionCard = (props) => {
     addToRevision,
     removeFromRevision,
   } = useContext(ProgressContext);
+
+  const [notePopup, setNotePopup] = useState(false);
 
   // to render the updated question card again
   useEffect(() => {}, [props.id, progressInfo]);
@@ -48,85 +51,99 @@ const QuestionCard = (props) => {
 
   return (
     // filter check
-    (revision ? progressInfo.questionsData[props.id].revision : true) && (filter === props.level || filter === "") && (
-      <div
-        className={`question-card ${
-          progressInfo.questionsData[props.id].completed &&
-          "question-completed"
-        }`}
-      >
-        {/*tick button  */}
+    (revision ? progressInfo.questionsData[props.id].revision : true) &&
+    (filter === props.level || filter === "") && (
+      <>
         <div
-          className={`check-btn ${
+          className={`question-card ${
             progressInfo.questionsData[props.id].completed &&
-            "completed"
-          }`}
-          onClick={() => handleDone(props.id, props.level)}
-        ></div>
-        <p className="question-title">{props.questionTitle}</p>
-        <p
-          className={`question-level ${
-            props.level === "medium"
-              ? "medium-level"
-              : props.level === "hard"
-              ? "hard-level"
-              : "easy-level"
+            "question-completed"
           }`}
         >
-          {props.level}
-        </p>
+          {/*tick button  */}
+          <div
+            className={`check-btn ${
+              progressInfo.questionsData[props.id].completed && "completed"
+            }`}
+            onClick={() => handleDone(props.id, props.level)}
+          ></div>
+          <p className="question-title">{props.questionTitle}</p>
+          <p
+            className={`question-level ${
+              props.level === "medium"
+                ? "medium-level"
+                : props.level === "hard"
+                ? "hard-level"
+                : "easy-level"
+            }`}
+          >
+            {props.level}
+          </p>
 
-        <a
-          href={props.lecturelink}
-          className="lecture-link"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src={props.lecturelink !== "" ? youtube : null} alt="" />
-        </a>
+          <a
+            href={props.lecturelink}
+            className="lecture-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={props.lecturelink !== "" ? youtube : null} alt="" />
+          </a>
 
-        <a
-          href={props.problemlink}
-          className="problem-link"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src={
-              domain === "www.geeksforgeeks.org"
-                ? gfg
-                : domain === "leetcode.com"
-                ? leetcode
-                : domain === "www.naukri.com"
-                ? codestudio
-                : domain === "www.interviewbit.com"
-                ? interviewbit
-                : domain === "www.spoj.com"
-                ? spoj
-                : ""
-            }
-            alt=""
-          />
-        </a>
+          <a
+            href={props.problemlink}
+            className="problem-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src={
+                domain === "www.geeksforgeeks.org"
+                  ? gfg
+                  : domain === "leetcode.com"
+                  ? leetcode
+                  : domain === "www.naukri.com"
+                  ? codestudio
+                  : domain === "www.interviewbit.com"
+                  ? interviewbit
+                  : domain === "www.spoj.com"
+                  ? spoj
+                  : ""
+              }
+              alt=""
+            />
+          </a>
 
-        <a
-          href={props.articlelink}
-          className="article-link"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src={props.articlelink !== "" ? tuf_circle : null} alt="" />
-        </a>
+          <a
+            href={props.articlelink}
+            className="article-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={props.articlelink !== "" ? tuf_circle : null} alt="" />
+          </a>
 
-        {/*add to revision button  */}
-        <div
-          className={`revision-btn ${
-            progressInfo.questionsData[props.id].revision &&
-            "revision"
-          }`}
-          onClick={() => handleRevision(props.id)}
-        ></div>
-      </div>
+          {/*add to revision button  */}
+          <div
+            className={`revision-btn ${
+              progressInfo.questionsData[props.id].revision && "revision"
+            }`}
+            onClick={() => handleRevision(props.id)}
+          ></div>
+
+          {/*add note button  */}
+          <div
+            className={`note-btn ${
+              progressInfo.questionsData[props.id].note.status && "note"
+            }`}
+            onClick={() => setNotePopup(true)}
+          ></div>
+        </div>
+        <NotePopup
+          questionId={props.id}
+          className={!notePopup && "hide-note"}
+          onClose={() => setNotePopup(false)}
+        />
+      </>
     )
   );
 };
