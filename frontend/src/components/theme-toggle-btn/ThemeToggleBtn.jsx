@@ -1,38 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./ThemeToggleBtn.css";
+import { ThemeContext } from "../../context/ThemeContext";
 
-const ThemeToggleBtn = ({ setTheme }) => {
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
-
-  // toggle theme function for the button
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    const theme = localStorage.getItem("theme");
-
-    // changing values because it is the toggling function
-    if (theme === "dark") {
-      setTheme("light");
-      setIsDarkMode(false);
-    } else {
-      setTheme("dark");
-      setIsDarkMode(true);
-    }
-  };
+const ThemeToggleBtn = () => {
+  const {theme, toggleTheme} = useContext(ThemeContext);
 
   return (
     <div className="theme-toggle-btn">
       <input
         type="checkbox"
         id="checkbox"
-        checked={isDarkMode}
+        checked={theme==='dark' ? true : false}
         onChange={toggleTheme}
       />
       <label className="theme-switch" htmlFor="checkbox">
-        <i class="fas fa-sun"></i>
-        <i class="fas fa-moon"></i>
-        <span class="ball"></span>
+        <i className="fas fa-sun"></i>
+        <i className="fas fa-moon"></i>
+        <span className="ball"></span>
       </label>
     </div>
   );

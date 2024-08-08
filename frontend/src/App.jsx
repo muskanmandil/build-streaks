@@ -10,6 +10,7 @@ import { ProgressProvider } from "./context/ProgressContext";
 import Leaderboard from "./pages/Leaderboard";
 import { useContext } from "react";
 import Loading from "./components/loading/Loading";
+import Notes from "./pages/Notes";
 
 const App = () => {
   const { loading } = useContext(AppContext);
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/notes" element={<Notes />} />
         </Routes>
       </BrowserRouter>
     </div>

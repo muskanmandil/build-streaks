@@ -1,0 +1,4 @@
+.notes-page {
+  display: flex;
+  height: calc(100% - 4.5rem);
+}
