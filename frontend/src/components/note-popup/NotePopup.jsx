@@ -33,6 +33,7 @@ const NotePopup = (props) => {
   const handleDeleteNote = () => {
     deleteNote(props.questionId);
     setEditMode(true);
+    setNoteContent("");
     props.onClose();
   };
 
