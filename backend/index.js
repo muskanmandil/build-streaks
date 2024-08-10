@@ -6,8 +6,8 @@ const cors = require("cors");
 require('dotenv').config();
 
 // Database variables
+const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
-const dbUser = "muskanmandil";
 const dbName = process.env.DB_NAME;
 
 // Declaring the port
