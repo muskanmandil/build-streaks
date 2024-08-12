@@ -56,7 +56,8 @@
 }
 
 .navbar-profile,
-.navbar-leaderboard {
+.navbar-leaderboard,
+.navbar-notes {
   padding: 0.5rem 1rem;
 }
 
@@ -90,7 +91,8 @@
     padding: 0.5rem 3rem 0.5rem 1.5rem;
   }
   .navbar-leaderboard,
-  .navbar-profile {
+  .navbar-profile,
+  .navbar-notes {
     display: none;
   }
   .mobile-navbar {
@@ -114,7 +116,8 @@
     display: none;
   }
   .mobile-navbar-leaderboard,
-  .mobile-navbar-profile {
+  .mobile-navbar-profile,
+  .mobile-navbar-notes {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -187,13 +190,15 @@
     right: 1.75rem;
   }
   .mobile-navbar-leaderboard,
-  .mobile-navbar-profile {
+  .mobile-navbar-profile,
+  .mobile-navbar-notes {
     width: 10rem;
     gap: 0.75rem;
     font-size: 0.85rem;
   }
   .mobile-navbar-leaderboard img,
-  .mobile-navbar-profile img {
+  .mobile-navbar-profile img,
+  .mobile-navbar-notes img {
     height: 1.5rem;
   }
 }
@@ -222,12 +227,14 @@
     right: 1.5rem;
   }
   .mobile-navbar-leaderboard,
-  .mobile-navbar-profile {
+  .mobile-navbar-profile,
+  .mobile-navbar-notes {
     gap: 0.5rem;
     font-size: 0.75rem;
   }
   .mobile-navbar-leaderboard img,
-  .mobile-navbar-profile img {
+  .mobile-navbar-profile img,
+  .mobile-navbar-notes img {
     height: 1.25rem;
   }
   .login-btn {

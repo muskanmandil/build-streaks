@@ -140,6 +140,7 @@ const QuestionCard = (props) => {
         </div>
         <NotePopup
           questionId={props.id}
+          questionTitle={props.questionTitle}
           className={!notePopup && "hide-note"}
           onClose={() => setNotePopup(false)}
         />

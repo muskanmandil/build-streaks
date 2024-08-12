@@ -41,7 +41,7 @@ const NotePopup = (props) => {
     <>
       <div className={`popup-overlay ${props.className}`}></div>
       <div className={`popup-container ${props.className}`}>
-        <h2 className="note-title">Note</h2>
+        <h2 className="note-title">{props.questionTitle}</h2>
 
         {/* Note Content*/}
         {editMode ? (
@@ -69,14 +69,14 @@ const NotePopup = (props) => {
             // editing mode buttons
             <div className="popup-btns-right">
               <SecondaryBtn
-                className="save-btn"
-                text="Save"
-                onClick={() => handleSaveNote()}
-              />
-              <SecondaryBtn
                 className="cancel-btn"
                 text="Cancel"
                 onClick={handleCancel}
+              />
+              <SecondaryBtn
+                className="save-btn"
+                text="Save"
+                onClick={() => handleSaveNote()}
               />
             </div>
           ) : (

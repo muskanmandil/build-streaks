@@ -3,10 +3,13 @@
   padding: 0.5rem;
   display: flex;
   gap: 0.5rem;
-  align-items: center;
-  font-weight: 600;
+  align-items: center;  
   border-radius: 0.5rem;
   cursor: pointer;
+}
+
+.selected-tab{
+  background: var(--border-light);
 }
 
 .step-number {
@@ -31,4 +34,21 @@
 
 .step-card-sidebar:hover {
   background: var(--border-light);
+}
+
+@media screen and (max-width:1000px){
+
+  .step-number {
+    transform: scale(0.8);
+  }
+  .step-title{
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 680px){
+  .step-card-sidebar {
+    padding: 0.25rem;
+  }
+  
 }

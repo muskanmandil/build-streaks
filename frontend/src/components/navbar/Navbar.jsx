@@ -9,6 +9,7 @@ import { ProgressContext } from "../../context/ProgressContext";
 import { AppContext } from "../../context/AppContext";
 import leaderboard from "../../assets/leaderboard.svg";
 import pointsxp from "../../assets/pointsxp.svg";
+import notes from "../../assets/notes.svg";
 import burger_menu from "../../assets/burger_menu.svg";
 import PrimaryBtn from "../primary-btn/PrimaryBtn";
 
@@ -100,6 +101,10 @@ const Navbar = () => {
               <img src={leaderboard} alt="" />
             </Link>
 
+            <Link to="/notes" className="navbar-notes">
+              <img src={notes} alt="" />
+            </Link>
+
             <Link to="/profile" className="navbar-profile">
               <img src={user_avatar} alt="" />
             </Link>
@@ -149,6 +154,14 @@ const Navbar = () => {
                   >
                     <img src={leaderboard} alt="" />
                     <p>Leaderboard</p>
+                  </Link>
+
+                  <Link
+                    to="/notes"
+                    className="navbar-notes mobile-navbar-notes"
+                  >
+                    <img src={notes} alt="" />
+                    <p>Notes</p>
                   </Link>
 
                   <Link
