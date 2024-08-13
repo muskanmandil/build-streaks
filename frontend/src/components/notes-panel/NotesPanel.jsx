@@ -29,6 +29,7 @@ const NotesPanel = ({ notesFilter, setNotesFilter }) => {
           )
           .map((question) => (
             <NoteCard
+              key={question.id}
               sNo={SNo++}
               title={question.questionTitle}
               id={question.id}
@@ -56,7 +57,6 @@ const NotesPanel = ({ notesFilter, setNotesFilter }) => {
         )}
       </div>
 
-      {console.log(filteredNotes)}
       {filteredNotes.length !== 0 ? (
         <div className="table">
           <div className="table-header">

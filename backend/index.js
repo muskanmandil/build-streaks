@@ -35,7 +35,7 @@ const Users = mongoose.model("Users", {
     streak: Number,
     points: Number,
     lastActiveDate: String,
-    date: Date
+    activityData: Object
 })
 
 // Signup Route
@@ -59,6 +59,8 @@ app.post('/signup', async (req, res) => {
                 }
             };
         }
+        
+        const date = new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
 
         // creating a new user
         const user = new Users({
@@ -68,7 +70,8 @@ app.post('/signup', async (req, res) => {
             questionsData: questionsObj,
             streak: 0,
             points: 0,
-            lastActiveDate: new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-')
+            lastActiveDate: date,
+            activityData: [date]
         })
         await user.save();
 
@@ -190,7 +193,8 @@ app.post('/progressinfo', fetchUser, async (req, res) => {
         questionsData: user.questionsData,
         streak: user.streak,
         points: user.points,
-        lastActiveDate: user.lastActiveDate
+        lastActiveDate: user.lastActiveDate,
+        activityData: user.activityData
     })
 })
 
@@ -202,8 +206,9 @@ app.post('/questiondone', fetchUser, async (req, res) => {
     user.streak = req.body.streak;
     user.points = req.body.points;
     user.lastActiveDate = req.body.lastActiveDate;
+    user.activityData = req.body.activityData;
 
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points, streak: user.streak, lastActiveDate: user.lastActiveDate });
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points, streak: user.streak, lastActiveDate: user.lastActiveDate, activityData: user.activityData});
 
     res.status(200).json({ message: "Question mark as completed" });
 });
@@ -251,7 +256,7 @@ app.post('/addNote', fetchUser, async (req, res) => {
 
     await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData });
 
-    res.status(200).json({ message: "Note added to Question" });
+    res.status(200).json({ message: "Note added/edited for Question" });
 });
 
 // Delete Note Route

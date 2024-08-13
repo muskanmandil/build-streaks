@@ -1,8 +1,16 @@
+.profile-page {
+  height: calc(100% - 4.5rem);
+  padding: 0 3vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 5vh auto 20vh;
+  align-items: center;
+}
+
 .profile-container {
   border: 1px solid var(--border-light);
   width: 50vw;
-  margin: 0 auto;
-  margin-top: 5vh;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -21,6 +29,7 @@
 
 .logout-btn {
   background: var(--semantic-red);
+  margin-top: 1rem;
 }
 
 @media screen and (max-width: 840px) {

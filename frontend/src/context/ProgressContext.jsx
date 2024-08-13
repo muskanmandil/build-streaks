@@ -25,6 +25,7 @@ export const ProgressProvider = ({ children }) => {
     streak: "",
     points: "",
     lastActiveDate: "",
+    activityData: []
   });
 
   const fetchProgressInfo = useCallback(async () => {
@@ -90,6 +91,11 @@ export const ProgressProvider = ({ children }) => {
       newStreak += 1;
     }
 
+    let latestActivityData = progressInfo.activityData;
+    if(!latestActivityData.includes(currentDate)){
+      latestActivityData.push(currentDate);
+    }
+
     // update progress info locally
     setProgressInfo((prevProgressInfo) => ({
       ...prevProgressInfo,
@@ -103,6 +109,7 @@ export const ProgressProvider = ({ children }) => {
       streak: newStreak,
       points: prevProgressInfo.points + pointsToAdd,
       lastActiveDate: currentDate,
+      activityData: latestActivityData
     }));
 
     // send progress info to backend
@@ -118,6 +125,7 @@ export const ProgressProvider = ({ children }) => {
           streak: newStreak,
           points: progressInfo.points + pointsToAdd,
           lastActiveDate: currentDate,
+          activityData: latestActivityData
         }),
       });
 

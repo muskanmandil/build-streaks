@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import "./CSS/Profile.css";
 import { AppContext } from "../context/AppContext";
 import PrimaryBtn from "../components/primary-btn/PrimaryBtn";
+import Heatmap from "../components/heatmap/Heatmap";
+import { ProgressProvider } from "../context/ProgressContext";
 
 const Profile = () => {
   const { setLoading, userInfo } = useContext(AppContext);
@@ -15,16 +17,25 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-container">
-      <div className="info-div">
-        <h3>Name:</h3>
-        <p>{userInfo.name}</p>
+    <div className="profile-page">
+      <div className="profile-container">
+        <div className="info-div">
+          <h3>Name:</h3>
+          <p>{userInfo.name}</p>
+        </div>
+        <div className="info-div">
+          <h3>Email:</h3>
+          <p>{userInfo.email}</p>
+        </div>
+        <PrimaryBtn
+          className="logout-btn"
+          text="Logout"
+          onClick={handleLogout}
+        />
       </div>
-      <div className="info-div">
-        <h3>Email:</h3>
-        <p>{userInfo.email}</p>
-      </div>
-      <PrimaryBtn className="logout-btn" text="Logout" onClick={handleLogout} />
+      <ProgressProvider>
+        <Heatmap />
+      </ProgressProvider>
     </div>
   );
 };
