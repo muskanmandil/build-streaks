@@ -12,6 +12,7 @@ const dbName = process.env.DB_NAME;
 
 // Declaring the port
 const port = 4000;
+const jwtKey = process.env.JWT_KEY;
 
 // Creating app instance, and using necessary packages for app
 const app = express();
@@ -83,7 +84,7 @@ app.post('/signup', async (req, res) => {
         }
 
         // generates a json web token using user's id and sending it in response
-        const token = jwt.sign(data, "secret_key");
+        const token = jwt.sign(data, jwtKey);
         res.status(200).json({ message: "User has been registered successfully", token });
     }
 })
@@ -107,7 +108,7 @@ app.post('/login', async (req, res) => {
             }
 
             // generates a json web token using user's id and sending response
-            const token = jwt.sign(data, 'secret_key');
+            const token = jwt.sign(data, jwtKey);
             res.status(200).json({ message: "Logged in successful", token })
         }
         else {
@@ -135,7 +136,7 @@ const fetchUser = async (req, res, next) => {
         // if token is present 
         try {
             // then verify it with secret key
-            const data = jwt.verify(token, 'secret_key');
+            const data = jwt.verify(token, jwtKey);
 
             // set the user property of data to the user property of request
             req.user = data.user;
