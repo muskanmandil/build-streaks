@@ -1,4 +1,4 @@
-.login-container {
+.form-container {
   border: 1px solid var(--border-light);
   width: 50vw;
   max-width: 600px;
@@ -12,6 +12,13 @@
 
 .form-heading {
   font-family: "Ysabeau Infant", sans-serif;
+}
+
+.switch-link {
+  text-decoration: underline;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 600;
 }
 
 form {
@@ -39,31 +46,24 @@ form {
   background-color: var(--border-light);
 }
 
-.login-signup-link {
-  text-decoration: underline;
-  color: var(--primary);
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.login-signup-btn {
+.form-btn {
   margin-top: 1.25rem;
 }
 
 @media screen and (max-width: 1000px) {
-  .login-container {
+  .form-container {
     width: 70vw;
   }
 }
 
 @media screen and (max-width: 840px) {
-  .login-signup-btn {
+  .form-btn {
     margin-top: 1rem;
   }
 }
 
 @media screen and (max-width: 680px) {
-  .login-container {
+  .form-container {
     width: 85vw;
     gap: 1rem;
     padding: 1.5rem 1.75rem;
@@ -87,7 +87,7 @@ form {
 }
 
 @media screen and (max-width: 500px) {
-  .login-container {
+  .form-container {
     width: 90vw;
   }
 }

@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const nodemailer = require('nodemailer');
 const cors = require("cors");
 require('dotenv').config();
 
@@ -39,6 +40,33 @@ const Users = mongoose.model("Users", {
     activityData: Object
 })
 
+// Creating OTP Schema
+const otpSchema = mongoose.Schema({
+    email: { type: String, required: true, unique: true },
+    otp: { type: Number, required: true },
+    expiresAt: { type: Date, required: true },
+    userData: {
+        name: { type: String, required: true },
+        password: { type: String, required: true },
+    }
+});
+
+// Create a TTL(Time-to-Live) index on the expiresAt field
+otpSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+
+// Create the OTP model
+const OTP = mongoose.model("OTP", otpSchema);
+
+// Nodemailer for email sending
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD
+    }
+});
+
+
 // Signup Route
 app.post('/signup', async (req, res) => {
 
@@ -48,47 +76,130 @@ app.post('/signup', async (req, res) => {
         res.status(400).json({ message: "User with this email already exists" });
     }
     else {
-        // default data
-        let questionsObj = {};
-        for (let i = 0; i < 455; i++) {
-            questionsObj[i] = {
-                completed: false,
-                revision: false,
-                note: {
-                    status: false,
-                    content: ""
-                }
+
+        // checking if otp is already requested in last few minutes
+        const otpCheck = await OTP.findOne({ email: req.body.email });
+
+        if (otpCheck) {
+
+            // Send OTP via email
+            const mailOptions = {
+                from: process.env.EMAIL,
+                to: req.body.email,
+                subject: 'Build Streaks: Account Verification',
+                text: `Your code to verify account is ${otpCheck.otp}. It is valid till ${otpCheck.expiresAt}.`
             };
+
+            transporter.sendMail(mailOptions, async (error, info) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ message: "Failed to send OTP email" });
+                } else {
+                    res.status(200).json({ message: "OTP sent to your email. Please verify." });
+                }
+            });
+
+        } else {
+            // otp hasn't been requested
+
+            // Generate a 6-digit OTP
+            const otpGenerated = Math.floor(100000 + Math.random() * 900000);
+
+            // Set expiration time to 10 minutes from now
+            const expiryTime = new Date(Date.now() + 10 * 60 * 1000);
+
+            // OTP Object
+            let newOTP = new OTP({
+                email: req.body.email,
+                otp: otpGenerated,
+                expiresAt: expiryTime,
+                userData: {
+                    name: req.body.name,
+                    password: req.body.password
+                }
+            })
+
+            // Send OTP via email
+            const mailOptions = {
+                from: process.env.EMAIL,
+                to: req.body.email,
+                subject: 'Build Streaks: Account Verification',
+                text: `Your code to verify account is ${otpGenerated}. It is valid till ${expiryTime}.`
+            };
+
+            transporter.sendMail(mailOptions, async (error, info) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ message: "Failed to send OTP email" });
+                } else {
+                    res.status(200).json({ message: "OTP sent to your email. Please verify." });
+                    await newOTP.save()
+                }
+            });
         }
-        
-        const date = new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
-
-        // creating a new user
-        const user = new Users({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            questionsData: questionsObj,
-            streak: 0,
-            points: 0,
-            lastActiveDate: date,
-            activityData: [date]
-        })
-        await user.save();
-
-        // creating a new data object containing user's id 
-        const data = {
-            user: {
-                id: user.id
-            }
-        }
-
-        // generates a json web token using user's id and sending it in response
-        const token = jwt.sign(data, jwtKey);
-        res.status(200).json({ message: "User has been registered successfully", token });
     }
 })
 
+
+app.post('/verify', async (req, res) => {
+
+    // Find the OTP document in the database
+    const otpRecord = await OTP.findOne({ email: req.body.email });
+
+    // Check if the OTP exists and is valid
+    if (!otpRecord) {
+        res.status(400).json({ message: "Code Expired" });
+    } else {
+        if (otpRecord.otp !== parseInt(req.body.otp)) {
+            res.status(400).json({ message: "Invalid Code" });
+        }
+        else {
+            // default data
+            let questionsObj = {};
+            for (let i = 0; i < 455; i++) {
+                questionsObj[i] = {
+                    completed: false,
+                    revision: false,
+                    note: {
+                        status: false,
+                        content: ""
+                    }
+                };
+            }
+
+            const date = new Date(Date.now()).toLocaleString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+
+            // creating a new user
+            const user = new Users({
+                name: otpRecord.userData.name,
+                email: otpRecord.email,
+                password: otpRecord.userData.password,
+                questionsData: questionsObj,
+                streak: 0,
+                points: 0,
+                lastActiveDate: date,
+                activityData: []
+            })
+
+            await user.save();
+
+            // creating a new data object containing user's id 
+            const data = {
+                user: {
+                    id: user.id
+                }
+            }
+
+            // generates a json web token using user's id and sending it in response
+            const token = jwt.sign(data, jwtKey);
+            res.status(200).json({ message: "User has been registered successfully", token });
+
+            await OTP.deleteOne({ email: otpRecord.email })
+        }
+    }
+
+
+})
 
 // Login Route
 app.post('/login', async (req, res) => {
@@ -209,7 +320,7 @@ app.post('/questiondone', fetchUser, async (req, res) => {
     user.lastActiveDate = req.body.lastActiveDate;
     user.activityData = req.body.activityData;
 
-    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points, streak: user.streak, lastActiveDate: user.lastActiveDate, activityData: user.activityData});
+    await Users.findOneAndUpdate({ _id: req.user.id }, { questionsData: user.questionsData, points: user.points, streak: user.streak, lastActiveDate: user.lastActiveDate, activityData: user.activityData });
 
     res.status(200).json({ message: "Question mark as completed" });
 });

@@ -4,6 +4,7 @@ import Navbar from "./components/navbar/Navbar";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { AppContext } from "./context/AppContext";
 import { ProgressProvider } from "./context/ProgressContext";
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/notes" element={<Notes />} />
