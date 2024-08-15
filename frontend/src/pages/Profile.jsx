@@ -13,6 +13,13 @@ const Profile = () => {
     new_password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevValue) => !prevValue);
+  };
+  
   // maintaning form input states
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -107,7 +114,7 @@ const Profile = () => {
         <div className="input-div">
           <label htmlFor="">Current Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="curr_password"
             value={formData.curr_password}
             onChange={handleInputChange}
@@ -117,13 +124,23 @@ const Profile = () => {
         <div className="input-div">
           <label htmlFor="">New Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="new_password"
             value={formData.new_password}
             onChange={handleInputChange}
             required
           />
         </div>
+
+        <div className="input-div show-password">
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={togglePasswordVisibility}
+          />
+          <label htmlFor="">Show Password</label>
+        </div>
+
         <PrimaryBtn text="Change Password" className="form-btn" />
       </form>
 

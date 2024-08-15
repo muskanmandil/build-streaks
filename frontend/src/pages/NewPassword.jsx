@@ -11,6 +11,13 @@ const NewPassword = () => {
     confirm_password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevValue) => !prevValue);
+  };
+
   // maintaning form input states
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -65,7 +72,7 @@ const NewPassword = () => {
         <div className="input-div">
           <label htmlFor="">New Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="new_password"
             value={formData.new_password}
             onChange={handleInputChange}
@@ -75,12 +82,21 @@ const NewPassword = () => {
         <div className="input-div">
           <label htmlFor="">Confirm Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="confirm_password"
             value={formData.confirm_password}
             onChange={handleInputChange}
             required
           />
+        </div>
+
+        <div className="input-div show-password">
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={togglePasswordVisibility}
+          />
+          <label htmlFor="">Show Password</label>
         </div>
 
         <PrimaryBtn className="form-btn" text="Change Password" />

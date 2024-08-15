@@ -14,6 +14,13 @@ const Signup = () => {
     confirm_password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevValue) => !prevValue);
+  };
+
   // maintaning form input states
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -46,9 +53,9 @@ const Signup = () => {
 
         if (res.status === 200) {
           localStorage.setItem("savedEmail", formData.email);
-          window.location.href="/verify";
+          window.location.href = "/verify";
         }
-        
+
         alert(data.message);
       } catch (error) {
         console.log(error);
@@ -96,7 +103,7 @@ const Signup = () => {
         <div className="input-div">
           <label htmlFor="">Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             value={formData.password}
             onChange={handleInputChange}
@@ -107,12 +114,21 @@ const Signup = () => {
         <div className="input-div">
           <label htmlFor="">Confirm Password</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="confirm_password"
             value={formData.confirm_password}
             onChange={handleInputChange}
             required
           />
+        </div>
+
+        <div className="input-div show-password">
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={togglePasswordVisibility}
+          />
+          <label htmlFor="">Show Password</label>
         </div>
 
         <PrimaryBtn className="form-btn" text="Signup" />

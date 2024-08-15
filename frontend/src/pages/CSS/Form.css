@@ -46,6 +46,21 @@ form {
   background-color: var(--border-light);
 }
 
+.show-password {
+  flex-direction: row;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.show-password input {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 0.25rem;
+}
+.show-password label {
+  margin: 0;
+}
+
 .form-btn {
   margin-top: 1.25rem;
 }
