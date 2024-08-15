@@ -30,14 +30,14 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/notes" element={<Notes />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verify" element={<Verification />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/new-password" element={<NewPassword />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/notes" element={<Notes />} />
         </Routes>
       </BrowserRouter>
     </div>

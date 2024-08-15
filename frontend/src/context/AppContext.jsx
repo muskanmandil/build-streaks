@@ -17,7 +17,7 @@ export const AppProvider = ({ children }) => {
     if (localStorage.getItem("auth-token")) {
       setLoading(true);
       try {
-        const res = await fetch(`${backendUrl}/userInfo`, {
+        const res = await fetch(`${backendUrl}/user-info`, {
           method: "POST",
           headers: {
             "auth-token": `${localStorage.getItem("auth-token")}`,

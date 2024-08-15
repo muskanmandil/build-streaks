@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./CSS/LoginSignup.css";
+import "./CSS/Form.css";
 import { AppContext } from "../context/AppContext";
 import PrimaryBtn from "../components/primary-btn/PrimaryBtn";
 import { Link } from "react-router-dom";
@@ -57,7 +57,6 @@ const Signup = () => {
       }
     } else {
       alert("Passwords do not match");
-      // setLoading(false);
     }
   };
 
@@ -70,7 +69,7 @@ const Signup = () => {
           <span className="switch-link">Login</span>
         </Link>
       </p>
-      {/* Signup Form */}
+
       <form onSubmit={handleSignup}>
         <div className="input-div">
           <label htmlFor="">Name</label>

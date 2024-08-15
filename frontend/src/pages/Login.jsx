@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./CSS/LoginSignup.css";
+import "./CSS/Form.css";
 import { AppContext } from "../context/AppContext";
 import PrimaryBtn from "../components/primary-btn/PrimaryBtn";
 import { Link } from "react-router-dom";
@@ -62,9 +62,7 @@ const Login = () => {
         </Link>
       </p>
 
-      {/* Form */}
       <form onSubmit={handleLogin}>
-        {/* Email */}
         <div className="input-div">
           <label htmlFor="">Email</label>
           <input
@@ -76,7 +74,6 @@ const Login = () => {
           />
         </div>
 
-        {/* Password */}
         <div className="input-div">
           <label htmlFor="">Password</label>
           <input

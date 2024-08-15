@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./CSS/LoginSignup.css";
+import "./CSS/Form.css";
 import { AppContext } from "../context/AppContext";
 import PrimaryBtn from "../components/primary-btn/PrimaryBtn";
 
@@ -26,7 +26,7 @@ const NewPassword = () => {
       setLoading(true);
 
       try {
-        const res = await fetch(`${backendUrl}/newPassword`, {
+        const res = await fetch(`${backendUrl}/new-password`, {
           method: "POST",
           headers: {
             "auth-token": `${localStorage.getItem("auth-token")}`,

@@ -31,7 +31,7 @@ export const ProgressProvider = ({ children }) => {
   const fetchProgressInfo = useCallback(async () => {
     if (localStorage.getItem("auth-token")) {
       try {
-        const res = await fetch(`${backendUrl}/progressinfo`, {
+        const res = await fetch(`${backendUrl}/progress-info`, {
           method: "POST",
           headers: {
             "auth-token": `${localStorage.getItem("auth-token")}`,
@@ -111,7 +111,7 @@ export const ProgressProvider = ({ children }) => {
 
     // send progress info to backend
     try {
-      const res = await fetch(`${backendUrl}/questionDone`, {
+      const res = await fetch(`${backendUrl}/question-done`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -176,7 +176,7 @@ export const ProgressProvider = ({ children }) => {
 
     // send updates progress info data to backend
     try {
-      const res = await fetch(`${backendUrl}/questionUndo`, {
+      const res = await fetch(`${backendUrl}/question-undo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -212,7 +212,7 @@ export const ProgressProvider = ({ children }) => {
 
     // send progress info to backend
     try {
-      const res = await fetch(`${backendUrl}/addToRevision`, {
+      const res = await fetch(`${backendUrl}/add-to-revision`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -247,7 +247,7 @@ export const ProgressProvider = ({ children }) => {
 
     // send updates progress info data to backend
     try {
-      const res = await fetch(`${backendUrl}/removeFromRevision`, {
+      const res = await fetch(`${backendUrl}/remove-from-revision`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -286,7 +286,7 @@ export const ProgressProvider = ({ children }) => {
 
     // send progress info to backend
     try {
-      const res = await fetch(`${backendUrl}/addNote`, {
+      const res = await fetch(`${backendUrl}/add-note`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -327,7 +327,7 @@ export const ProgressProvider = ({ children }) => {
 
       // send updates progress info data to backend
       try {
-        const res = await fetch(`${backendUrl}/deleteNote`, {
+        const res = await fetch(`${backendUrl}/delete-note`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

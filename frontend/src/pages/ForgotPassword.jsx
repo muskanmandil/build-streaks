@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./CSS/LoginSignup.css";
+import "./CSS/Form.css";
 import { AppContext } from "../context/AppContext";
 import PrimaryBtn from "../components/primary-btn/PrimaryBtn";
 import { Link } from "react-router-dom";
@@ -23,7 +23,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`${backendUrl}/forgotPassword`, {
+      const res = await fetch(`${backendUrl}/forgot-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,9 +60,7 @@ const ForgotPassword = () => {
         </Link>
       </p>
 
-      {/* Form */}
       <form onSubmit={ForgotPassword}>
-        {/* Email */}
         <div className="input-div">
           <label htmlFor="">Email</label>
           <input

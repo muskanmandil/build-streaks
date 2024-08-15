@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./CSS/LoginSignup.css";
+import "./CSS/Form.css";
 import { AppContext } from "../context/AppContext";
 import PrimaryBtn from "../components/primary-btn/PrimaryBtn";
 

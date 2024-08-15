@@ -235,7 +235,7 @@ app.post("/login", async (req, res) => {
 });
 
 // Forgot Password
-app.post("/forgotPassword", async (req, res) => {
+app.post("/forgot-password", async (req, res) => {
     let user = await Users.findOne({ email: req.body.email });
     if (user) {
 
@@ -309,7 +309,7 @@ const fetchUser = async (req, res, next) => {
 };
 
 // New Password
-app.post("/newPassword", fetchUser, async (req, res) => {
+app.post("/new-password", fetchUser, async (req, res) => {
     bcrypt.hash(req.body.new_password, saltRounds, async (err, hash) => {
         if (err) {
             return res.status(500).json({ message: "Error while hashing password" });
@@ -321,7 +321,7 @@ app.post("/newPassword", fetchUser, async (req, res) => {
 });
 
 // User info Route
-app.post("/userInfo", fetchUser, async (req, res) => {
+app.post("/user-info", fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
     return res.status(200).json({
         name: user.name,
@@ -348,7 +348,7 @@ const calculateDaysDiff = (date1, date2) => {
 };
 
 // Progress Info Route
-app.post("/progressInfo", fetchUser, async (req, res) => {
+app.post("/progress-info", fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     let currDate = new Date(Date.now())
@@ -375,7 +375,7 @@ app.post("/progressInfo", fetchUser, async (req, res) => {
 });
 
 //  Question done Route
-app.post("/questionDone", fetchUser, async (req, res) => {
+app.post("/question-done", fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     user.questionsData[req.body.questionId].completed = true;
@@ -398,7 +398,7 @@ app.post("/questionDone", fetchUser, async (req, res) => {
 });
 
 // Question undo Route
-app.post("/questionUndo", fetchUser, async (req, res) => {
+app.post("/question-undo", fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     user.questionsData[req.body.questionId].completed = false;
@@ -412,7 +412,7 @@ app.post("/questionUndo", fetchUser, async (req, res) => {
 });
 
 // Add to Revision Route
-app.post("/addToRevision", fetchUser, async (req, res) => {
+app.post("/add-to-revision", fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     user.questionsData[req.body.questionId].revision = true;
@@ -425,7 +425,7 @@ app.post("/addToRevision", fetchUser, async (req, res) => {
 });
 
 // Remove from Revision route
-app.post("/removeFromRevision", fetchUser, async (req, res) => {
+app.post("/remove-from-revision", fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     user.questionsData[req.body.questionId].revision = false;
@@ -438,7 +438,7 @@ app.post("/removeFromRevision", fetchUser, async (req, res) => {
 });
 
 //  Add Note Route
-app.post("/addNote", fetchUser, async (req, res) => {
+app.post("/add-note", fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     user.questionsData[req.body.questionId].note.status = true;
@@ -452,7 +452,7 @@ app.post("/addNote", fetchUser, async (req, res) => {
 });
 
 // Delete Note Route
-app.post("/deleteNote", fetchUser, async (req, res) => {
+app.post("/delete-note", fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     user.questionsData[req.body.questionId].note.status = false;
@@ -486,7 +486,7 @@ app.get("/leaderboard", fetchUser, async (req, res) => {
 });
 
 // Change Password Route
-app.post("/changePassword", fetchUser, async (req, res) => {
+app.post("/change-password", fetchUser, async (req, res) => {
     let user = await Users.findOne({ _id: req.user.id });
 
     bcrypt.compare(req.body.curr_password, user.password, (err, result) => {
@@ -510,7 +510,7 @@ app.post("/changePassword", fetchUser, async (req, res) => {
 });
 
 // Delete Account Route
-app.post("/deleteAccount", fetchUser, async (req, res) => {
+app.post("/delete-account", fetchUser, async (req, res) => {
     await Users.findOneAndDelete({ _id: req.user.id });
     return res.status(200).json({ message: "Account deleted successfully" });
 });
