@@ -159,6 +159,7 @@ const Navbar = () => {
                   <Link
                     to="/notes"
                     className="navbar-notes mobile-navbar-notes"
+                    onClick={() => setMobileMenu(false)}
                   >
                     <img src={notes} alt="" />
                     <p>Notes</p>

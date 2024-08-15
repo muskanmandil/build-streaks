@@ -50,6 +50,12 @@ form {
   margin-top: 1.25rem;
 }
 
+.form-btns-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media screen and (max-width: 1000px) {
   .form-container {
     width: 70vw;

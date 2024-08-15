@@ -17,6 +17,7 @@
   left: calc(22vw + 0.5rem + 50px);
   width: 4px;
   height: 100%;
+  z-index: -1;
 }
 
 @media screen and (max-width: 1000px) {

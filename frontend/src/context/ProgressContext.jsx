@@ -25,13 +25,11 @@ export const ProgressProvider = ({ children }) => {
     streak: "",
     points: "",
     lastActiveDate: "",
-    activityData: []
+    activityData: [],
   });
 
   const fetchProgressInfo = useCallback(async () => {
-    // if auth-token is present
     if (localStorage.getItem("auth-token")) {
-      // try fetching the progress info
       try {
         const res = await fetch(`${backendUrl}/progressinfo`, {
           method: "POST",
@@ -44,7 +42,6 @@ export const ProgressProvider = ({ children }) => {
 
         if (res.status === 200) {
           const data = await res.json();
-          // set the local progress info state with the data from backend
           setProgressInfo((prevProgressInfo) => ({
             ...prevProgressInfo,
             ...data,
@@ -92,7 +89,7 @@ export const ProgressProvider = ({ children }) => {
     }
 
     let latestActivityData = progressInfo.activityData;
-    if(!latestActivityData.includes(currentDate)){
+    if (!latestActivityData.includes(currentDate)) {
       latestActivityData.push(currentDate);
     }
 
@@ -109,12 +106,12 @@ export const ProgressProvider = ({ children }) => {
       streak: newStreak,
       points: prevProgressInfo.points + pointsToAdd,
       lastActiveDate: currentDate,
-      activityData: latestActivityData
+      activityData: latestActivityData,
     }));
 
     // send progress info to backend
     try {
-      const res = await fetch(`${backendUrl}/questiondone`, {
+      const res = await fetch(`${backendUrl}/questionDone`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +122,7 @@ export const ProgressProvider = ({ children }) => {
           streak: newStreak,
           points: progressInfo.points + pointsToAdd,
           lastActiveDate: currentDate,
-          activityData: latestActivityData
+          activityData: latestActivityData,
         }),
       });
 
@@ -179,7 +176,7 @@ export const ProgressProvider = ({ children }) => {
 
     // send updates progress info data to backend
     try {
-      const res = await fetch(`${backendUrl}/questionundo`, {
+      const res = await fetch(`${backendUrl}/questionUndo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -311,37 +308,43 @@ export const ProgressProvider = ({ children }) => {
   };
 
   const deleteNote = async (questionId) => {
-    // Update progress info local state
-    setProgressInfo((prevProgressInfo) => ({
-      ...prevProgressInfo,
-      questionsData: {
-        ...prevProgressInfo.questionsData,
-        [questionId]: {
-          ...prevProgressInfo.questionsData[questionId],
-          note: { status: false, content: "" },
+    const confirmation = window.confirm(
+      "Are you sure you want to delete this note?"
+    );
+    
+    if (confirmation) {
+      // Update progress info local state
+      setProgressInfo((prevProgressInfo) => ({
+        ...prevProgressInfo,
+        questionsData: {
+          ...prevProgressInfo.questionsData,
+          [questionId]: {
+            ...prevProgressInfo.questionsData[questionId],
+            note: { status: false, content: "" },
+          },
         },
-      },
-    }));
+      }));
 
-    // send updates progress info data to backend
-    try {
-      const res = await fetch(`${backendUrl}/deleteNote`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": `${localStorage.getItem("auth-token")}`,
-        },
-        body: JSON.stringify({
-          questionId: questionId,
-        }),
-      });
+      // send updates progress info data to backend
+      try {
+        const res = await fetch(`${backendUrl}/deleteNote`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": `${localStorage.getItem("auth-token")}`,
+          },
+          body: JSON.stringify({
+            questionId: questionId,
+          }),
+        });
 
-      if (res.status === 200) {
-        const data = await res.json();
-        console.log(data);
+        if (res.status === 200) {
+          const data = await res.json();
+          console.log(data);
+        }
+      } catch (error) {
+        console.error("Error while removing note from question:", error);
       }
-    } catch (error) {
-      console.error("Error while removing note from question:", error);
     }
   };
 

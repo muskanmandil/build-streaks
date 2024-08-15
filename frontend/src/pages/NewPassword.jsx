@@ -2,15 +2,12 @@ import React, { useContext, useState } from "react";
 import "./CSS/LoginSignup.css";
 import { AppContext } from "../context/AppContext";
 import PrimaryBtn from "../components/primary-btn/PrimaryBtn";
-import { Link } from "react-router-dom";
 
-const Signup = () => {
+const NewPassword = () => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const { setLoading } = useContext(AppContext);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    new_password: "",
     confirm_password: "",
   });
 
@@ -22,21 +19,21 @@ const Signup = () => {
     });
   };
 
-  const handleSignup = async (e) => {
+  const ChangePassword = async (e) => {
     e.preventDefault();
 
-    if (formData.password.trim() === formData.confirm_password.trim()) {
+    if (formData.new_password.trim() === formData.confirm_password.trim()) {
       setLoading(true);
+
       try {
-        const res = await fetch(`${backendUrl}/signup`, {
+        const res = await fetch(`${backendUrl}/newPassword`, {
           method: "POST",
           headers: {
+            "auth-token": `${localStorage.getItem("auth-token")}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            password: formData.password,
+            new_password: formData.new_password,
           }),
         });
 
@@ -45,10 +42,9 @@ const Signup = () => {
         const data = await res.json();
 
         if (res.status === 200) {
-          localStorage.setItem("savedEmail", formData.email);
-          window.location.href="/verify";
+          window.location.href = "/dashboard";
         }
-        
+
         alert(data.message);
       } catch (error) {
         console.log(error);
@@ -57,54 +53,25 @@ const Signup = () => {
       }
     } else {
       alert("Passwords do not match");
-      // setLoading(false);
     }
   };
 
   return (
     <div className="form-container">
-      <h2 className="form-heading">Signup</h2>
-      <p>
-        Already have an account?{" "}
-        <Link to="/login">
-          <span className="switch-link">Login</span>
-        </Link>
-      </p>
-      {/* Signup Form */}
-      <form onSubmit={handleSignup}>
-        <div className="input-div">
-          <label htmlFor="">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+      <h2 className="form-heading">Set New Password</h2>
 
+      {/* Form */}
+      <form onSubmit={ChangePassword}>
         <div className="input-div">
-          <label htmlFor="">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="input-div">
-          <label htmlFor="">Password</label>
+          <label htmlFor="">New Password</label>
           <input
             type="password"
-            name="password"
-            value={formData.password}
+            name="new_password"
+            value={formData.new_password}
             onChange={handleInputChange}
             required
           />
         </div>
-
         <div className="input-div">
           <label htmlFor="">Confirm Password</label>
           <input
@@ -116,10 +83,10 @@ const Signup = () => {
           />
         </div>
 
-        <PrimaryBtn className="form-btn" text="Signup" />
+        <PrimaryBtn className="form-btn" text="Change Password" />
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default NewPassword;

@@ -6,6 +6,9 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Verification from "./pages/Verification";
+import ForgotPassword from "./pages/ForgotPassword";
+import NewPassword from "./pages/NewPassword";
 import { AppContext } from "./context/AppContext";
 import { ProgressProvider } from "./context/ProgressContext";
 import Leaderboard from "./pages/Leaderboard";
@@ -30,6 +33,9 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/verify" element={<Verification />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/new-password" element={<NewPassword />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/notes" element={<Notes />} />
         </Routes>

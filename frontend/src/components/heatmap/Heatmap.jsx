@@ -27,6 +27,20 @@ const Heatmap = () => {
   };
 
   const currYear = new Date().getFullYear();
+  const all_months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   const renderHeatmapForYear = () => {
     const yearArray = [];
@@ -53,8 +67,9 @@ const Heatmap = () => {
       });
 
       yearArray.push(
-        <div className="heatmap-month" key={month}>
-          {monthArray}
+        <div className="heatmap-month-container" key={month}>
+          <div className="heatmap-month">{monthArray}</div>
+          <p>{all_months[month]}</p>
         </div>
       );
     }
@@ -63,7 +78,6 @@ const Heatmap = () => {
 
   return (
     <div className="heatmap-container">
-      <h3>Heatmap</h3>
       <div id="heatmap">{renderHeatmapForYear()}</div>
     </div>
   );

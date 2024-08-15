@@ -5,7 +5,6 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const [loading, setLoading] = useState(false);
-  const [isSignedUp, setSignedUp] = useState(true);
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -15,12 +14,10 @@ export const AppProvider = ({ children }) => {
   const [revision, setRevision] = useState(false);
 
   const fetchUserInfo = useCallback(async () => {
-    // check if auth-token is present or not
     if (localStorage.getItem("auth-token")) {
-      // if present then try to fetch response
       setLoading(true);
       try {
-        const res = await fetch(`${backendUrl}/userinfo`, {
+        const res = await fetch(`${backendUrl}/userInfo`, {
           method: "POST",
           headers: {
             "auth-token": `${localStorage.getItem("auth-token")}`,
@@ -31,13 +28,11 @@ export const AppProvider = ({ children }) => {
 
         // console.log(res);
 
-        // if response is ok then set userInfo
         if (res.status === 200) {
           const data = await res.json();
           setUserInfo(data);
         }
       } catch (error) {
-        // catch if any error occurs and log it
         console.log(error);
       } finally {
         setLoading(false);
@@ -46,9 +41,7 @@ export const AppProvider = ({ children }) => {
   }, [backendUrl]);
 
   const fetchLeaderboard = useCallback(async () => {
-    // check if auth-token is present or not
     if (localStorage.getItem("auth-token")) {
-      // if present then try to fetch response
       setLoading(true);
       try {
         const res = await fetch(`${backendUrl}/leaderboard`, {
@@ -61,13 +54,11 @@ export const AppProvider = ({ children }) => {
 
         // console.log(res);
 
-        // if response is ok then set leaderboard
         if (res.status === 200) {
           const data = await res.json();
           setLeaderboard(data);
         }
       } catch (error) {
-        // catch if any error occurs and log it
         console.log(error);
       } finally {
         setLoading(false);
@@ -86,8 +77,6 @@ export const AppProvider = ({ children }) => {
       value={{
         loading,
         setLoading,
-        isSignedUp,
-        setSignedUp,
         userInfo,
         leaderboard,
         fetchLeaderboard,
