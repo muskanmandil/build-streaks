@@ -131,6 +131,7 @@ const Signup = () => {
           <label htmlFor="">Show Password</label>
         </div>
 
+        <p>(It might take 1-2 minutes to process your first request on the server. Kindly wait.)</p>
         <PrimaryBtn className="form-btn" text="Signup" />
       </form>
     </div>

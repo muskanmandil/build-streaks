@@ -107,6 +107,7 @@ const Login = () => {
             <span className="switch-link">Forgot Password</span>
           </Link>
         </div>
+          <p>(It might take 1-2 minutes to process your first request on the server. Kindly wait.)</p>
       </form>
     </div>
   );
