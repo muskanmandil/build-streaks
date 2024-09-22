@@ -2,37 +2,38 @@ import React, { useContext, useState } from "react";
 import "./NotesPanel.css";
 import { ThemeContext } from "../../context/ThemeContext";
 import { ProgressContext } from "../../context/ProgressContext";
-import all_steps from "../../roadmap";
 import NoteCard from "../note-card/NoteCard";
+import { AppContext } from "../../context/AppContext";
 
 const NotesPanel = ({ notesFilter, setNotesFilter }) => {
+  const {roadmap} = useContext(AppContext);
   const { progressInfo } = useContext(ProgressContext);
   const { theme } = useContext(ThemeContext);
   const [notePopupId, setNotePopupId] = useState(null);
 
   let SNo = 1;
   const title = () => {
-    if (all_steps.find((step) => step.id === notesFilter)) {
-      return `Step ${notesFilter}: ${all_steps[notesFilter - 1].title}`;
+    if (roadmap.find((step) => step.step_id === notesFilter)) {
+      return `Step ${notesFilter}: ${roadmap[notesFilter - 1].title}`;
     } else {
       return "All Notes";
     }
   };
 
-  const filteredNotes = all_steps.flatMap((step) => {
-    if (notesFilter === 0 || step.id === notesFilter) {
+  const filteredNotes = roadmap.flatMap((step) => {
+    if (notesFilter === 0 || step.step_id === notesFilter) {
       return step.all_substeps.flatMap((substep) =>
         substep.all_questions
           .filter(
             (question) =>
-              progressInfo.questionsData[question.id].note.status === true
+              progressInfo.questionsData[question.question_id].note.status === true
           )
           .map((question) => (
             <NoteCard
-              key={question.id}
+              key={question.question_id}
               sNo={SNo++}
-              title={question.questionTitle}
-              id={question.id}
+              title={question.title}
+              id={question.question_id}
               notePopupId={notePopupId}
               setNotePopupId={setNotePopupId}
             />
