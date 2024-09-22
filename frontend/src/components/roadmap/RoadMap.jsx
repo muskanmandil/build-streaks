@@ -1,19 +1,20 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./RoadMap.css";
-import all_steps from "../../roadmap";
 import StepCard from "../step-card/StepCard";
+import { AppContext } from "../../context/AppContext";
 
 const RoadMap = () => {
+  const {roadmap} = useContext(AppContext);
+
   return (
     <div className="roadmap">
       <div className="roadmap-timeline">
-        {all_steps.map((step, index) => {
+        {roadmap.map((step, index) => {
           return (
             <StepCard
               key={index}
-              id={step.id}
+              id={step.step_id}
               title={step.title}
-              color={step.color}
               all_substeps={step.all_substeps}
             />
           );

@@ -19,9 +19,9 @@ const StepCard = (props) => {
       substep.all_questions.forEach((question) => {
         if (
           (revision
-            ? progressInfo.questionsData[question.id].revision
+            ? progressInfo.questionsData[question.question_id].revision
             : true) &&
-          progressInfo.questionsData[question.id].completed &&
+          progressInfo.questionsData[question.question_id].completed &&
           (question.level === filter || filter === "")
         ) {
           count++;
@@ -43,7 +43,7 @@ const StepCard = (props) => {
       substep.all_questions.forEach((question) => {
         if (
           (revision
-            ? progressInfo.questionsData[question.id].revision
+            ? progressInfo.questionsData[question.question_id].revision
             : true) &&
           (filter === "" || question.level === filter)
         ) {
@@ -107,8 +107,8 @@ const StepCard = (props) => {
               return (
                 <SubstepCard
                   key={index}
-                  id={substep.id}
-                  substepTitle={substep.substepTitle}
+                  id={substep.substep_id}
+                  title={substep.title}
                   all_questions={substep.all_questions}
                 />
               );

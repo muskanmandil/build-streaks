@@ -1,5 +1,5 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
-import all_steps from "../roadmap";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { AppContext } from "./AppContext";
 
 export const ProgressContext = createContext();
 
@@ -349,14 +349,15 @@ export const ProgressProvider = ({ children }) => {
   };
 
   // filtering all questions
+  const {roadmap} = useContext(AppContext);
   const filteredQuestions = (level, revision) => {
     let filteredQuestions = 0;
-    all_steps.forEach((step) => {
+    roadmap.forEach((step) => {
       step.all_substeps.forEach((substep) => {
         substep.all_questions.forEach((question) => {
           if (
             (revision
-              ? progressInfo.questionsData[question.id].revision
+              ? progressInfo.questionsData[question.question_id].revision
               : true) &&
             (level === "" || question.level === level)
           ) {
@@ -371,15 +372,15 @@ export const ProgressProvider = ({ children }) => {
   // filtering questions done
   const filteredQuestionsDone = (level, revision) => {
     let filteredQuestionsDone = 0;
-    all_steps.forEach((step) => {
+    roadmap.forEach((step) => {
       step.all_substeps.forEach((substep) => {
         substep.all_questions.forEach((question) => {
           if (
             (revision
-              ? progressInfo.questionsData[question.id].revision
+              ? progressInfo.questionsData[question.question_id].revision
               : true) &&
             (level === "" || question.level === level) &&
-            progressInfo.questionsData[question.id].completed
+            progressInfo.questionsData[question.question_id].completed
           ) {
             filteredQuestionsDone++;
           }

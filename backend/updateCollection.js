@@ -1,24 +1,20 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
 
+const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbName = "deploy";
+const dbUri = `mongodb+srv://${dbUser}:${dbPassword}@cluster0.uajhxxn.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster0s`;
 
-// Connection URL for database
-const dbUri = `mongodb+srv://muskanmandil:${dbPassword}@cluster0.uajhxxn.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster0s`;
 
-// Function to update
 async function updateDatabase() {
     try {
 
-        // Connect to the database
         await mongoose.connect(dbUri);
         console.log("Connected to database");
 
-        // Get the 'users' collection
         const usersCollection = mongoose.connection.db.collection('users');
 
-        // Find all documents in the collection
         const users = await usersCollection.find({}).toArray();
         console.log(`Fetched ${users.length} documents from database`);
 
@@ -40,7 +36,6 @@ async function updateDatabase() {
                 };
             });
 
-            // Update the user's document with the new questionData structure
             await usersCollection.updateOne(
                 { _id: user._id },
                 { $set: { questionsData: updatedQuestionsData } }

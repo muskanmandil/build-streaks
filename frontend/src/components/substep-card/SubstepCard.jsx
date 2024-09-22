@@ -17,8 +17,8 @@ const SubstepCard = (props) => {
     let count = 0;
     props.all_questions.forEach((question) => {
       if (
-        (revision ? progressInfo.questionsData[question.id].revision : true) &&
-        progressInfo.questionsData[question.id].completed &&
+        (revision ? progressInfo.questionsData[question.question_id].revision : true) &&
+        progressInfo.questionsData[question.question_id].completed &&
         (question.level === filter || filter === "")
       ) {
         count++;
@@ -37,7 +37,7 @@ const SubstepCard = (props) => {
     let length = 0;
     props.all_questions.forEach((question) => {
       if (
-        (revision ? progressInfo.questionsData[question.id].revision : true) &&
+        (revision ? progressInfo.questionsData[question.question_id].revision : true) &&
         (filter === "" || question.level === filter)
       ) {
         length++;
@@ -56,7 +56,7 @@ const SubstepCard = (props) => {
       <div className="substep-card">
         <div className="substep-card-content">
           <p className="substep-heading">
-            <span>Step {props.id} :</span> {props.substepTitle}
+            <span>Step {props.id} :</span> {props.title}
           </p>
 
           {/* progress-bar */}
@@ -87,12 +87,12 @@ const SubstepCard = (props) => {
               return (
                 <QuestionCard
                   key={index}
-                  id={question.id}
-                  questionTitle={question.questionTitle}
+                  id={question.question_id}
+                  title={question.title}
                   level={question.level}
-                  lecturelink={question.lecturelink}
-                  problemlink={question.problemlink}
-                  articlelink={question.articlelink}
+                  lecture_link={question.lecture_link}
+                  problem_link={question.problem_link}
+                  article_link={question.article_link}
                 />
               );
             })}

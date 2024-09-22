@@ -62,6 +62,72 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+// Roadmap Schemas
+const questionSchema = new mongoose.Schema({
+    question_id: Number,
+    title: String,
+    level: String,
+    lecture_link: String,
+    problem_link: String,
+    article_link: String
+});
+
+const substepSchema = new mongoose.Schema({
+    substep_id: Number,
+    title: String,
+    all_questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
+});
+
+const stepSchema = new mongoose.Schema({
+    step_id: Number,
+    title: String,
+    all_substeps: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Substep' }],
+});
+
+// Create Mongoose Models
+const Question = mongoose.model('Question', questionSchema);
+const Substep = mongoose.model('Substep', substepSchema);
+const Step = mongoose.model('Step', stepSchema);
+
+// GET route to fetch roadmap
+app.get('/roadmap', async (req, res) => {
+    try {
+        // Fetch all steps and populate substeps and questions
+        const steps = await Step.find()
+            .populate({
+                path: 'all_substeps',
+                populate: {
+                    path: 'all_questions', 
+                },
+            })
+            .exec();
+
+        // Prepare data to send back as response
+        const data = steps.map(step => ({
+            step_id: step.step_id,
+            title: step.title,
+            all_substeps: step.all_substeps.map(substep => ({
+                substep_id: substep.substep_id,
+                title: substep.title,
+                all_questions: substep.all_questions.map(question => ({
+                    question_id: question.question_id,
+                    title: question.title,
+                    level: question.level,
+                    lecture_link: question.lecture_link,
+                    problem_link: question.problem_link,
+                    article_link: question.article_link
+                }))
+            }))
+        }));
+
+        res.status(200).json(data);
+
+    } catch (err) {
+        console.error("Error fetching data:", err);
+        res.status(500).send("Error fetching data");
+    }
+});
+
 // Signup Route
 app.post("/signup", async (req, res) => {
     let check = await Users.findOne({ email: req.body.email });

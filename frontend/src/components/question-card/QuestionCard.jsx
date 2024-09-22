@@ -45,8 +45,8 @@ const QuestionCard = (props) => {
 
   // domain check for correct problem platform icon
   let domain = "";
-  if (props.problemlink !== "") {
-    domain = new URL(props.problemlink).hostname;
+  if (props.problem_link !== "") {
+    domain = new URL(props.problem_link).hostname;
   }
 
   return (
@@ -67,7 +67,7 @@ const QuestionCard = (props) => {
             }`}
             onClick={() => handleDone(props.id, props.level)}
           ></div>
-          <p className="question-title">{props.questionTitle}</p>
+          <p className="question-title">{props.title}</p>
           <p
             className={`question-level ${
               props.level === "medium"
@@ -81,16 +81,16 @@ const QuestionCard = (props) => {
           </p>
 
           <a
-            href={props.lecturelink}
+            href={props.lecture_link}
             className="lecture-link"
             target="_blank"
             rel="noreferrer"
           >
-            <img src={props.lecturelink !== "" ? youtube : null} alt="" />
+            <img src={props.lecture_link !== "" ? youtube : null} alt="" />
           </a>
 
           <a
-            href={props.problemlink}
+            href={props.problem_link}
             className="problem-link"
             target="_blank"
             rel="noreferrer"
@@ -114,12 +114,12 @@ const QuestionCard = (props) => {
           </a>
 
           <a
-            href={props.articlelink}
+            href={props.article_link}
             className="article-link"
             target="_blank"
             rel="noreferrer"
           >
-            <img src={props.articlelink !== "" ? tuf_circle : null} alt="" />
+            <img src={props.article_link !== "" ? tuf_circle : null} alt="" />
           </a>
 
           {/*add to revision button  */}
@@ -140,7 +140,7 @@ const QuestionCard = (props) => {
         </div>
         <NotePopup
           questionId={props.id}
-          questionTitle={props.questionTitle}
+          questionTitle={props.title}
           className={!notePopup && "hide-note"}
           onClose={() => setNotePopup(false)}
         />

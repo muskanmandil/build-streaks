@@ -9,9 +9,32 @@ export const AppProvider = ({ children }) => {
     name: "",
     email: "",
   });
+  const [roadmap, setRoadmap] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [filter, setFilter] = useState("");
   const [revision, setRevision] = useState(false);
+
+  const fetchRoadmap = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${backendUrl}/roadmap`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        setRoadmap(data);
+        localStorage.setItem("roadmap", data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [backendUrl]);
 
   const fetchUserInfo = useCallback(async () => {
     if (localStorage.getItem("auth-token")) {
@@ -68,15 +91,17 @@ export const AppProvider = ({ children }) => {
 
   // to fetch the userinfo & leaderboard on the first render of the app
   useEffect(() => {
+    fetchRoadmap();
     fetchUserInfo();
     fetchLeaderboard();
-  }, [fetchUserInfo, fetchLeaderboard]);
+  }, [fetchRoadmap, fetchUserInfo, fetchLeaderboard]);
 
   return (
     <AppContext.Provider
       value={{
         loading,
         setLoading,
+        roadmap,
         userInfo,
         leaderboard,
         fetchLeaderboard,
