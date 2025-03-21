@@ -33,7 +33,7 @@ const Profile = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`${backendUrl}/change-password`, {
+      const res = await fetch(`${backendUrl}/auth/change-password`, {
         method: "POST",
         headers: {
           "auth-token": `${localStorage.getItem("auth-token")}`,
@@ -72,7 +72,7 @@ const Profile = () => {
       setLoading(true);
 
       try {
-        const res = await fetch(`${backendUrl}/delete-account`, {
+        const res = await fetch(`${backendUrl}/auth/delete-account`, {
           method: "POST",
           headers: {
             "auth-token": `${localStorage.getItem("auth-token")}`,

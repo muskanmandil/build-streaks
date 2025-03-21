@@ -31,7 +31,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`${backendUrl}/login`, {
+      const res = await fetch(`${backendUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,6 @@ const Login = () => {
             <span className="switch-link">Forgot Password</span>
           </Link>
         </div>
-          <p>(It might take 1-2 minutes to process your first request on the server. Kindly wait.)</p>
       </form>
     </div>
   );

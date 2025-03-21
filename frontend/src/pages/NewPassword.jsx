@@ -33,7 +33,7 @@ const NewPassword = () => {
       setLoading(true);
 
       try {
-        const res = await fetch(`${backendUrl}/new-password`, {
+        const res = await fetch(`${backendUrl}/auth/new-password`, {
           method: "POST",
           headers: {
             "auth-token": `${localStorage.getItem("auth-token")}`,

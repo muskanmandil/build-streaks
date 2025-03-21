@@ -22,7 +22,7 @@ const Verification = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`${backendUrl}/verify`, {
+      const res = await fetch(`${backendUrl}/auth/verify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,6 +72,8 @@ const Verification = () => {
             required
           />
         </div>
+
+        <p>(Do check your Spam Folder for Verification Code)</p>
 
         <PrimaryBtn className="form-btn" text="Verify" />
       </form>

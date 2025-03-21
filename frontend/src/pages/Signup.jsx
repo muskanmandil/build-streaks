@@ -35,7 +35,7 @@ const Signup = () => {
     if (formData.password.trim() === formData.confirm_password.trim()) {
       setLoading(true);
       try {
-        const res = await fetch(`${backendUrl}/signup`, {
+        const res = await fetch(`${backendUrl}/auth/signup`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -130,8 +130,6 @@ const Signup = () => {
           />
           <label htmlFor="">Show Password</label>
         </div>
-
-        <p>(It might take 1-2 minutes to process your first request on the server. Kindly wait.)</p>
         <PrimaryBtn className="form-btn" text="Signup" />
       </form>
     </div>
