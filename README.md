@@ -74,14 +74,14 @@ To set up the backend:
    Create a `.env` file with the following configuration:
 
    ```env
-   GOOGLE_CLIENT_ID = "89801067113-99ppicshnvfk28j1cg366t5rt7oh29at.apps.googleusercontent.com"
-   GOOGLE_CLIENT_SECRET = "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"
-   REFRESH_TOKEN = "1//04qvuK2l3NLR2CgYIARAAGAQSNwF-L9IrWbCAJnUkvGGNFzGXv0kYymzFrO_w3XL6dcrpHygp0M1h_sBoyFvAJCHkgcfaIKj1MMg"
+   GOOGLE_CLIENT_ID = ""
+   GOOGLE_CLIENT_SECRET = ""
+   REFRESH_TOKEN = ""
    EMAIL_ADDRESS = "buildstreaks@gmail.com"
 
-   MONGO_DB_URI = "mongodb+srv://muskanmandil:cICeLRYJEMgiRajz@cluster0.uajhxxn.mongodb.net/deploy?retryWrites=true&w=majority&appName=Cluster0s"
+   MONGO_DB_URI = ""
    
-   JWT_KEY="secret_key"
+   JWT_KEY=""
    ```
 
 3. **Install the backend dependencies:**
